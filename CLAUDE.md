@@ -5,7 +5,8 @@
 中丸晴留哉（はれるや）のポートフォリオサイト。
 GitHub Pages で静的HTMLとして公開している。
 
-**サイトURL（公開後に更新）:** https://xxxxxxxx.github.io  
+**サイトURL:** https://hareruyanakamaru.github.io/  
+**リポジトリ:** https://github.com/hareruyanakamaru/hareruyanakamaru.github.io  
 **独自ドメイン（取得後に更新）:** https://xxxxxxxx.com
 
 ---
