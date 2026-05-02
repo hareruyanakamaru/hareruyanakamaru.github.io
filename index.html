@@ -229,6 +229,50 @@ section{border-bottom:1px solid var(--line2);}
   color:var(--orange);letter-spacing:.05em;
 }
 
+/* ── WORKS ── */
+.works-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+}
+.work-card{
+  display:block;text-decoration:none;color:inherit;
+  background:var(--paper);
+  transition:transform .25s;
+}
+.work-card:hover{transform:translateY(-4px);}
+.work-card:hover .work-title{color:var(--orange);}
+.work-cover{
+  width:100%;aspect-ratio:4/3;
+  background:var(--paper2);
+  overflow:hidden;
+}
+.work-cover img{
+  width:100%;height:100%;object-fit:cover;
+  transition:transform .4s;
+}
+.work-card:hover .work-cover img{transform:scale(1.04);}
+.work-meta{
+  font-family:'DM Mono',monospace;
+  font-size:10px;color:var(--muted);
+  letter-spacing:.08em;
+  margin:.9rem 0 .5rem;
+  display:flex;gap:.8rem;align-items:center;
+}
+.work-cat{
+  background:var(--paper2);padding:3px 8px;
+}
+.work-title{
+  font-size:1rem;font-weight:600;line-height:1.5;
+  transition:color .2s;
+}
+.work-tags{
+  margin-top:.6rem;
+  display:flex;flex-wrap:wrap;gap:.4rem;
+}
+.work-tag{
+  font-family:'DM Mono',monospace;
+  font-size:9px;color:var(--muted);
+}
+
 /* ── BLOG ── */
 .blog-list{display:flex;flex-direction:column;}
 .blog-item{
@@ -236,6 +280,7 @@ section{border-bottom:1px solid var(--line2);}
   align-items:center;
   padding:1.4rem 0;border-bottom:1px solid var(--line);
   cursor:pointer;transition:padding-left .2s;
+  text-decoration:none;color:inherit;
 }
 .blog-item:first-child{border-top:1px solid var(--line);}
 .blog-item:hover{padding-left:.5rem;}
@@ -331,6 +376,7 @@ footer{
   .container{padding:3rem 1.5rem;}
   .about-grid,.contact-wrap{grid-template-columns:1fr;gap:2.5rem;}
   .proj-grid{grid-template-columns:1fr;}
+  .works-grid{grid-template-columns:1fr;gap:1.5rem;}
   .proj-card.span2,.proj-card.featured{grid-column:span 1;display:block;}
   .proj-visual{min-height:100px;margin-top:1.5rem;}
   .events-grid{grid-template-columns:1fr 1fr;}
@@ -348,6 +394,7 @@ footer{
   <ul class="nav-links">
     <li><a href="#about">about</a></li>
     <li><a href="#projects">projects</a></li>
+    <li><a href="#works">works</a></li>
     <li><a href="#blog">blog</a></li>
     <li><a href="#events">events</a></li>
     <li><a href="#contact">contact</a></li>
@@ -502,11 +549,24 @@ footer{
   </div>
 </section>
 
+<!-- WORKS -->
+<section id="works">
+  <div class="container">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">Works</h2>
+    </div>
+    <div class="works-grid reveal" id="works-grid">
+      <div class="work-card"><div class="work-meta">読み込み中…</div></div>
+    </div>
+  </div>
+</section>
+
 <!-- BLOG -->
 <section id="blog">
   <div class="container">
     <div class="sec-head">
-      <span class="sec-num">03</span>
+      <span class="sec-num">04</span>
       <h2 class="sec-title">Blog / Note</h2>
       <a class="sec-more" href="https://note.com" target="_blank">note で読む →</a>
     </div>
@@ -520,7 +580,7 @@ footer{
 <section id="events">
   <div class="container">
     <div class="sec-head">
-      <span class="sec-num">04</span>
+      <span class="sec-num">05</span>
       <h2 class="sec-title">Events</h2>
     </div>
     <div class="events-grid reveal">
@@ -562,7 +622,7 @@ footer{
 <section id="contact">
   <div class="container">
     <div class="sec-head">
-      <span class="sec-num">05</span>
+      <span class="sec-num">06</span>
       <h2 class="sec-title">Contact</h2>
     </div>
     <div class="contact-wrap reveal">
@@ -615,39 +675,80 @@ const MICROCMS_API_KEY = 'oglpByvCLfiiCRxPnNqAEYUDMIy2MZnrgui6';
 
 const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-async function loadBlogPosts(){
+function categoryOf(p){
+  const cat = p.category;
+  return Array.isArray(cat) ? cat[0] : cat;
+}
+
+async function fetchAllPosts(){
+  const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=100&orders=-publishedAt`;
+  const res = await fetch(url, { headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY }});
+  if(!res.ok) throw new Error('API error: ' + res.status);
+  const data = await res.json();
+  return data.contents || [];
+}
+
+function renderBlog(posts){
   const list = document.getElementById('blog-list');
   if(!list) return;
+  const blogs = posts.filter(p => categoryOf(p) === 'Blog');
+  if(!blogs.length){
+    list.innerHTML = '<div class="blog-item"><span class="blog-d">記事がまだありません</span></div>';
+    return;
+  }
+  list.innerHTML = blogs.map(p => {
+    const d = new Date(p.publishedAt);
+    const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}`;
+    const tags = Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
+    const tag = tags[0] || '';
+    return `<a class="blog-item" href="post.html?id=${encodeURIComponent(p.id)}">
+      <span class="blog-d">${escapeHtml(ymd)}</span>
+      <span class="blog-title">${escapeHtml(p.title)}</span>
+      <span class="blog-cat">${escapeHtml(tag)}</span>
+    </a>`;
+  }).join('');
+}
+
+function renderWorks(posts){
+  const grid = document.getElementById('works-grid');
+  if(!grid) return;
+  const works = posts.filter(p => categoryOf(p) === 'Works');
+  if(!works.length){
+    grid.innerHTML = '<div class="work-card"><div class="work-meta">作品がまだありません</div></div>';
+    return;
+  }
+  grid.innerHTML = works.map(p => {
+    const d = new Date(p.publishedAt);
+    const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}`;
+    const tags = Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
+    const tag = tags[0] || '';
+    const cover = p.cover?.url ? `<img src="${p.cover.url}" alt="${escapeHtml(p.title)}">` : '';
+    return `<a class="work-card" href="post.html?id=${encodeURIComponent(p.id)}">
+      <div class="work-cover">${cover}</div>
+      <div class="work-meta">
+        <span>${escapeHtml(ymd)}</span>
+        ${tag ? `<span class="work-cat">${escapeHtml(tag)}</span>` : ''}
+      </div>
+      <div class="work-title">${escapeHtml(p.title)}</div>
+      ${tags.length > 1 ? `<div class="work-tags">${tags.slice(1).map(t => `<span class="work-tag">#${escapeHtml(t)}</span>`).join('')}</div>` : ''}
+    </a>`;
+  }).join('');
+}
+
+async function loadAll(){
   try{
-    const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=20&orders=-publishedAt`;
-    const res = await fetch(url, { headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY }});
-    if(!res.ok) throw new Error('API error');
-    const data = await res.json();
-    const blogs = (data.contents || []).filter(p => {
-      const cat = p.category;
-      return Array.isArray(cat) ? cat.includes('Blog') : cat === 'Blog';
-    });
-    if(!blogs.length){
-      list.innerHTML = '<div class="blog-item"><span class="blog-d">記事がまだありません</span></div>';
-      return;
-    }
-    list.innerHTML = blogs.map(p => {
-      const d = new Date(p.publishedAt);
-      const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}`;
-      const tags = Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
-      const tag = tags[0] || '';
-      return `<div class="blog-item">
-        <span class="blog-d">${escapeHtml(ymd)}</span>
-        <span class="blog-title">${escapeHtml(p.title)}</span>
-        <span class="blog-cat">${escapeHtml(tag)}</span>
-      </div>`;
-    }).join('');
+    const posts = await fetchAllPosts();
+    renderBlog(posts);
+    renderWorks(posts);
   }catch(e){
     console.error(e);
-    list.innerHTML = '<div class="blog-item"><span class="blog-d">読み込みに失敗しました</span></div>';
+    const blogList = document.getElementById('blog-list');
+    if(blogList) blogList.innerHTML = '<div class="blog-item"><span class="blog-d">読み込みに失敗しました</span></div>';
+    const worksGrid = document.getElementById('works-grid');
+    if(worksGrid) worksGrid.innerHTML = '<div class="work-card"><div class="work-meta">読み込みに失敗しました</div></div>';
   }
 }
-loadBlogPosts();
+loadAll();
 </script>
 </body>
 </html>
