@@ -4,13 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>中丸晴留哉 — 空間と学びをつなぐ人</title>
-<meta name="description" content="東京・江東区を拠点に、こどもの探究学習イベントや空間デザイン・コミュニティ構築を手がけるフリーランス。itoito・いとあわせ主宰。">
+<meta name="description" content="東京・江東区を拠点に、空間デザイン・イベント制作・探究学習を手がけるフリーランス。絲スタジオ運営。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --ink:#1c1a16;
+  --ink2:#3a342c;
   --paper:#f4f1e8;
   --paper2:#ebe7d9;
   --paper3:#e0dbca;
@@ -19,370 +20,388 @@
   --muted:#7a7568;
   --line:rgba(28,26,22,.1);
   --line2:rgba(28,26,22,.18);
+  --footer-bg:#1f1c17;
 }
 html{scroll-behavior:smooth;}
 body{
   background:var(--paper);
   color:var(--ink);
   font-family:'Noto Serif JP',serif;
-  overflow-x:hidden;
-  cursor:default;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
 }
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar{width:3px;}
-::-webkit-scrollbar-track{background:var(--paper);}
-::-webkit-scrollbar-thumb{background:var(--paper3);}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
 
 /* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  height:52px;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 3rem;
+  padding:1.2rem 2.5rem;
   background:rgba(244,241,232,.92);
   backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);
 }
-.nav-logo{
-  font-family:'DM Mono',monospace;
-  font-size:12px;letter-spacing:.1em;
-  color:var(--ink);
-  text-decoration:none;
+.brand{
+  display:flex;align-items:center;gap:.6rem;
 }
-.nav-logo span{color:var(--muted);font-size:10px;margin-left:6px;}
-.nav-links{display:flex;gap:2rem;list-style:none;}
-.nav-links a{
+.brand-mark{
+  width:54px;height:54px;
+  background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;font-weight:700;
+  letter-spacing:0;
+  flex-direction:column;line-height:1;
+}
+.brand-mark small{
+  font-size:7px;letter-spacing:.1em;
+  margin-top:3px;
   font-family:'DM Mono',monospace;
-  font-size:10px;letter-spacing:.12em;
-  color:var(--muted);text-decoration:none;
+  font-weight:400;
+}
+.nav-links{
+  display:flex;gap:2.5rem;list-style:none;
+}
+.nav-links a{
+  font-size:.95rem;color:var(--ink);
+  font-weight:500;
   transition:color .2s;
 }
 .nav-links a:hover{color:var(--orange);}
-.nav-cta{
-  font-family:'DM Mono',monospace;font-size:10px;
-  padding:6px 14px;border:1px solid var(--ink);
-  color:var(--ink);text-decoration:none;
-  transition:background .2s,color .2s;
-}
-.nav-cta:hover{background:var(--ink);color:var(--paper);}
 
 /* ── HERO ── */
 .hero{
-  min-height:100vh;padding-top:52px;
-  display:grid;grid-template-columns:1fr 42%;
-}
-.hero-left{
-  padding:6rem 4rem 5rem;
-  display:flex;flex-direction:column;justify-content:center;
-  border-right:1px solid var(--line2);
+  min-height:92vh;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:3rem;
+  padding:7rem 3rem 4rem;
   position:relative;
 }
-.hero-left::after{
-  content:'';position:absolute;bottom:0;left:4rem;right:4rem;
-  height:1px;background:var(--line2);
+.hero-photo{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,#3a342c 0%,#1c1a16 60%,#0f0d0a 100%);
+  background-image:var(--hero-bg, none);
+  background-size:cover;background-position:center;
+  z-index:-1;
 }
-.hero-eyebrow{
-  font-family:'DM Mono',monospace;
-  font-size:10px;letter-spacing:.2em;color:var(--orange);
-  text-transform:uppercase;margin-bottom:2.5rem;
-  opacity:0;animation:fadeUp .7s .1s ease forwards;
+.hero-photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg, rgba(244,241,232,.4) 0%, rgba(244,241,232,0) 30%, rgba(244,241,232,0) 70%, rgba(244,241,232,.5) 100%);
 }
-.hero-h1{
-  font-size:clamp(3rem,5.5vw,5rem);
-  font-weight:800;line-height:1.05;
-  letter-spacing:-.025em;margin-bottom:2rem;
-  opacity:0;animation:fadeUp .7s .25s ease forwards;
+.hero-vertical-l{
+  writing-mode:vertical-rl;
+  font-size:1.6rem;font-weight:500;
+  letter-spacing:.5em;line-height:2.2;
+  color:var(--paper);
+  text-shadow:0 2px 12px rgba(0,0,0,.6);
+  align-self:center;
+  padding-top:6rem;
 }
-.hero-h1 em{font-style:normal;color:var(--orange);}
-.hero-h1 .green{color:var(--green);}
-.hero-body{
-  font-size:1rem;line-height:2;color:var(--muted);
-  max-width:420px;margin-bottom:3.5rem;
-  opacity:0;animation:fadeUp .7s .4s ease forwards;
-}
-.hero-chips{
-  display:flex;flex-wrap:wrap;gap:.5rem;
-  opacity:0;animation:fadeUp .7s .55s ease forwards;
-}
-.chip{
-  font-family:'DM Mono',monospace;font-size:9px;
-  letter-spacing:.08em;padding:5px 11px;
-  border:1px solid var(--line2);color:var(--muted);
-}
+.hero-spacer{flex:1;}
 .hero-right{
-  background:var(--paper2);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:4rem 3rem;position:relative;overflow:hidden;
-  opacity:0;animation:fadeIn .9s .3s ease forwards;
+  align-self:flex-end;
+  text-align:right;
+  background:rgba(244,241,232,.78);
+  backdrop-filter:blur(8px);
+  padding:2rem 2rem 1.8rem;
+  border-left:2px solid var(--ink);
+  max-width:320px;
 }
-.hero-ring{
-  width:200px;height:200px;border-radius:50%;
-  border:1px solid var(--line2);
-  display:flex;align-items:center;justify-content:center;
-  margin-bottom:2.5rem;position:relative;
+.hero-name{
+  writing-mode:vertical-rl;
+  font-size:3.1rem;font-weight:700;
+  line-height:1.1;letter-spacing:.05em;
+  color:var(--ink);
+  margin:0 auto 1.2rem;
+  height:7em;
 }
-.hero-ring::before{
-  content:'';position:absolute;
-  width:160px;height:160px;border-radius:50%;
-  border:1px dashed var(--line2);
-  animation:spin 20s linear infinite;
+.hero-name ruby rt{
+  font-size:.22em;letter-spacing:.15em;
+  color:var(--muted);
+  font-weight:400;
 }
-.hero-ring::after{
-  content:'';position:absolute;
-  width:120px;height:120px;border-radius:50%;
-  background:var(--orange);opacity:.08;
+.hero-tagline{
+  font-size:.95rem;
+  color:var(--ink);
+  margin-bottom:.8rem;
+  font-weight:500;
 }
-.hero-kanji{
-  font-size:4.5rem;font-weight:800;
-  color:var(--orange);z-index:1;line-height:1;
-}
-.hero-stack{
+.hero-meta{
+  font-size:.78rem;
+  color:var(--ink2);
+  line-height:1.9;
   font-family:'DM Mono',monospace;
-  font-size:11px;line-height:2.4;
-  color:var(--muted);text-align:center;letter-spacing:.06em;
+  font-style:normal;
+  letter-spacing:.04em;
 }
-.hero-stack strong{color:var(--ink);}
-.hero-stack .tag-o{color:var(--orange);}
-.hero-stack .tag-g{color:var(--green);}
-.hero-divider{
-  width:1px;height:2rem;background:var(--line2);margin:1.5rem auto;
+.hero-meta-jp{
+  font-size:.85rem;
+  font-family:'Noto Serif JP',serif;
+  letter-spacing:.04em;
+  margin-top:.4rem;
 }
 
 /* ── SECTIONS ── */
-section{border-bottom:1px solid var(--line2);}
-.container{max-width:1120px;margin:0 auto;padding:5rem 4rem;}
+section{padding:5rem 3rem;}
 .sec-head{
-  display:flex;align-items:baseline;gap:1.2rem;
-  margin-bottom:3.5rem;
+  display:flex;align-items:baseline;gap:1rem;
+  margin-bottom:2.5rem;
 }
-.sec-num{
-  font-family:'DM Mono',monospace;font-size:10px;
-  letter-spacing:.15em;color:var(--orange);
+.sec-title{
+  font-size:1.9rem;font-weight:700;letter-spacing:.04em;
 }
-.sec-title{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;}
+.sec-sub{
+  font-size:.85rem;color:var(--orange);
+  font-family:'DM Mono',monospace;
+  letter-spacing:.08em;
+}
 .sec-more{
-  font-family:'DM Mono',monospace;font-size:10px;
-  color:var(--muted);margin-left:auto;
-  border-bottom:1px solid var(--line2);cursor:pointer;
-  text-decoration:none;transition:color .2s;
+  margin-left:auto;
+  font-size:.82rem;color:var(--muted);
+  font-family:'DM Mono',monospace;letter-spacing:.06em;
+  transition:color .2s;
 }
 .sec-more:hover{color:var(--orange);}
 
-/* ── ABOUT ── */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;}
-.about-bio p{font-size:.95rem;line-height:2.1;color:var(--ink);}
-.about-bio p+p{margin-top:1.2em;}
-.about-bio strong{color:var(--orange);}
-.about-bio .g{color:var(--green);}
-.facts{display:flex;flex-direction:column;gap:0;}
-.fact{
-  display:grid;grid-template-columns:100px 1fr;gap:1rem;
-  padding:1rem 0;border-bottom:1px solid var(--line);
-  align-items:start;
+/* ── SERVICE ── */
+#service{padding-top:2rem;padding-bottom:5rem;background:var(--paper);}
+.service-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:3rem;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  padding:3rem 0;
 }
-.fact:first-child{border-top:1px solid var(--line);}
-.fact-k{
-  font-family:'DM Mono',monospace;font-size:10px;
-  color:var(--muted);letter-spacing:.06em;padding-top:3px;
+.service-col{
+  display:flex;flex-direction:column;align-items:flex-start;
+  padding:0 1.5rem;
 }
-.fact-v{font-size:.88rem;line-height:1.8;}
+.service-col + .service-col{border-left:1px solid var(--line);}
+.service-icon{
+  width:48px;height:48px;
+  margin-bottom:1.2rem;color:var(--orange);
+}
+.service-icon svg{width:100%;height:100%;}
+.service-title{
+  font-size:1.15rem;font-weight:700;
+  margin-bottom:.8rem;
+}
+.service-desc{
+  font-size:.88rem;line-height:1.9;color:var(--ink2);
+  margin-bottom:1.5rem;
+}
+.service-more{
+  font-size:.78rem;color:var(--muted);
+  font-family:'DM Mono',monospace;letter-spacing:.08em;
+  transition:color .2s;
+}
+.service-more:hover{color:var(--orange);}
 
-/* ── PROJECTS ── */
-.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line2);}
-.proj-card{
-  background:var(--paper);padding:2.5rem;
-  cursor:pointer;transition:background .25s;
-  position:relative;overflow:hidden;
+/* ── MAIN GRID (Works + Blog) ── */
+.main-grid{
+  display:grid;grid-template-columns:2fr 1fr;
+  gap:4rem;
+  padding:5rem 3rem;
 }
-.proj-card:hover{background:var(--paper2);}
-.proj-card.span2{grid-column:span 2;}
-.proj-card.featured{
-  display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;
-  align-items:center;
-}
-.proj-badge{
-  font-family:'DM Mono',monospace;font-size:9px;
-  letter-spacing:.14em;color:var(--orange);
-  margin-bottom:1.2rem;
-}
-.proj-title{
-  font-size:1.25rem;font-weight:600;
-  line-height:1.4;margin-bottom:.8rem;
-}
-.proj-featured-title{font-size:1.6rem;}
-.proj-desc{font-size:.88rem;color:var(--muted);line-height:2;}
-.proj-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1.2rem;}
-.proj-num{
-  position:absolute;top:1.8rem;right:1.8rem;
-  font-family:'DM Mono',monospace;font-size:28px;
-  color:var(--line2);font-weight:500;line-height:1;
-}
-.proj-visual{
-  background:var(--paper3);
-  display:flex;align-items:center;justify-content:center;
-  min-height:180px;
-}
-.proj-visual-word{
-  font-family:'DM Mono',monospace;
-  font-size:2.2rem;font-style:italic;
-  color:var(--orange);letter-spacing:.05em;
-}
+.main-grid > section{padding:0;}
 
 /* ── WORKS ── */
 .works-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:2rem;
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:2rem 1.8rem;
 }
 .work-card{
-  display:block;text-decoration:none;color:inherit;
-  background:var(--paper);
+  display:block;
   transition:transform .25s;
 }
 .work-card:hover{transform:translateY(-4px);}
 .work-card:hover .work-title{color:var(--orange);}
 .work-cover{
   width:100%;aspect-ratio:4/3;
-  background:var(--paper2);
-  overflow:hidden;
+  background:var(--paper2);overflow:hidden;
 }
 .work-cover img{
   width:100%;height:100%;object-fit:cover;
   transition:transform .4s;
 }
 .work-card:hover .work-cover img{transform:scale(1.04);}
-.work-meta{
-  font-family:'DM Mono',monospace;
-  font-size:10px;color:var(--muted);
-  letter-spacing:.08em;
-  margin:.9rem 0 .5rem;
-  display:flex;gap:.8rem;align-items:center;
-}
-.work-cat{
-  background:var(--paper2);padding:3px 8px;
-}
 .work-title{
-  font-size:1rem;font-weight:600;line-height:1.5;
+  font-size:1rem;font-weight:600;
+  margin:.9rem 0 .4rem;
+  line-height:1.5;
   transition:color .2s;
 }
 .work-tags{
-  margin-top:.6rem;
-  display:flex;flex-wrap:wrap;gap:.4rem;
-}
-.work-tag{
+  font-size:.75rem;color:var(--muted);
   font-family:'DM Mono',monospace;
-  font-size:9px;color:var(--muted);
+  letter-spacing:.04em;
+  margin-bottom:.3rem;
 }
+.work-year{
+  font-size:.72rem;color:var(--muted);
+  font-family:'DM Mono',monospace;
+  letter-spacing:.06em;
+}
+.works-foot{
+  text-align:right;
+  margin-top:2rem;
+  padding-top:1.5rem;
+  border-top:1px solid var(--line);
+}
+.works-foot a{
+  font-size:.82rem;color:var(--muted);
+  font-family:'DM Mono',monospace;letter-spacing:.06em;
+  transition:color .2s;
+}
+.works-foot a:hover{color:var(--orange);}
 
 /* ── BLOG ── */
-.blog-list{display:flex;flex-direction:column;}
+.blog-list{
+  display:flex;flex-direction:column;
+}
 .blog-item{
-  display:grid;grid-template-columns:90px 1fr 90px;gap:2rem;
+  display:grid;grid-template-columns:64px 1fr;gap:1rem;
   align-items:center;
-  padding:1.4rem 0;border-bottom:1px solid var(--line);
-  cursor:pointer;transition:padding-left .2s;
-  text-decoration:none;color:inherit;
+  padding:.9rem 0;
+  border-bottom:1px solid var(--line);
+  transition:padding-left .2s;
 }
 .blog-item:first-child{border-top:1px solid var(--line);}
-.blog-item:hover{padding-left:.5rem;}
+.blog-item:hover{padding-left:.4rem;}
 .blog-item:hover .blog-title{color:var(--orange);}
+.blog-thumb{
+  width:64px;height:64px;
+  background:var(--paper2);overflow:hidden;
+  flex-shrink:0;
+}
+.blog-thumb img{width:100%;height:100%;object-fit:cover;}
+.blog-text{display:flex;flex-direction:column;gap:.25rem;}
 .blog-d{
-  font-family:'DM Mono',monospace;font-size:10px;
-  color:var(--muted);letter-spacing:.06em;
+  font-size:.7rem;color:var(--muted);
+  font-family:'DM Mono',monospace;letter-spacing:.06em;
 }
-.blog-title{font-size:.95rem;font-weight:600;line-height:1.6;transition:color .2s;}
-.blog-cat{
-  font-family:'DM Mono',monospace;font-size:9px;
-  color:var(--muted);text-align:right;
-  background:var(--paper2);padding:4px 8px;
-  justify-self:end;white-space:nowrap;
+.blog-title{
+  font-size:.85rem;font-weight:500;
+  line-height:1.45;
+  transition:color .2s;
 }
+.blog-foot{
+  text-align:right;
+  margin-top:1.5rem;
+  padding-top:1rem;
+  border-top:1px solid var(--line);
+}
+.blog-foot a{
+  font-size:.8rem;color:var(--muted);
+  font-family:'DM Mono',monospace;letter-spacing:.06em;
+  transition:color .2s;
+}
+.blog-foot a:hover{color:var(--orange);}
 
-/* ── EVENTS ── */
-.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line2);}
-.ev-card{
-  background:var(--paper);padding:1.8rem;
-  transition:background .2s;cursor:pointer;
+/* ── TAGS ── */
+#tags{padding:4rem 3rem 6rem;}
+.tags-list{
+  display:flex;flex-wrap:wrap;gap:.6rem 1rem;
 }
-.ev-card:hover{background:var(--paper2);}
-.ev-card.dim{background:var(--paper2);}
-.ev-date{
-  font-family:'DM Mono',monospace;font-size:9px;
-  color:var(--muted);letter-spacing:.08em;margin-bottom:.8rem;
+.tag-chip{
+  font-size:.85rem;color:var(--orange);
+  letter-spacing:.04em;
+  transition:opacity .2s;
 }
-.ev-title{font-size:.9rem;font-weight:600;line-height:1.6;margin-bottom:.6rem;}
-.ev-status{
-  font-family:'DM Mono',monospace;font-size:9px;
-  letter-spacing:.1em;
-}
-.ev-status.upcoming{color:var(--orange);}
-.ev-status.scheduled{color:var(--green);}
-.ev-status.done{color:var(--muted);}
-
-/* ── CONTACT ── */
-.contact-wrap{
-  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
-}
-.contact-headline{
-  font-size:2.2rem;font-weight:800;
-  line-height:1.35;letter-spacing:-.025em;
-}
-.contact-headline em{font-style:normal;color:var(--green);}
-.contact-sub{
-  font-size:.9rem;color:var(--muted);
-  line-height:2;margin-top:1.2rem;
-}
-.contact-list{display:flex;flex-direction:column;gap:.6rem;}
-.contact-btn{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:1.1rem 1.5rem;
-  border:1px solid var(--line2);
-  color:var(--ink);text-decoration:none;
-  font-size:.88rem;cursor:pointer;
-  transition:background .2s,border-color .2s;
-}
-.contact-btn:hover{background:var(--paper2);border-color:var(--ink);}
-.contact-btn span{
-  font-family:'DM Mono',monospace;font-size:12px;color:var(--muted);
-}
+.tag-chip:hover{opacity:.6;}
 
 /* ── FOOTER ── */
 footer{
-  padding:2rem 4rem;
-  display:flex;justify-content:space-between;align-items:center;
-  border-top:1px solid var(--line2);
+  background:var(--footer-bg);
+  color:var(--paper);
+  padding:3.5rem 3rem 2rem;
 }
-.footer-l{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
-.footer-r{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);}
+.footer-grid{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr;
+  gap:3rem;
+  margin-bottom:2.5rem;
+}
+.footer-brand{display:flex;gap:1.2rem;align-items:flex-start;}
+.footer-brand .brand-mark{background:var(--paper);color:var(--ink);}
+.footer-tagline{
+  font-size:.85rem;color:var(--paper);opacity:.85;
+  line-height:1.9;
+}
+.footer-col h4{
+  font-size:.75rem;color:var(--paper);opacity:.55;
+  font-family:'DM Mono',monospace;letter-spacing:.1em;
+  font-weight:500;margin-bottom:.8rem;
+}
+.footer-col p{
+  font-size:.95rem;margin-bottom:.8rem;
+}
+.footer-col a{
+  font-size:.78rem;color:var(--paper);opacity:.7;
+  font-family:'DM Mono',monospace;letter-spacing:.08em;
+  transition:opacity .2s;
+}
+.footer-col a:hover{opacity:1;color:var(--orange);}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1.5rem;border-top:1px solid rgba(244,241,232,.12);
+}
+.footer-copy{
+  font-size:.72rem;color:var(--paper);opacity:.5;
+  font-family:'DM Mono',monospace;letter-spacing:.06em;
+}
+.footer-social{display:flex;gap:.8rem;}
+.footer-social a{
+  width:32px;height:32px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(244,241,232,.08);
+  transition:background .2s;
+}
+.footer-social a:hover{background:rgba(244,241,232,.18);}
+.footer-social svg{width:14px;height:14px;color:var(--paper);}
 
 /* ── ANIMATIONS ── */
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(18px);}
-  to{opacity:1;transform:translateY(0);}
-}
-@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
-@keyframes spin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-
-/* scroll reveal */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:none;}
 
 /* ── MOBILE ── */
-@media(max-width:768px){
-  nav{padding:0 1.5rem;}
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
   .nav-links{display:none;}
-  .hero{grid-template-columns:1fr;}
-  .hero-right{display:none;}
-  .hero-left{padding:4rem 1.5rem 3rem;}
-  .container{padding:3rem 1.5rem;}
-  .about-grid,.contact-wrap{grid-template-columns:1fr;gap:2.5rem;}
-  .proj-grid{grid-template-columns:1fr;}
+  .hero{
+    grid-template-columns:1fr;
+    padding:6rem 1.5rem 3rem;
+    min-height:auto;
+  }
+  .hero-vertical-l{
+    writing-mode:horizontal-tb;
+    font-size:1.1rem;letter-spacing:.3em;
+    text-align:center;
+    padding-top:0;margin-bottom:1.5rem;
+  }
+  .hero-right{
+    max-width:none;
+    align-self:center;
+    text-align:center;
+    border-left:none;border-top:2px solid var(--ink);
+    padding:1.5rem 1.2rem;
+  }
+  .hero-name{
+    writing-mode:horizontal-tb;
+    font-size:2rem;height:auto;
+    margin-bottom:.8rem;
+  }
+  section{padding:3.5rem 1.5rem;}
+  .service-grid{grid-template-columns:1fr;gap:2rem;padding:2rem 0;}
+  .service-col + .service-col{border-left:none;border-top:1px solid var(--line);padding-top:2rem;}
+  .main-grid{
+    grid-template-columns:1fr;
+    gap:3.5rem;
+    padding:3.5rem 1.5rem;
+  }
   .works-grid{grid-template-columns:1fr;gap:1.5rem;}
-  .proj-card.span2,.proj-card.featured{grid-column:span 1;display:block;}
-  .proj-visual{min-height:100px;margin-top:1.5rem;}
-  .events-grid{grid-template-columns:1fr 1fr;}
-  .blog-item{grid-template-columns:70px 1fr;gap:1rem;}
-  .blog-cat{display:none;}
-  footer{flex-direction:column;gap:.5rem;text-align:center;}
+  .footer-grid{grid-template-columns:1fr;gap:2rem;}
+  .footer-bottom{flex-direction:column;gap:1rem;}
 }
 </style>
 </head>
@@ -390,295 +409,191 @@ footer{
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#">中丸晴留哉 <span>/ HARUREYA</span></a>
+  <a class="brand" href="#">
+    <span class="brand-mark">絲<small>絲スタジオ</small></span>
+  </a>
   <ul class="nav-links">
-    <li><a href="#about">about</a></li>
-    <li><a href="#projects">projects</a></li>
-    <li><a href="#works">works</a></li>
-    <li><a href="#blog">blog</a></li>
-    <li><a href="#events">events</a></li>
-    <li><a href="#contact">contact</a></li>
+    <li><a href="#service">About</a></li>
+    <li><a href="#works">Works</a></li>
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#contact">Contact</a></li>
   </ul>
-  <a class="nav-cta" href="#contact">get in touch</a>
 </nav>
 
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-left">
-    <p class="hero-eyebrow">Freelance — 江東区, Tokyo</p>
-    <h1 class="hero-h1">
-      空間と<em>学び</em>を、<br>
-      <span class="green">つなぐ</span>人。
-    </h1>
-    <p class="hero-body">
-      元・公立中学校数学教師。空間デザイン・音楽フェス制作を経て、いまはこどもたちが「本物の問い」と出会える場をつくっています。<br>
-      探究学習スタジオ <strong style="color:var(--green)">いとあわせ</strong>、体験マッチングプラットフォーム <strong style="color:var(--orange)">itoito</strong>（仮）を構想・運営中。
-    </p>
-    <div class="hero-chips">
-      <span class="chip">空間デザイン</span>
-      <span class="chip">イベント制作</span>
-      <span class="chip">探究学習</span>
-      <span class="chip">コミュニティ</span>
-      <span class="chip">フェス装飾</span>
-      <span class="chip">いとあわせ</span>
-      <span class="chip">itoito</span>
-    </div>
-  </div>
+<header class="hero">
+  <div class="hero-photo"></div>
+  <div class="hero-vertical-l">空間と学びを、静かにつなぐ。</div>
+  <div class="hero-spacer"></div>
   <div class="hero-right">
-    <div class="hero-ring">
-      <span class="hero-kanji">晴</span>
+    <div class="hero-name">
+      <ruby>中丸<rt>なかまる</rt></ruby><ruby>晴留哉<rt>はれるや</rt></ruby>
     </div>
-    <div class="hero-stack">
-      former<br>
-      <strong>math teacher</strong><br>
-      ↓<br>
-      spatial designer<br>
-      <strong>festival producer</strong><br>
-      ↓<br>
-      <div class="hero-divider"></div>
-      studio <span class="tag-g">いとあわせ</span><br>
-      platform <span class="tag-o">itoito</span>
-    </div>
+    <div class="hero-tagline">空間と学びをつなぐ人</div>
+    <div class="hero-meta">東京都江東区</div>
+    <div class="hero-meta-jp">空間デザイン・イベント制作<br>探究学習・絲スタジオ運営</div>
   </div>
-</div>
+</header>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="container">
-    <div class="sec-head">
-      <span class="sec-num">01</span>
-      <h2 class="sec-title">About</h2>
-    </div>
-    <div class="about-grid reveal">
-      <div class="about-bio">
-        <p>東京・江東区を拠点に活動する、フリーランスのソロプレナー。もとは公立中学校で数学を教えていました。</p>
-        <p>退職後、<strong>音楽フェスの装飾・空間プロデュース</strong>の世界へ。5年以上にわたって制作とディレクションの両輪で、多くのイベント・空間に携わってきました。</p>
-        <p>いまは「こどもが<strong>本物の問いに出会える場所</strong>」をつくることに情熱を注いでいます。探究学習スタジオ <span class="g"><strong>絲（いとあわせ）</strong></span> を立ち上げ、月2回以上のワークショップを江東区で開催中。</p>
-        <p>並行して、体験と人をつなぐプラットフォーム <strong>itoito</strong>（仮）を構想。江東区・周辺エリアからスタートし、将来的には全国展開を目指しています。</p>
-      </div>
-      <div class="facts">
-        <div class="fact">
-          <span class="fact-k">拠点</span>
-          <span class="fact-v">東京都江東区</span>
-        </div>
-        <div class="fact">
-          <span class="fact-k">前職</span>
-          <span class="fact-v">公立中学校 数学教師</span>
-        </div>
-        <div class="fact">
-          <span class="fact-k">専門</span>
-          <span class="fact-v">空間デザイン／イベント制作<br>探究学習／コミュニティ構築</span>
-        </div>
-        <div class="fact">
-          <span class="fact-k">制作歴</span>
-          <span class="fact-v">5年以上（空間制作・フェス装飾）</span>
-        </div>
-        <div class="fact">
-          <span class="fact-k">プロジェクト</span>
-          <span class="fact-v">絲（いとあわせ）スタジオ<br>itoito 体験マッチングPF（構想中）</span>
-        </div>
-        <div class="fact">
-          <span class="fact-k">note</span>
-          <span class="fact-v">探究学習・空間・学びについて発信中</span>
-        </div>
-      </div>
-    </div>
+<!-- SERVICE -->
+<section id="service">
+  <div class="sec-head">
+    <h2 class="sec-title">Service</h2>
+    <span class="sec-sub">やっていること</span>
   </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="container">
-    <div class="sec-head">
-      <span class="sec-num">02</span>
-      <h2 class="sec-title">Projects</h2>
+  <div class="service-grid reveal">
+    <div class="service-col">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="8" y="14" width="14" height="28"/>
+          <rect x="26" y="6" width="14" height="36"/>
+          <line x1="12" y1="20" x2="18" y2="20"/>
+          <line x1="12" y1="26" x2="18" y2="26"/>
+          <line x1="12" y1="32" x2="18" y2="32"/>
+          <line x1="30" y1="14" x2="36" y2="14"/>
+          <line x1="30" y1="22" x2="36" y2="22"/>
+          <line x1="30" y1="30" x2="36" y2="30"/>
+        </svg>
+      </div>
+      <h3 class="service-title">空間デザイン</h3>
+      <p class="service-desc">人の動きや関係性を丁寧に見つめ、<br>場の個性を引き出す空間をつくります。</p>
+      <a class="service-more" href="#works">詳しくみる ⟶</a>
     </div>
-    <div class="proj-grid reveal">
-
-      <!-- Featured -->
-      <div class="proj-card featured span2">
-        <div>
-          <div class="proj-badge">PLATFORM — IN PROGRESS</div>
-          <div class="proj-title proj-featured-title">itoito（仮）<br>体験マッチングプラットフォーム</div>
-          <div class="proj-desc">「やってみたい」と「教えたい・場を開きたい」をつなぐ、体験型学びのマッチングプラットフォーム。江東区・周辺エリアからスタートし、将来的に全国展開を目指して構想中。</div>
-          <div class="proj-chips">
-            <span class="chip">構想中</span>
-            <span class="chip">江東区スタート</span>
-            <span class="chip">全国展開予定</span>
-            <span class="chip">体験×学び</span>
-          </div>
-        </div>
-        <div class="proj-visual">
-          <span class="proj-visual-word">itoito</span>
-        </div>
+    <div class="service-col">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M24 6 L24 11"/>
+          <path d="M16 11 L32 11 L30 16 L18 16 Z"/>
+          <path d="M18 16 L18 36 L30 36 L30 16"/>
+          <path d="M14 36 L34 36"/>
+          <line x1="22" y1="20" x2="22" y2="32"/>
+          <line x1="26" y1="20" x2="26" y2="32"/>
+          <path d="M24 36 L24 42"/>
+        </svg>
       </div>
-
-      <!-- いとあわせ -->
-      <div class="proj-card">
-        <div class="proj-num">02</div>
-        <div class="proj-badge">STUDIO — RUNNING</div>
-        <div class="proj-title">絲（いとあわせ）<br>探究学習スタジオ</div>
-        <div class="proj-desc">江東区を拠点に、中高生がリアルな問いと出会う探究学習ワークショップを月2回以上開催。10月に向けて100人規模のフェス型イベントを準備中。</div>
+      <h3 class="service-title">イベント制作</h3>
+      <p class="service-desc">企画から設計・運営まで伴走し、<br>心に残る時間と場をつくります。</p>
+      <a class="service-more" href="#works">詳しくみる ⟶</a>
+    </div>
+    <div class="service-col">
+      <div class="service-icon">
+        <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 12 C12 10, 18 10, 24 14 C30 10, 36 10, 42 12 L42 38 C36 36, 30 36, 24 40 C18 36, 12 36, 6 38 Z"/>
+          <line x1="24" y1="14" x2="24" y2="40"/>
+          <line x1="11" y1="18" x2="20" y2="18"/>
+          <line x1="11" y1="24" x2="20" y2="24"/>
+          <line x1="28" y1="18" x2="37" y2="18"/>
+          <line x1="28" y1="24" x2="37" y2="24"/>
+        </svg>
       </div>
-
-      <!-- フェスイベント -->
-      <div class="proj-card">
-        <div class="proj-num">03</div>
-        <div class="proj-badge">EVENT — OCT 2025</div>
-        <div class="proj-title">100人規模<br>フェス型こども探究イベント</div>
-        <div class="proj-desc">中高生ターゲット。音楽フェス的な空気感と探究学習を融合させた大型体験イベントを10月に向けて企画進行中。</div>
-      </div>
-
-      <!-- 空間制作 -->
-      <div class="proj-card">
-        <div class="proj-num">04</div>
-        <div class="proj-badge">PRODUCTION — PAST WORK</div>
-        <div class="proj-title">音楽フェス装飾・<br>空間プロデュース</div>
-        <div class="proj-desc">5年以上にわたる音楽フェスの装飾制作・空間デザイン。制作現場から方向性のディレクションまで、多数のプロジェクトに携わってきた。</div>
-      </div>
-
-      <!-- note -->
-      <div class="proj-card">
-        <div class="proj-num">05</div>
-        <div class="proj-badge">CONTENT — ONGOING</div>
-        <div class="proj-title">note 発信<br>探究学習 × 空間 × 学び</div>
-        <div class="proj-desc">教師・空間デザイン・探究学習という異なる経歴を活かし、無料記事を重ねながら有料記事へと繋げるnoteコンテンツを展開中。</div>
-      </div>
-
+      <h3 class="service-title">探究学習</h3>
+      <p class="service-desc">問いを起点に、学びをひらく仕掛けを<br>デザインし、伴走します。</p>
+      <a class="service-more" href="#works">詳しくみる ⟶</a>
     </div>
   </div>
 </section>
 
-<!-- WORKS -->
-<section id="works">
-  <div class="container">
+<!-- MAIN: Works + Blog -->
+<div class="main-grid">
+
+  <!-- WORKS -->
+  <section id="works">
     <div class="sec-head">
-      <span class="sec-num">03</span>
       <h2 class="sec-title">Works</h2>
+      <span class="sec-sub">仕事の実績</span>
     </div>
     <div class="works-grid reveal" id="works-grid">
-      <div class="work-card"><div class="work-meta">読み込み中…</div></div>
+      <div class="work-card"><div class="work-tags">読み込み中…</div></div>
     </div>
-  </div>
-</section>
+    <div class="works-foot">
+      <a href="#works">すべての実績を見る ⟶</a>
+    </div>
+  </section>
 
-<!-- BLOG -->
-<section id="blog">
-  <div class="container">
+  <!-- BLOG -->
+  <section id="blog">
     <div class="sec-head">
-      <span class="sec-num">04</span>
-      <h2 class="sec-title">Blog / Note</h2>
-      <a class="sec-more" href="https://note.com" target="_blank">note で読む →</a>
+      <h2 class="sec-title">Blog</h2>
+      <span class="sec-sub">考えたこと、つくっていること</span>
     </div>
     <div class="blog-list reveal" id="blog-list">
-      <div class="blog-item"><span class="blog-d">読み込み中…</span></div>
+      <div class="blog-item"><div class="blog-text"><span class="blog-d">読み込み中…</span></div></div>
     </div>
-  </div>
-</section>
+    <div class="blog-foot">
+      <a href="#blog">ブログ一覧へ ⟶</a>
+    </div>
+  </section>
 
-<!-- EVENTS -->
-<section id="events">
-  <div class="container">
-    <div class="sec-head">
-      <span class="sec-num">05</span>
-      <h2 class="sec-title">Events</h2>
-    </div>
-    <div class="events-grid reveal">
-      <div class="ev-card">
-        <div class="ev-date">2025.10 ／ 江東区</div>
-        <div class="ev-title">100人フェス型こども探究イベント</div>
-        <div class="ev-status upcoming">UPCOMING — 準備中</div>
-      </div>
-      <div class="ev-card">
-        <div class="ev-date">2025.05 ／ 江東区</div>
-        <div class="ev-title">いとあわせ 探究ワークショップ vol.3</div>
-        <div class="ev-status scheduled">SCHEDULED</div>
-      </div>
-      <div class="ev-card">
-        <div class="ev-date">2025.04 ／ 江東区</div>
-        <div class="ev-title">いとあわせ 探究ワークショップ vol.2</div>
-        <div class="ev-status done">DONE</div>
-      </div>
-      <div class="ev-card">
-        <div class="ev-date">2025.04 ／ 江東区</div>
-        <div class="ev-title">いとあわせ 探究ワークショップ vol.1</div>
-        <div class="ev-status done">DONE</div>
-      </div>
-      <div class="ev-card dim">
-        <div class="ev-date">2020 〜 2024 ／ 各地</div>
-        <div class="ev-title">音楽フェス装飾・空間制作（多数）</div>
-        <div class="ev-status done">PAST WORK</div>
-      </div>
-      <div class="ev-card dim">
-        <div class="ev-date">随時更新予定</div>
-        <div class="ev-title">今後のイベント情報はSNSでも告知予定</div>
-        <div class="ev-status" style="color:var(--muted);">Instagram / Threads</div>
-      </div>
-    </div>
-  </div>
-</section>
+</div>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="container">
-    <div class="sec-head">
-      <span class="sec-num">06</span>
-      <h2 class="sec-title">Contact</h2>
-    </div>
-    <div class="contact-wrap reveal">
-      <div>
-        <div class="contact-headline">
-          気軽に、<br><em>声をかけて</em>ください。
-        </div>
-        <p class="contact-sub">
-          お仕事の相談、itoitoへの興味、イベントへの参加希望、ただ話したいだけでも。どんな入り口でも歓迎です。
-        </p>
-      </div>
-      <div class="contact-list">
-        <a class="contact-btn" href="mailto:hello@example.com">
-          お仕事・コラボの相談 <span>→</span>
-        </a>
-        <a class="contact-btn" href="#">
-          itoitoに興味がある <span>→</span>
-        </a>
-        <a class="contact-btn" href="#">
-          イベントに参加したい <span>→</span>
-        </a>
-        <a class="contact-btn" href="#">
-          ただ話したい <span>→</span>
-        </a>
-      </div>
-    </div>
+<!-- TAGS -->
+<section id="tags">
+  <div class="sec-head">
+    <h2 class="sec-title">Tags</h2>
+    <span class="sec-sub">タグから探す</span>
+  </div>
+  <div class="tags-list reveal" id="tags-list">
+    <span class="tag-chip">読み込み中…</span>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <span class="footer-l">中丸晴留哉 — Harureya Nakamaru</span>
-  <span class="footer-r">© 2025 / 江東区 Tokyo</span>
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark">絲<small>絲スタジオ</small></span>
+      <div>
+        <p class="footer-tagline">
+          空間と学びをつなぎ、<br>
+          人と人が出会う場を、丁寧につくっています。
+        </p>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>所在地</h4>
+      <p>東京都江東区</p>
+      <a href="https://www.google.com/maps/place/江東区" target="_blank">Google Map ⟶</a>
+    </div>
+    <div class="footer-col">
+      <h4>ご相談・お問い合わせ</h4>
+      <p>まずはお気軽にご相談ください。</p>
+      <a href="mailto:hareruyanakamaru@gmail.com">Contact ⟶</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Hareruya Nakamaru / Ito Studio</span>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
+        </svg>
+      </a>
+      <a href="mailto:hareruyanakamaru@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="M2 7 L12 13 L22 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
 </footer>
 
 <script>
-// scroll reveal
-const els = document.querySelectorAll('.reveal');
-const obs = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
-  });
+// ── scroll reveal ──
+const obs = new IntersectionObserver(es=>{
+  es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
 },{threshold:.12});
-els.forEach(el=>obs.observe(el));
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-// ── microCMS Blog 連携 ─────────────────────────────────
-// このAPIキーはGET（読み取り）専用です
+// ── microCMS ──
 const MICROCMS_DOMAIN = 'hareruya-portfolio';
 const MICROCMS_API_KEY = 'oglpByvCLfiiCRxPnNqAEYUDMIy2MZnrgui6';
 
 const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-function categoryOf(p){
-  const cat = p.category;
-  return Array.isArray(cat) ? cat[0] : cat;
-}
+const categoryOf = p => Array.isArray(p.category) ? p.category[0] : p.category;
+const tagsOf = p => Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
 
 async function fetchAllPosts(){
   const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=100&orders=-publishedAt`;
@@ -688,67 +603,79 @@ async function fetchAllPosts(){
   return data.contents || [];
 }
 
-function renderBlog(posts){
-  const list = document.getElementById('blog-list');
-  if(!list) return;
-  const blogs = posts.filter(p => categoryOf(p) === 'Blog');
-  if(!blogs.length){
-    list.innerHTML = '<div class="blog-item"><span class="blog-d">記事がまだありません</span></div>';
-    return;
-  }
-  list.innerHTML = blogs.map(p => {
-    const d = new Date(p.publishedAt);
-    const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}`;
-    const tags = Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
-    const tag = tags[0] || '';
-    return `<a class="blog-item" href="post.html?id=${encodeURIComponent(p.id)}">
-      <span class="blog-d">${escapeHtml(ymd)}</span>
-      <span class="blog-title">${escapeHtml(p.title)}</span>
-      <span class="blog-cat">${escapeHtml(tag)}</span>
-    </a>`;
-  }).join('');
-}
-
 function renderWorks(posts){
   const grid = document.getElementById('works-grid');
   if(!grid) return;
-  const works = posts.filter(p => categoryOf(p) === 'Works');
+  const works = posts.filter(p => categoryOf(p) === 'Works').slice(0, 4);
   if(!works.length){
-    grid.innerHTML = '<div class="work-card"><div class="work-meta">作品がまだありません</div></div>';
+    grid.innerHTML = '<div class="work-card"><div class="work-tags">作品がまだありません</div></div>';
     return;
   }
   grid.innerHTML = works.map(p => {
     const d = new Date(p.publishedAt);
-    const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}`;
-    const tags = Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
-    const tag = tags[0] || '';
-    const cover = p.cover?.url ? `<img src="${p.cover.url}" alt="${escapeHtml(p.title)}">` : '';
+    const year = d.getFullYear();
+    const tags = tagsOf(p);
+    const tagsLine = tags.length ? tags.join(' / ') : '';
+    const cover = p.cover?.url
+      ? `<img src="${p.cover.url}?w=800&fit=crop" alt="${escapeHtml(p.title)}">`
+      : '';
     return `<a class="work-card" href="post.html?id=${encodeURIComponent(p.id)}">
       <div class="work-cover">${cover}</div>
-      <div class="work-meta">
-        <span>${escapeHtml(ymd)}</span>
-        ${tag ? `<span class="work-cat">${escapeHtml(tag)}</span>` : ''}
-      </div>
       <div class="work-title">${escapeHtml(p.title)}</div>
-      ${tags.length > 1 ? `<div class="work-tags">${tags.slice(1).map(t => `<span class="work-tag">#${escapeHtml(t)}</span>`).join('')}</div>` : ''}
+      ${tagsLine ? `<div class="work-tags">${escapeHtml(tagsLine)}</div>` : ''}
+      <div class="work-year">${year}</div>
     </a>`;
   }).join('');
 }
 
-async function loadAll(){
+function renderBlog(posts){
+  const list = document.getElementById('blog-list');
+  if(!list) return;
+  const blogs = posts.filter(p => categoryOf(p) === 'Blog').slice(0, 5);
+  if(!blogs.length){
+    list.innerHTML = '<div class="blog-item"><div class="blog-text"><span class="blog-d">記事がまだありません</span></div></div>';
+    return;
+  }
+  list.innerHTML = blogs.map(p => {
+    const d = new Date(p.publishedAt);
+    const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+    const thumb = p.cover?.url
+      ? `<img src="${p.cover.url}?w=200&h=200&fit=crop" alt="">`
+      : '';
+    return `<a class="blog-item" href="post.html?id=${encodeURIComponent(p.id)}">
+      <div class="blog-thumb">${thumb}</div>
+      <div class="blog-text">
+        <span class="blog-d">${escapeHtml(ymd)}</span>
+        <span class="blog-title">${escapeHtml(p.title)}</span>
+      </div>
+    </a>`;
+  }).join('');
+}
+
+function renderTags(posts){
+  const list = document.getElementById('tags-list');
+  if(!list) return;
+  const all = new Set();
+  posts.forEach(p => tagsOf(p).forEach(t => all.add(t)));
+  if(!all.size){
+    list.innerHTML = '<span class="tag-chip">タグがまだありません</span>';
+    return;
+  }
+  list.innerHTML = [...all].map(t => `<a class="tag-chip" href="#">＃${escapeHtml(t)}</a>`).join('');
+}
+
+(async () => {
   try{
     const posts = await fetchAllPosts();
-    renderBlog(posts);
     renderWorks(posts);
+    renderBlog(posts);
+    renderTags(posts);
   }catch(e){
     console.error(e);
-    const blogList = document.getElementById('blog-list');
-    if(blogList) blogList.innerHTML = '<div class="blog-item"><span class="blog-d">読み込みに失敗しました</span></div>';
-    const worksGrid = document.getElementById('works-grid');
-    if(worksGrid) worksGrid.innerHTML = '<div class="work-card"><div class="work-meta">読み込みに失敗しました</div></div>';
+    document.getElementById('works-grid').innerHTML = '<div class="work-card"><div class="work-tags">読み込みに失敗しました</div></div>';
+    document.getElementById('blog-list').innerHTML = '<div class="blog-item"><div class="blog-text"><span class="blog-d">読み込みに失敗しました</span></div></div>';
   }
-}
-loadAll();
+})();
 </script>
 </body>
 </html>
