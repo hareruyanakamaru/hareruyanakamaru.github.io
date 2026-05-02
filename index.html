@@ -510,32 +510,8 @@ footer{
       <h2 class="sec-title">Blog / Note</h2>
       <a class="sec-more" href="https://note.com" target="_blank">note で読む →</a>
     </div>
-    <div class="blog-list reveal">
-      <div class="blog-item">
-        <span class="blog-d">2025.03</span>
-        <span class="blog-title">「なぜ？」を育てる授業設計 ── 数学教師だった私が探究学習に向かった理由</span>
-        <span class="blog-cat">探究学習</span>
-      </div>
-      <div class="blog-item">
-        <span class="blog-d">2025.02</span>
-        <span class="blog-title">フェスの装飾から学んだ「空間が人をつくる」という感覚</span>
-        <span class="blog-cat">空間デザイン</span>
-      </div>
-      <div class="blog-item">
-        <span class="blog-d">2025.01</span>
-        <span class="blog-title">itoitoを構想する：体験の「需給」をどうつなぐか</span>
-        <span class="blog-cat">itoito</span>
-      </div>
-      <div class="blog-item">
-        <span class="blog-d">2024.12</span>
-        <span class="blog-title">こどものイベントをつくるとき、大切にしていること</span>
-        <span class="blog-cat">イベント</span>
-      </div>
-      <div class="blog-item">
-        <span class="blog-d">2024.11</span>
-        <span class="blog-title">ひとりで事業をつくるということ ── ソロプレナーの正直な話</span>
-        <span class="blog-cat">ひとりごと</span>
-      </div>
+    <div class="blog-list reveal" id="blog-list">
+      <div class="blog-item"><span class="blog-d">読み込み中…</span></div>
     </div>
   </div>
 </section>
@@ -631,6 +607,47 @@ const obs = new IntersectionObserver(entries=>{
   });
 },{threshold:.12});
 els.forEach(el=>obs.observe(el));
+
+// ── microCMS Blog 連携 ─────────────────────────────────
+// このAPIキーはGET（読み取り）専用です
+const MICROCMS_DOMAIN = 'hareruya-portfolio';
+const MICROCMS_API_KEY = 'oglpByvCLfiiCRxPnNqAEYUDMIy2MZnrgui6';
+
+const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function loadBlogPosts(){
+  const list = document.getElementById('blog-list');
+  if(!list) return;
+  try{
+    const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=20&orders=-publishedAt`;
+    const res = await fetch(url, { headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY }});
+    if(!res.ok) throw new Error('API error');
+    const data = await res.json();
+    const blogs = (data.contents || []).filter(p => {
+      const cat = p.category;
+      return Array.isArray(cat) ? cat.includes('Blog') : cat === 'Blog';
+    });
+    if(!blogs.length){
+      list.innerHTML = '<div class="blog-item"><span class="blog-d">記事がまだありません</span></div>';
+      return;
+    }
+    list.innerHTML = blogs.map(p => {
+      const d = new Date(p.publishedAt);
+      const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}`;
+      const tags = Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
+      const tag = tags[0] || '';
+      return `<div class="blog-item">
+        <span class="blog-d">${escapeHtml(ymd)}</span>
+        <span class="blog-title">${escapeHtml(p.title)}</span>
+        <span class="blog-cat">${escapeHtml(tag)}</span>
+      </div>`;
+    }).join('');
+  }catch(e){
+    console.error(e);
+    list.innerHTML = '<div class="blog-item"><span class="blog-d">読み込みに失敗しました</span></div>';
+  }
+}
+loadBlogPosts();
 </script>
 </body>
 </html>
