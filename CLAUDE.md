@@ -7,7 +7,18 @@ GitHub Pages で静的HTMLとして公開している。
 
 **サイトURL:** https://hareruyanakamaru.github.io/  
 **リポジトリ:** https://github.com/hareruyanakamaru/hareruyanakamaru.github.io  
-**独自ドメイン（取得後に更新）:** https://xxxxxxxx.com
+**独自ドメイン（取得後に更新）:** https://xxxxxxxx.com  
+**microCMS管理画面:** https://hareruya-portfolio.microcms.io/
+
+---
+
+## microCMS運用メモ
+
+- **API:** `posts` （リスト形式）
+- **フィールド:** title / category（Works|Blog 単一選択）/ tags（複数選択）/ cover（画像）/ content（リッチエディタ）
+- **連携箇所:** index.html の `<script>` 内 `loadBlogPosts()` で Blogカテゴリのみ表示
+- **記事の追加:** microCMS管理画面 → 「+ 追加」→ 入力 → 「公開」ボタン → サイトに自動反映（コードpush不要！）
+- **APIキー:** GET（読み取り）専用。ソースに埋め込み済み
 
 ---
 
