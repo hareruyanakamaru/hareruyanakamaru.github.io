@@ -3,22 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>記事 — 中丸晴留哉</title>
-<meta name="description" content="中丸晴留哉のポートフォリオ記事">
+<meta name="description" content="中丸晴留哉のポートフォリオ記事。空間デザイン・イベント制作・探究学習について。">
+<meta name="author" content="中丸晴留哉">
+
+<meta property="og:type" content="article">
+<meta property="og:title" content="記事 — 中丸晴留哉">
+<meta property="og:description" content="空間デザイン・イベント制作・探究学習について。">
+<meta property="og:site_name" content="中丸晴留哉 / 絲スタジオ">
+<meta property="og:image" content="https://hareruyanakamaru.github.io/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=DM+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 :root{
   --ink:#1c1a16;
+  --ink2:#3a342c;
   --paper:#f4f1e8;
   --paper2:#ebe7d9;
   --paper3:#e0dbca;
   --orange:#c8651a;
-  --green:#3d6b38;
   --muted:#7a7568;
   --line:rgba(28,26,22,.1);
   --line2:rgba(28,26,22,.18);
+  --navy:#1c2c50;
+  --footer-bg:#1c2c50;
 }
 html{scroll-behavior:smooth;}
 body{
@@ -27,32 +39,41 @@ body{
   font-family:'Noto Serif JP',serif;
   line-height:1.8;
 }
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
-  height:52px;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 3rem;
+  padding:1.2rem 2.5rem;
   background:rgba(244,241,232,.92);
   backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line);
 }
-.nav-logo{
-  font-family:'DM Mono',monospace;
-  font-size:12px;letter-spacing:.1em;
-  color:var(--ink);text-decoration:none;
+.brand{display:flex;align-items:center;gap:.6rem;}
+.brand-mark{
+  width:64px;height:64px;
+  background:var(--navy);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.7rem;font-weight:700;
+  flex-direction:column;line-height:1;
 }
-.nav-logo span{color:var(--muted);font-size:10px;margin-left:6px;}
-.back-link{
-  font-family:'DM Mono',monospace;
-  font-size:11px;letter-spacing:.1em;
-  color:var(--muted);text-decoration:none;
-  transition:color .2s;
+.brand-mark small{
+  font-size:7px;letter-spacing:.18em;
+  margin-top:4px;font-family:'DM Mono',monospace;font-weight:400;
+  opacity:.85;
 }
-.back-link:hover{color:var(--orange);}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{
+  font-size:.95rem;color:var(--ink);
+  font-weight:500;transition:color .2s;
+}
+.nav-links a:hover{color:var(--orange);}
+
 main{
   max-width:760px;
   margin:0 auto;
-  padding:7rem 2rem 6rem;
+  padding:8rem 2rem 6rem;
 }
 .post-meta{
   font-family:'DM Mono',monospace;
@@ -84,22 +105,23 @@ main{
 .post-tag{
   font-family:'DM Mono',monospace;
   font-size:10px;
-  color:var(--muted);
-  background:var(--paper2);
+  color:var(--ink2);
+  background:var(--paper);
+  border:1px solid var(--line2);
   padding:4px 10px;
 }
 .post-content{
   font-size:1rem;
-  line-height:1.9;
+  line-height:1.95;
 }
 .post-content h1,.post-content h2,.post-content h3{
   margin:2.5rem 0 1rem;
   font-weight:700;
 }
-.post-content h2{font-size:1.4rem;border-left:4px solid var(--orange);padding-left:1rem;}
+.post-content h2{font-size:1.4rem;border-left:4px solid var(--navy);padding-left:1rem;}
 .post-content h3{font-size:1.15rem;}
 .post-content p{margin-bottom:1.2rem;}
-.post-content a{color:var(--orange);}
+.post-content a{color:var(--orange);text-decoration:underline;text-underline-offset:3px;}
 .post-content ul,.post-content ol{margin:1rem 0 1.2rem 1.5rem;}
 .post-content blockquote{
   border-left:3px solid var(--paper3);
@@ -109,20 +131,13 @@ main{
   font-style:italic;
 }
 .post-content img{max-width:100%;height:auto;display:block;}
-.post-content figure{
-  margin:2rem 0;
-}
-.post-content figure img{
-  margin:0;
-  border:1px solid var(--line);
-}
+.post-content figure{margin:2rem 0;}
+.post-content figure img{margin:0;border:1px solid var(--line);}
 .post-content figcaption{
   font-size:.85rem;
   color:var(--muted);
   margin-top:.6rem;
   line-height:1.5;
-  text-align:left;
-  padding-left:.2rem;
   border-left:2px solid var(--paper3);
   padding:.2rem 0 .2rem .8rem;
 }
@@ -143,36 +158,117 @@ main{
   padding-top:2rem;
   border-top:1px solid var(--line);
   display:flex;justify-content:space-between;align-items:center;
-}
-.loading,.error{
-  text-align:center;
-  color:var(--muted);
-  padding:4rem 0;
   font-family:'DM Mono',monospace;
-  font-size:12px;
+  font-size:.78rem;letter-spacing:.1em;color:var(--muted);
 }
-@media(max-width:600px){
-  nav{padding:0 1.5rem;}
+.post-footer a{transition:color .2s;}
+.post-footer a:hover{color:var(--orange);}
+.loading,.error{
+  text-align:center;color:var(--muted);
+  padding:4rem 0;
+  font-family:'DM Mono',monospace;font-size:12px;
+}
+
+footer{
+  background:var(--footer-bg);
+  color:var(--paper);
+  padding:4rem 3rem 2rem;
+}
+.footer-grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr;
+  gap:3rem;margin-bottom:3rem;
+}
+.footer-brand .brand-mark{
+  background:var(--paper);color:var(--navy);
+  width:72px;height:72px;
+  font-size:1.9rem;
+}
+.footer-col h4{
+  font-size:.72rem;color:var(--paper);opacity:.55;
+  font-family:'DM Mono',monospace;letter-spacing:.16em;
+  font-weight:500;margin-bottom:1.2rem;
+}
+.footer-list{list-style:none;}
+.footer-list li{margin-bottom:.7rem;}
+.footer-list a{
+  font-size:.8rem;color:var(--paper);opacity:.85;
+  font-family:'DM Mono',monospace;letter-spacing:.1em;
+  transition:opacity .2s;
+}
+.footer-list a:hover{opacity:1;}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1.5rem;border-top:1px solid rgba(244,241,232,.12);
+}
+.footer-copy{
+  font-size:.72rem;color:var(--paper);opacity:.5;
+  font-family:'DM Mono',monospace;letter-spacing:.06em;
+}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
   main{padding:6rem 1.5rem 4rem;}
-  .post-title{font-size:1.4rem;}
+  .post-title{font-size:1.5rem;}
+  footer{padding:2.5rem 1.5rem 1.5rem;}
+  .footer-grid{grid-template-columns:1fr;gap:2rem;}
+  .footer-bottom{flex-direction:column;gap:1rem;}
 }
 </style>
 </head>
 <body>
+
 <nav>
-  <a class="nav-logo" href="index.html">中丸晴留哉 <span>/ HARUREYA</span></a>
-  <a class="back-link" href="index.html">← back</a>
+  <a class="brand" href="index.html">
+    <span class="brand-mark">絲<small>いとあわせ</small></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="works.html">Works</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
 </nav>
 
 <main id="post">
   <div class="loading">読み込み中…</div>
 </main>
 
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark">絲<small>いとあわせ</small></span>
+    </div>
+    <div class="footer-col">
+      <h4>MENU</h4>
+      <ul class="footer-list">
+        <li><a href="about.html">About</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="mailto:hareruyanakamaru@gmail.com">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>SNS</h4>
+      <ul class="footer-list">
+        <li><a href="https://twitter.com/itoawase0324" target="_blank" rel="noopener">TWITTER</a></li>
+        <li><a href="https://www.instagram.com/harerunakama033/" target="_blank" rel="noopener">INSTAGRAM</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=100004436648159" target="_blank" rel="noopener">FACEBOOK</a></li>
+        <li><a href="https://note.com/itoawase" target="_blank" rel="noopener">NOTE</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Hareruya Nakamaru / Ito Studio</span>
+  </div>
+</footer>
+
 <script>
 const MICROCMS_DOMAIN = 'hareruya-portfolio';
 const MICROCMS_API_KEY = 'oglpByvCLfiiCRxPnNqAEYUDMIy2MZnrgui6';
 
 const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const stripHtml = s => String(s ?? '').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
 
 function linkifyTextNodes(root){
   const urlRegex = /(https?:\/\/[^\s<>'"]+)/g;
@@ -209,6 +305,17 @@ function getPostId(){
   return params.get('id');
 }
 
+function setMeta(name, content, isProperty = false){
+  const attr = isProperty ? 'property' : 'name';
+  let el = document.querySelector(`meta[${attr}="${name}"]`);
+  if(!el){
+    el = document.createElement('meta');
+    el.setAttribute(attr, name);
+    document.head.appendChild(el);
+  }
+  el.setAttribute('content', content);
+}
+
 async function loadPost(){
   const id = getPostId();
   const main = document.getElementById('post');
@@ -222,12 +329,20 @@ async function loadPost(){
     if(!res.ok) throw new Error('API error: ' + res.status);
     const p = await res.json();
 
-    document.title = `${p.title} — 中丸晴留哉`;
+    const title = `${p.title} — 中丸晴留哉`;
+    document.title = title;
+    const desc = stripHtml(p.content).slice(0, 120);
+    setMeta('description', desc);
+    setMeta('og:title', title, true);
+    setMeta('og:description', desc, true);
+    if(p.cover?.url) setMeta('og:image', p.cover.url, true);
 
     const d = new Date(p.publishedAt);
     const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
     const cat = Array.isArray(p.category) ? p.category[0] : p.category;
     const tags = Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
+    const backHref = cat === 'Blog' ? 'blog.html' : 'works.html';
+    const backLabel = cat === 'Blog' ? '← Blog一覧へ' : '← Works一覧へ';
 
     main.innerHTML = `
       <div class="post-meta">
@@ -239,10 +354,10 @@ async function loadPost(){
       ${tags.length ? `<div class="post-tags">${tags.map(t => `<span class="post-tag">#${escapeHtml(t)}</span>`).join('')}</div>` : ''}
       <article class="post-content">${p.content || ''}</article>
       <div class="post-footer">
-        <a class="back-link" href="index.html">← 一覧に戻る</a>
+        <a href="${backHref}">${backLabel}</a>
+        <a href="index.html">Home →</a>
       </div>
     `;
-    // Auto-link plain URLs in content
     const contentEl = main.querySelector('.post-content');
     if(contentEl) linkifyTextNodes(contentEl);
   }catch(e){
