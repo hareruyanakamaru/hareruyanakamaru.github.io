@@ -82,9 +82,9 @@ nav{
   display:flex;align-items:center;gap:.6rem;
 }
 .brand-logo{
-  width:68px;height:68px;
+  height:54px;width:auto;
   display:block;
-  object-fit:cover;
+  mix-blend-mode:multiply;
 }
 .nav-links{
   display:flex;gap:2.5rem;list-style:none;
@@ -98,10 +98,11 @@ nav{
 
 /* ── HERO SLIDER ── */
 .hero{
-  height:92vh;min-height:540px;
+  height:88vh;min-height:520px;
   position:relative;
   overflow:hidden;
   background:#1c1a16;
+  margin:1rem 3rem 0;
 }
 .hero-slides{
   display:flex;
@@ -461,7 +462,8 @@ footer{
 }
 .footer-brand{display:flex;align-items:flex-start;}
 .footer-brand .brand-logo{
-  width:84px;height:84px;
+  height:70px;width:auto;
+  mix-blend-mode:screen;
 }
 .footer-col h4{
   font-size:.72rem;color:var(--paper);opacity:.55;
@@ -508,7 +510,7 @@ footer{
 @media(max-width:900px){
   nav{padding:1rem 1.5rem;}
   .nav-links{display:none;}
-  .hero{height:auto;min-height:560px;}
+  .hero{height:auto;min-height:560px;margin:.6rem 1.5rem 0;}
   .hero-slide-content{
     right:1.5rem;top:5rem;bottom:4rem;
     flex-direction:column-reverse;
@@ -545,7 +547,7 @@ footer{
 <!-- NAV -->
 <nav>
   <a class="brand" href="#">
-    <img class="brand-logo" src="images/logo/logo-square-navy.jpg" alt="絲 いとあわせ">
+    <img class="brand-logo" src="images/logo/logo-horizontal-light.jpg" alt="絲 いとあわせ">
   </a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
@@ -675,7 +677,7 @@ footer{
 <footer id="contact">
   <div class="footer-grid">
     <div class="footer-brand">
-      <img class="brand-logo" src="images/logo/logo-square-light.jpg" alt="絲 いとあわせ">
+      <img class="brand-logo" src="images/logo/logo-horizontal-navy.jpg" alt="絲 いとあわせ">
     </div>
     <div class="footer-col">
       <h4>MENU</h4>
@@ -734,6 +736,11 @@ const MICROCMS_API_KEY = 'oglpByvCLfiiCRxPnNqAEYUDMIy2MZnrgui6';
 
 const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const categoryOf = p => Array.isArray(p.category) ? p.category[0] : p.category;
+const hasCategory = (p, cat) => {
+  const c = p.category;
+  if(Array.isArray(c)) return c.includes(cat);
+  return c === cat;
+};
 const tagsOf = p => Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
 const stripHtml = s => String(s ?? '').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
 
@@ -751,7 +758,10 @@ function renderHero(posts){
   const prevBtn = document.getElementById('hero-prev');
   const nextBtn = document.getElementById('hero-next');
   if(!slides) return;
-  const heroes = posts.filter(p => categoryOf(p) === 'Hero').slice(0, 3);
+  const heroes = posts
+    .filter(p => hasCategory(p, 'Hero'))
+    .sort((a, b) => (a.heroOrder ?? 999) - (b.heroOrder ?? 999))
+    .slice(0, 3);
   if(!heroes.length){
     slides.innerHTML = `<div class="hero-slide"><div class="hero-empty">
       <div class="hero-empty-name">中丸晴留哉</div>
@@ -808,7 +818,7 @@ function renderHero(posts){
 function renderWorks(posts){
   const grid = document.getElementById('works-grid');
   if(!grid) return;
-  const works = posts.filter(p => categoryOf(p) === 'Works').slice(0, 4);
+  const works = posts.filter(p => hasCategory(p, 'Works')).slice(0, 4);
   if(!works.length){
     grid.innerHTML = '<div class="work-card"><div class="work-tags">作品がまだありません</div></div>';
     return;
@@ -835,7 +845,7 @@ function renderWorks(posts){
 function renderBlog(posts){
   const list = document.getElementById('blog-list');
   if(!list) return;
-  const blogs = posts.filter(p => categoryOf(p) === 'Blog').slice(0, 5);
+  const blogs = posts.filter(p => hasCategory(p, 'Blog')).slice(0, 5);
   if(!blogs.length){
     list.innerHTML = '<div class="blog-item"><div class="blog-text"><span class="blog-d">記事がまだありません</span></div></div>';
     return;
