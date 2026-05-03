@@ -228,6 +228,37 @@ async function loadPost(){
     const ogImg = p.cover?.url || p.thumbnailUrl || (p.content.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1]);
     if(ogImg) setMeta('og:image', ogImg, true);
 
+    // 構造化データ（Article + BreadcrumbList）
+    const isBlog = (Array.isArray(p.category) ? p.category.includes('Blog') : p.category === 'Blog');
+    const ldJson = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": isBlog ? "BlogPosting" : "Article",
+          "headline": p.title,
+          "description": desc,
+          "image": ogImg ? [ogImg] : undefined,
+          "datePublished": p.publishedAt,
+          "dateModified": p.updatedAt || p.publishedAt,
+          "author": {"@type": "Person", "name": "中丸晴留哉", "url": "https://hareruyanakamaru.github.io/about.html"},
+          "publisher": {"@type": "Person", "name": "中丸晴留哉"},
+          "mainEntityOfPage": {"@type": "WebPage", "@id": `https://hareruyanakamaru.github.io/post.html?id=${encodeURIComponent(p.id)}`}
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://hareruyanakamaru.github.io/"},
+            {"@type": "ListItem", "position": 2, "name": isBlog ? "Blog" : "Works", "item": isBlog ? "https://hareruyanakamaru.github.io/blog.html" : "https://hareruyanakamaru.github.io/works.html"},
+            {"@type": "ListItem", "position": 3, "name": p.title}
+          ]
+        }
+      ]
+    };
+    const ldScript = document.createElement('script');
+    ldScript.type = 'application/ld+json';
+    ldScript.textContent = JSON.stringify(ldJson);
+    document.head.appendChild(ldScript);
+
     const d = new Date(p.publishedAt);
     const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
     const catArr = Array.isArray(p.category) ? p.category : (p.category ? [p.category] : []);

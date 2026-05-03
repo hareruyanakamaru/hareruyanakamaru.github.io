@@ -21,21 +21,35 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "中丸晴留哉",
-  "alternateName": "なかまる はれるや",
-  "url": "https://hareruyanakamaru.github.io/",
-  "jobTitle": "空間デザイナー / イベントプロデューサー / 探究学習コーディネーター",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "東京都江東区",
-    "addressCountry": "JP"
-  },
-  "sameAs": [
-    "https://twitter.com/itoawase0324",
-    "https://www.instagram.com/harerunakama033/",
-    "https://www.facebook.com/profile.php?id=100004436648159",
-    "https://note.com/itoawase"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://hareruyanakamaru.github.io/#website",
+      "url": "https://hareruyanakamaru.github.io/",
+      "name": "中丸晴留哉 / 絲スタジオ",
+      "description": "空間デザイン・イベント企画運営・探究学習を手がけるフリーランス、中丸晴留哉のポートフォリオ",
+      "inLanguage": "ja",
+      "publisher": {"@id": "https://hareruyanakamaru.github.io/#person"}
+    },
+    {
+      "@type": "Person",
+      "@id": "https://hareruyanakamaru.github.io/#person",
+      "name": "中丸晴留哉",
+      "alternateName": "なかまる はれるや",
+      "url": "https://hareruyanakamaru.github.io/",
+      "jobTitle": "空間デザイナー / イベントプロデューサー / 探究学習コーディネーター",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "東京都江東区",
+        "addressCountry": "JP"
+      },
+      "sameAs": [
+        "https://twitter.com/itoawase0324",
+        "https://www.instagram.com/harerunakama033/",
+        "https://www.facebook.com/profile.php?id=100004436648159",
+        "https://note.com/itoawase"
+      ]
+    }
   ]
 }
 </script>
