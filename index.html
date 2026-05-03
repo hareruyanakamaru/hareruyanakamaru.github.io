@@ -144,9 +144,67 @@ nav{
 
 /* ── SECTIONS ── */
 section{padding:5rem 3rem;}
+
+/* ── CONCEPT ── */
+.concept{
+  background:var(--paper2);
+  padding:6rem 3rem;
+  position:relative;
+}
+.concept-inner{
+  max-width:1100px;
+  margin:0 auto;
+}
+.concept-label{
+  font-size:.78rem;color:var(--orange);
+  font-family:'DM Mono',monospace;
+  letter-spacing:.18em;
+  margin-bottom:2.5rem;
+  text-align:center;
+}
+.concept-grid{
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:4rem;
+  align-items:start;
+}
+.concept-q{
+  writing-mode:vertical-rl;
+  font-size:1.9rem;font-weight:700;
+  letter-spacing:.18em;
+  line-height:2.1;
+  color:var(--ink);
+  border-right:1px solid var(--ink2);
+  padding:.4rem 1.6rem .4rem 0;
+  height:auto;
+}
+.concept-a{
+  display:flex;flex-direction:column;
+  gap:1.2rem;
+  padding-top:.6rem;
+  max-width:560px;
+}
+.concept-a p{
+  font-size:1rem;
+  line-height:2.1;
+  color:var(--ink2);
+}
+.concept-sign{
+  margin-top:2rem;
+  font-size:.78rem;color:var(--muted);
+  font-family:'DM Mono',monospace;
+  letter-spacing:.1em;
+}
 .sec-head{
   display:flex;align-items:baseline;gap:1rem;
   margin-bottom:2.5rem;
+}
+.sec-num{
+  font-size:.78rem;color:var(--orange);
+  font-family:'DM Mono',monospace;
+  letter-spacing:.12em;
+  font-weight:500;
+  padding-top:.4rem;
 }
 .sec-title{
   font-size:1.9rem;font-weight:700;letter-spacing:.04em;
@@ -208,12 +266,22 @@ section{padding:5rem 3rem;}
 
 /* ── WORKS ── */
 .works-grid{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:2rem 1.8rem;
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2rem 1.4rem;
 }
 .work-card{
   display:block;
   transition:transform .25s;
+}
+.work-card.featured{
+  grid-column:1 / -1;
+}
+.work-card.featured .work-cover{
+  aspect-ratio:16/7;
+}
+.work-card.featured .work-title{
+  font-size:1.35rem;
+  margin-top:1.2rem;
 }
 .work-card:hover{transform:translateY(-4px);}
 .work-card:hover .work-title{color:var(--orange);}
@@ -435,6 +503,24 @@ footer{
   </div>
 </header>
 
+<!-- CONCEPT -->
+<section class="concept" id="concept">
+  <div class="concept-inner reveal">
+    <div class="concept-label">— Concept —</div>
+    <div class="concept-grid">
+      <div class="concept-q">
+        なぜ、空間と<br>学びを、つなぐのか。
+      </div>
+      <div class="concept-a">
+        <p>十年、公立中学校の教室で、数学を教えてきました。<br>毎日向き合ううちに、気づいたことがあります。</p>
+        <p>学ぶ姿勢を変えるのは、教え方ではなく、<br>そこに流れている「場の空気」だということ。</p>
+        <p>いまは、空間づくり・イベント制作・探究学習という<br>三つの入り口から、人と人が出会い直す時間を、<br>静かに、丁寧にデザインしています。</p>
+        <div class="concept-sign">— Hareruya Nakamaru</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- SERVICE -->
 <section id="service">
   <div class="sec-head">
@@ -499,6 +585,7 @@ footer{
   <!-- WORKS -->
   <section id="works">
     <div class="sec-head">
+      <span class="sec-num">01</span>
       <h2 class="sec-title">Works</h2>
       <span class="sec-sub">仕事の実績</span>
     </div>
@@ -513,6 +600,7 @@ footer{
   <!-- BLOG -->
   <section id="blog">
     <div class="sec-head">
+      <span class="sec-num">02</span>
       <h2 class="sec-title">Blog</h2>
       <span class="sec-sub">考えたこと、つくっていること</span>
     </div>
@@ -611,15 +699,17 @@ function renderWorks(posts){
     grid.innerHTML = '<div class="work-card"><div class="work-tags">作品がまだありません</div></div>';
     return;
   }
-  grid.innerHTML = works.map(p => {
+  grid.innerHTML = works.map((p, i) => {
     const d = new Date(p.publishedAt);
     const year = d.getFullYear();
     const tags = tagsOf(p);
     const tagsLine = tags.length ? tags.join(' / ') : '';
+    const isFeatured = i === 0;
+    const imgW = isFeatured ? 1600 : 800;
     const cover = p.cover?.url
-      ? `<img src="${p.cover.url}?w=800&fit=crop" alt="${escapeHtml(p.title)}">`
+      ? `<img src="${p.cover.url}?w=${imgW}&fit=crop" alt="${escapeHtml(p.title)}">`
       : '';
-    return `<a class="work-card" href="post.html?id=${encodeURIComponent(p.id)}">
+    return `<a class="work-card${isFeatured ? ' featured' : ''}" href="post.html?id=${encodeURIComponent(p.id)}">
       <div class="work-cover">${cover}</div>
       <div class="work-title">${escapeHtml(p.title)}</div>
       ${tagsLine ? `<div class="work-tags">${escapeHtml(tagsLine)}</div>` : ''}
