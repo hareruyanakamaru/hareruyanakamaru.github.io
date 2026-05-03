@@ -20,7 +20,8 @@
   --muted:#7a7568;
   --line:rgba(28,26,22,.1);
   --line2:rgba(28,26,22,.18);
-  --footer-bg:#1f1c17;
+  --navy:#1c2c50;
+  --footer-bg:#1c2c50;
 }
 html{scroll-behavior:smooth;}
 body{
@@ -46,18 +47,19 @@ nav{
   display:flex;align-items:center;gap:.6rem;
 }
 .brand-mark{
-  width:54px;height:54px;
-  background:var(--ink);color:var(--paper);
+  width:64px;height:64px;
+  background:var(--navy);color:var(--paper);
   display:flex;align-items:center;justify-content:center;
-  font-size:1.5rem;font-weight:700;
+  font-size:1.7rem;font-weight:700;
   letter-spacing:0;
   flex-direction:column;line-height:1;
 }
 .brand-mark small{
-  font-size:7px;letter-spacing:.1em;
-  margin-top:3px;
+  font-size:7px;letter-spacing:.18em;
+  margin-top:4px;
   font-family:'DM Mono',monospace;
   font-weight:400;
+  opacity:.85;
 }
 .nav-links{
   display:flex;gap:2.5rem;list-style:none;
@@ -144,19 +146,22 @@ nav{
 .hero-arrow{
   position:absolute;top:50%;
   transform:translateY(-50%);
-  width:42px;height:42px;
-  background:rgba(244,241,232,.12);
-  border:1px solid rgba(244,241,232,.45);
+  width:32px;height:60px;
+  background:transparent;
+  border:none;
   color:var(--paper);
-  font-size:1.4rem;line-height:1;
+  font-size:2.4rem;line-height:1;
   cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   z-index:10;
-  transition:background .2s;
+  opacity:.7;
+  text-shadow:0 1px 6px rgba(0,0,0,.5);
+  transition:opacity .2s;
+  font-weight:300;
 }
 .hero-arrow.prev{left:1.5rem;}
 .hero-arrow.next{right:1.5rem;}
-.hero-arrow:hover{background:rgba(244,241,232,.28);}
+.hero-arrow:hover{opacity:1;}
 .hero-dots{
   position:absolute;
   bottom:1.6rem;left:50%;transform:translateX(-50%);
@@ -265,38 +270,41 @@ section{padding:5rem 3rem;}
 .sec-more:hover{color:var(--orange);}
 
 /* ── SERVICE ── */
-#service{padding-top:2rem;padding-bottom:5rem;background:var(--paper);}
+#service{padding-top:2rem;padding-bottom:3rem;background:var(--paper);}
 .service-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
-  gap:3rem;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-  padding:3rem 0;
+  gap:0;
+  border-top:1px solid var(--line2);
+  border-bottom:1px solid var(--line2);
+  padding:3.5rem 0;
 }
 .service-col{
-  display:flex;flex-direction:column;align-items:flex-start;
+  display:flex;flex-direction:column;
+  align-items:center;
+  text-align:center;
   padding:0 1.5rem;
 }
-.service-col + .service-col{border-left:1px solid var(--line);}
-.service-icon{
-  width:48px;height:48px;
-  margin-bottom:1.2rem;color:var(--orange);
-}
-.service-icon svg{width:100%;height:100%;}
+.service-icon{display:none;}
 .service-title{
-  font-size:1.15rem;font-weight:700;
-  margin-bottom:.8rem;
+  font-size:1.2rem;font-weight:500;
+  margin-bottom:.7rem;
+  letter-spacing:.06em;
 }
 .service-desc{
-  font-size:.88rem;line-height:1.9;color:var(--ink2);
-  margin-bottom:1.5rem;
+  font-size:.78rem;line-height:1.9;color:var(--muted);
+  font-family:'DM Mono',monospace;
+  letter-spacing:.04em;
 }
-.service-more{
+.service-foot{
+  text-align:right;
+  margin-top:1.2rem;
+}
+.service-foot a{
   font-size:.78rem;color:var(--muted);
-  font-family:'DM Mono',monospace;letter-spacing:.08em;
+  font-family:'DM Mono',monospace;letter-spacing:.1em;
   transition:color .2s;
 }
-.service-more:hover{color:var(--orange);}
+.service-foot a:hover{color:var(--orange);}
 
 /* ── MAIN GRID (Works + Blog) ── */
 .main-grid{
@@ -308,8 +316,8 @@ section{padding:5rem 3rem;}
 
 /* ── WORKS ── */
 .works-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:2rem 1.4rem;
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:2.4rem 1.6rem;
 }
 .work-card{
   display:block;
@@ -322,7 +330,7 @@ section{padding:5rem 3rem;}
   aspect-ratio:16/7;
 }
 .work-card.featured .work-title{
-  font-size:1.35rem;
+  font-size:1.4rem;
   margin-top:1.2rem;
 }
 .work-card:hover{transform:translateY(-4px);}
@@ -412,46 +420,52 @@ section{padding:5rem 3rem;}
 /* ── TAGS ── */
 #tags{padding:4rem 3rem 6rem;}
 .tags-list{
-  display:flex;flex-wrap:wrap;gap:.6rem 1rem;
+  display:flex;flex-wrap:wrap;gap:.6rem;
 }
 .tag-chip{
-  font-size:.85rem;color:var(--orange);
-  letter-spacing:.04em;
-  transition:opacity .2s;
+  font-size:.78rem;color:var(--ink2);
+  letter-spacing:.06em;
+  padding:.45rem .95rem;
+  border:1px solid var(--line2);
+  background:var(--paper);
+  transition:background .2s,color .2s,border-color .2s;
 }
-.tag-chip:hover{opacity:.6;}
+.tag-chip:hover{
+  background:var(--ink);
+  color:var(--paper);
+  border-color:var(--ink);
+}
 
 /* ── FOOTER ── */
 footer{
   background:var(--footer-bg);
   color:var(--paper);
-  padding:3.5rem 3rem 2rem;
+  padding:4rem 3rem 2rem;
 }
 .footer-grid{
-  display:grid;grid-template-columns:1.4fr 1fr 1fr;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr;
   gap:3rem;
-  margin-bottom:2.5rem;
+  margin-bottom:3rem;
 }
-.footer-brand{display:flex;gap:1.2rem;align-items:flex-start;}
-.footer-brand .brand-mark{background:var(--paper);color:var(--ink);}
-.footer-tagline{
-  font-size:.85rem;color:var(--paper);opacity:.85;
-  line-height:1.9;
+.footer-brand{display:flex;align-items:flex-start;}
+.footer-brand .brand-mark{
+  background:var(--paper);color:var(--navy);
+  width:72px;height:72px;
+  font-size:1.9rem;
 }
 .footer-col h4{
-  font-size:.75rem;color:var(--paper);opacity:.55;
+  font-size:.72rem;color:var(--paper);opacity:.55;
+  font-family:'DM Mono',monospace;letter-spacing:.16em;
+  font-weight:500;margin-bottom:1.2rem;
+}
+.footer-list{list-style:none;}
+.footer-list li{margin-bottom:.7rem;}
+.footer-list a{
+  font-size:.8rem;color:var(--paper);opacity:.85;
   font-family:'DM Mono',monospace;letter-spacing:.1em;
-  font-weight:500;margin-bottom:.8rem;
-}
-.footer-col p{
-  font-size:.95rem;margin-bottom:.8rem;
-}
-.footer-col a{
-  font-size:.78rem;color:var(--paper);opacity:.7;
-  font-family:'DM Mono',monospace;letter-spacing:.08em;
   transition:opacity .2s;
 }
-.footer-col a:hover{opacity:1;color:var(--orange);}
+.footer-list a:hover{opacity:1;}
 .footer-bottom{
   display:flex;justify-content:space-between;align-items:center;
   padding-top:1.5rem;border-top:1px solid rgba(244,241,232,.12);
@@ -513,7 +527,7 @@ footer{
 <!-- NAV -->
 <nav>
   <a class="brand" href="#">
-    <span class="brand-mark">絲<small>絲スタジオ</small></span>
+    <span class="brand-mark">絲<small>いとあわせ</small></span>
   </a>
   <ul class="nav-links">
     <li><a href="#service">About</a></li>
@@ -603,6 +617,9 @@ footer{
       <p class="service-desc">問いを起点に、学びをひらく仕掛けを<br>デザインし、伴走します。</p>
     </div>
   </div>
+  <div class="service-foot reveal">
+    <a href="works.html">view all →</a>
+  </div>
 </section>
 
 <!-- MAIN: Works + Blog -->
@@ -650,23 +667,25 @@ footer{
 <footer id="contact">
   <div class="footer-grid">
     <div class="footer-brand">
-      <span class="brand-mark">絲<small>絲スタジオ</small></span>
-      <div>
-        <p class="footer-tagline">
-          空間と学びをつなぎ、<br>
-          人と人が出会う場を、丁寧につくっています。
-        </p>
-      </div>
+      <span class="brand-mark">絲<small>いとあわせ</small></span>
     </div>
     <div class="footer-col">
-      <h4>所在地</h4>
-      <p>東京都江東区</p>
-      <a href="https://www.google.com/maps/place/江東区" target="_blank">Google Map ⟶</a>
+      <h4>MENU</h4>
+      <ul class="footer-list">
+        <li><a href="#service">About</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="mailto:hareruyanakamaru@gmail.com">Contact</a></li>
+      </ul>
     </div>
     <div class="footer-col">
-      <h4>ご相談・お問い合わせ</h4>
-      <p>まずはお気軽にご相談ください。</p>
-      <a href="mailto:hareruyanakamaru@gmail.com">Contact ⟶</a>
+      <h4>SNS</h4>
+      <ul class="footer-list">
+        <li><a href="https://twitter.com/itoawase0324" target="_blank" rel="noopener">TWITTER</a></li>
+        <li><a href="https://www.instagram.com/harerunakama033/" target="_blank" rel="noopener">INSTAGRAM</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=100004436648159" target="_blank" rel="noopener">FACEBOOK</a></li>
+        <li><a href="https://note.com/itoawase" target="_blank" rel="noopener">NOTE</a></li>
+      </ul>
     </div>
   </div>
   <div class="footer-bottom">
