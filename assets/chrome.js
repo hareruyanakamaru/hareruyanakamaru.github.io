@@ -25,7 +25,7 @@
     </div>
     <div class="footer-social">
       <a href="https://www.facebook.com/profile.php?id=100004436648159" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg viewBox="0 0 24 24"><path d="M14 13.5h2.5l.5-3H14v-2c0-.86 0-1.5 1.5-1.5h1.5V4.14c-.32-.04-1.78-.14-3.13-.14C11.05 4 9 5.71 9 8.6V10.5H6.5v3H9V21h5z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 13.5h2.5l.5-3H14v-2c0-.86 0-1.5 1.5-1.5h1.5V4.14c-.32-.04-1.78-.14-3.13-.14C11.05 4 9 5.71 9 8.6V10.5H6.5v3H9V21h5z"/></svg>
       </a>
       <a href="https://www.instagram.com/harerunakama033/" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -35,7 +35,7 @@
         </svg>
       </a>
       <a href="https://twitter.com/itoawase0324" target="_blank" rel="noopener" aria-label="X (Twitter)">
-        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
       <a href="https://note.com/itoawase" target="_blank" rel="noopener" aria-label="note">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
