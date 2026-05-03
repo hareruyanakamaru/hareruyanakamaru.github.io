@@ -71,7 +71,7 @@ nav{
 
 /* ── HERO SLIDER ── */
 .hero{
-  height:60vh;min-height:440px;max-height:680px;
+  height:92vh;min-height:540px;
   position:relative;
   overflow:hidden;
   background:#1c1a16;
@@ -92,6 +92,13 @@ nav{
   width:100%;height:100%;
   object-fit:cover;
 }
+.hero-slide::after{
+  content:"";position:absolute;
+  top:0;bottom:0;right:0;
+  width:38%;
+  background:linear-gradient(270deg, rgba(0,0,0,.55) 0%, rgba(0,0,0,0) 100%);
+  pointer-events:none;
+}
 .hero-slide-content{
   position:absolute;
   right:2.2rem;
@@ -104,20 +111,20 @@ nav{
 }
 .hero-slide-title{
   writing-mode:vertical-rl;
-  font-size:2.2rem;font-weight:700;
+  font-size:2.4rem;font-weight:700;
   letter-spacing:.22em;line-height:1.5;
   color:var(--paper);
-  text-shadow:0 2px 14px rgba(0,0,0,.55);
+  text-shadow:0 2px 4px rgba(0,0,0,.85), 0 0 14px rgba(0,0,0,.55);
   max-height:100%;
 }
 .hero-slide-excerpt{
   writing-mode:vertical-rl;
-  font-size:.74rem;
+  font-size:.78rem;
   color:var(--paper);
   line-height:2;
   letter-spacing:.18em;
   max-height:100%;
-  text-shadow:0 1px 6px rgba(0,0,0,.6);
+  text-shadow:0 1px 3px rgba(0,0,0,.95), 0 0 10px rgba(0,0,0,.7);
   padding-top:.4rem;
 }
 .hero-readmore{
