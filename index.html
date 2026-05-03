@@ -74,8 +74,7 @@ nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
   padding:1.2rem 2.5rem;
-  background:rgba(244,241,232,.92);
-  backdrop-filter:blur(12px);
+  background:var(--paper);
   border-bottom:1px solid var(--line);
 }
 .brand{
@@ -512,13 +511,14 @@ footer{
   .nav-links{display:none;}
   .hero{height:auto;min-height:560px;margin:.6rem 1.5rem 0;}
   .hero-slide-content{
-    right:1.5rem;top:5rem;bottom:4rem;
-    flex-direction:column-reverse;
+    right:1.2rem;top:1.5rem;bottom:4rem;
+    flex-direction:column;
     align-items:flex-end;
-    gap:1.2rem;
+    gap:1rem;
+    max-height:calc(100% - 5.5rem);
   }
-  .hero-slide-title{font-size:1.7rem;}
-  .hero-slide-excerpt{max-width:60%;font-size:.78rem;}
+  .hero-slide-title{font-size:1.4rem !important;letter-spacing:.14em;}
+  .hero-slide-excerpt{font-size:.7rem;letter-spacing:.1em;max-height:60vh;}
   .hero-arrow{width:36px;height:36px;}
   section{padding:3.5rem 1.5rem;}
   .service-grid{grid-template-columns:1fr;gap:2rem;padding:2rem 0;}
