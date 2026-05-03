@@ -174,6 +174,36 @@ const MICROCMS_API_KEY = 'oglpByvCLfiiCRxPnNqAEYUDMIy2MZnrgui6';
 
 const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
+function linkifyTextNodes(root){
+  const urlRegex = /(https?:\/\/[^\s<>'"]+)/g;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode: n => n.parentElement && n.parentElement.closest('a') ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT
+  });
+  const targets = [];
+  let node;
+  while(node = walker.nextNode()){
+    urlRegex.lastIndex = 0;
+    if(urlRegex.test(node.nodeValue)) targets.push(node);
+  }
+  targets.forEach(textNode => {
+    const text = textNode.nodeValue;
+    const frag = document.createDocumentFragment();
+    let lastIdx = 0;
+    text.replace(urlRegex, (match, url, offset) => {
+      if(offset > lastIdx) frag.appendChild(document.createTextNode(text.slice(lastIdx, offset)));
+      const a = document.createElement('a');
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = url;
+      frag.appendChild(a);
+      lastIdx = offset + match.length;
+    });
+    if(lastIdx < text.length) frag.appendChild(document.createTextNode(text.slice(lastIdx)));
+    textNode.parentNode.replaceChild(frag, textNode);
+  });
+}
+
 function getPostId(){
   const params = new URLSearchParams(location.search);
   return params.get('id');
@@ -212,6 +242,9 @@ async function loadPost(){
         <a class="back-link" href="index.html">← 一覧に戻る</a>
       </div>
     `;
+    // Auto-link plain URLs in content
+    const contentEl = main.querySelector('.post-content');
+    if(contentEl) linkifyTextNodes(contentEl);
   }catch(e){
     console.error(e);
     main.innerHTML = '<div class="error">記事の読み込みに失敗しました</div>';
