@@ -73,7 +73,7 @@ img{display:block;max-width:100%;}
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding:.55rem 2.5rem;
+  padding:1.1rem 2.5rem;
   background:var(--paper);
   transition:padding .3s ease, background .3s ease;
   animation:nav-drop 1s cubic-bezier(.65,0,.35,1) 1.4s backwards;
@@ -82,7 +82,7 @@ nav{
   transition:transform .5s cubic-bezier(.65,0,.35,1), opacity .4s ease;
 }
 nav.scrolled{
-  padding:.3rem 2.5rem;
+  padding:.6rem 2.5rem;
   background:transparent;
 }
 nav.scrolled .brand{
@@ -101,7 +101,7 @@ nav.scrolled .brand{
   display:flex;align-items:center;gap:.6rem;
 }
 .brand-logo{
-  height:64px;width:auto;
+  height:52px;width:auto;
   display:block;
   transition:height .3s ease;
 }
@@ -610,10 +610,10 @@ footer{
 
 /* ── MOBILE ── */
 @media(max-width:900px){
-  nav{padding:.5rem 1.2rem;}
-  nav.scrolled{padding:.4rem 1.2rem;}
-  .brand-logo{height:40px;}
-  nav.scrolled .brand-logo{height:36px;}
+  nav{padding:.9rem 1.2rem;}
+  nav.scrolled{padding:.6rem 1.2rem;}
+  .brand-logo{height:32px;}
+  nav.scrolled .brand-logo{height:28px;}
   .footer-brand .brand-logo{height:90px;}
   .nav-links{display:none;}
   .hero{height:auto;min-height:520px;margin:72px 1.5rem 1.5rem;animation:none;}
