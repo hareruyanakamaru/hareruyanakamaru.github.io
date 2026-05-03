@@ -232,6 +232,16 @@ const hasCategory = (p, cat) => {
   return c === cat;
 };
 const tagsOf = p => Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
+const firstImageOf = s => {
+  const m = String(s ?? '').match(/<img[^>]+src=["']([^"']+)["']/i);
+  return m ? m[1] : '';
+};
+const coverUrlOf = p => p.cover?.url || firstImageOf(p.content);
+const coverWithSize = (p, params) => {
+  const u = coverUrlOf(p);
+  if(!u) return '';
+  return p.cover?.url ? `${u}?${params}` : u;
+};
 
 async function loadBlogs(){
   const list = document.getElementById('blog-list');
@@ -250,9 +260,8 @@ async function loadBlogs(){
       const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
       const tags = tagsOf(p);
       const tagsLine = tags.length ? tags.map(t => `#${t}`).join(' ') : '';
-      const thumb = p.cover?.url
-        ? `<img src="${p.cover.url}?w=400&h=300&fit=crop" alt="">`
-        : '';
+      const thumbSrc = coverWithSize(p, 'w=400&h=300&fit=crop');
+      const thumb = thumbSrc ? `<img src="${thumbSrc}" alt="" loading="lazy">` : '';
       return `<a class="blog-item" href="post.html?id=${encodeURIComponent(p.id)}">
         <div class="blog-thumb">${thumb}</div>
         <div class="blog-text">

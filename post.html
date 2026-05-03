@@ -328,7 +328,8 @@ async function loadPost(){
     setMeta('description', desc);
     setMeta('og:title', title, true);
     setMeta('og:description', desc, true);
-    if(p.cover?.url) setMeta('og:image', p.cover.url, true);
+    const ogImg = p.cover?.url || (p.content.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1]);
+    if(ogImg) setMeta('og:image', ogImg, true);
 
     const d = new Date(p.publishedAt);
     const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;

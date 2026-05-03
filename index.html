@@ -846,6 +846,16 @@ const hasCategory = (p, cat) => {
 };
 const tagsOf = p => Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
 const stripHtml = s => String(s ?? '').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
+const firstImageOf = s => {
+  const m = String(s ?? '').match(/<img[^>]+src=["']([^"']+)["']/i);
+  return m ? m[1] : '';
+};
+const coverUrlOf = p => p.cover?.url || firstImageOf(p.content);
+const coverWithSize = (p, params) => {
+  const u = coverUrlOf(p);
+  if(!u) return '';
+  return p.cover?.url ? `${u}?${params}` : u;
+};
 
 async function fetchAllPosts(){
   const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=100&orders=-publishedAt`;
@@ -877,8 +887,9 @@ function renderHero(posts){
   const TITLE_MAX = 14;
   const EXCERPT_MAX = 45;
   slides.innerHTML = heroes.map(p => {
-    const cover = p.cover?.url
-      ? `<img class="hero-slide-bg" src="${p.cover.url}?w=2000&fit=crop" alt="${escapeHtml(p.title)}">`
+    const coverSrc = coverWithSize(p, 'w=2000&fit=crop');
+    const cover = coverSrc
+      ? `<img class="hero-slide-bg" src="${coverSrc}" alt="${escapeHtml(p.title)}">`
       : '';
     const titleStr = p.title.length > TITLE_MAX ? p.title.slice(0, TITLE_MAX) + '…' : p.title;
     const fullText = stripHtml(p.content);
@@ -931,8 +942,9 @@ function renderWorks(posts){
     const tagsLine = tags.length ? tags.join(' / ') : '';
     const isFeatured = i === 0;
     const imgW = isFeatured ? 1600 : 800;
-    const cover = p.cover?.url
-      ? `<img src="${p.cover.url}?w=${imgW}&fit=crop" alt="${escapeHtml(p.title)}">`
+    const coverSrc = coverWithSize(p, `w=${imgW}&fit=crop`);
+    const cover = coverSrc
+      ? `<img src="${coverSrc}" alt="${escapeHtml(p.title)}">`
       : '';
     return `<a class="work-card${isFeatured ? ' featured' : ''}" href="post.html?id=${encodeURIComponent(p.id)}">
       <div class="work-cover">${cover}</div>
@@ -953,9 +965,8 @@ function renderBlog(posts){
   list.innerHTML = blogs.map(p => {
     const d = new Date(p.publishedAt);
     const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
-    const thumb = p.cover?.url
-      ? `<img src="${p.cover.url}?w=200&h=200&fit=crop" alt="">`
-      : '';
+    const thumbSrc = coverWithSize(p, 'w=200&h=200&fit=crop');
+    const thumb = thumbSrc ? `<img src="${thumbSrc}" alt="" loading="lazy">` : '';
     return `<a class="blog-item" href="post.html?id=${encodeURIComponent(p.id)}">
       <div class="blog-thumb">${thumb}</div>
       <div class="blog-text">
