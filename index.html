@@ -73,16 +73,17 @@ img{display:block;max-width:100%;}
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding:1.1rem 2.5rem;
+  padding:1.1rem 3rem;
   background:var(--paper);
+  transform-origin:center center;
   transition:padding .3s ease, background .3s ease;
-  animation:nav-drop 1s cubic-bezier(.65,0,.35,1) 1.4s backwards;
+  animation:nav-emerge 1.2s cubic-bezier(.22,1,.36,1) 1.2s backwards;
 }
 .brand{
   transition:transform .5s cubic-bezier(.65,0,.35,1), opacity .4s ease;
 }
 nav.scrolled{
-  padding:.6rem 2.5rem;
+  padding:.6rem 3rem;
   background:transparent;
 }
 nav.scrolled .brand{
@@ -93,9 +94,10 @@ nav.scrolled .brand{
 .nav-links a{
   text-shadow:0 0 1px rgba(244,241,232,.6);
 }
-@keyframes nav-drop{
-  0%{transform:translateY(-100%);opacity:0;}
-  100%{transform:translateY(0);opacity:1;}
+@keyframes nav-emerge{
+  0%{opacity:0;transform:scale(.94);filter:blur(2px);}
+  60%{filter:blur(0);}
+  100%{opacity:1;transform:scale(1);filter:blur(0);}
 }
 .brand{
   display:flex;align-items:center;gap:.6rem;
@@ -603,8 +605,8 @@ footer{
 
 /* ── MOBILE ── */
 @media(max-width:900px){
-  nav{padding:.9rem 1.2rem;}
-  nav.scrolled{padding:.6rem 1.2rem;}
+  nav{padding:.9rem 1.5rem;}
+  nav.scrolled{padding:.6rem 1.5rem;}
   .brand-logo{height:32px;}
   nav.scrolled .brand-logo{height:28px;}
   .footer-brand .brand-logo{height:90px;}
