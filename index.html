@@ -850,7 +850,7 @@ const firstImageOf = s => {
   const m = String(s ?? '').match(/<img[^>]+src=["']([^"']+)["']/i);
   return m ? m[1] : '';
 };
-const coverUrlOf = p => p.cover?.url || firstImageOf(p.content);
+const coverUrlOf = p => p.cover?.url || p.thumbnailUrl || firstImageOf(p.content);
 const coverWithSize = (p, params) => {
   const u = coverUrlOf(p);
   if(!u) return '';

@@ -328,7 +328,7 @@ async function loadPost(){
     setMeta('description', desc);
     setMeta('og:title', title, true);
     setMeta('og:description', desc, true);
-    const ogImg = p.cover?.url || (p.content.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1]);
+    const ogImg = p.cover?.url || p.thumbnailUrl || (p.content.match(/<img[^>]+src=["']([^"']+)["']/i)?.[1]);
     if(ogImg) setMeta('og:image', ogImg, true);
 
     const d = new Date(p.publishedAt);
@@ -346,7 +346,7 @@ async function loadPost(){
         ${cat ? `<span class="post-cat">${escapeHtml(cat)}</span>` : ''}
       </div>
       <h1 class="post-title">${escapeHtml(p.title)}</h1>
-      ${p.cover?.url ? `<img class="post-cover" src="${p.cover.url}" alt="${escapeHtml(p.title)}">` : ''}
+      ${(p.cover?.url || p.thumbnailUrl) ? `<img class="post-cover" src="${p.cover?.url || p.thumbnailUrl}" alt="${escapeHtml(p.title)}">` : ''}
       ${tags.length ? `<div class="post-tags">${tags.map(t => `<span class="post-tag">#${escapeHtml(t)}</span>`).join('')}</div>` : ''}
       <article class="post-content">${p.content || ''}</article>
       <div class="post-footer">
