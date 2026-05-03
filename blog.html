@@ -233,8 +233,11 @@ const hasCategory = (p, cat) => {
 };
 const tagsOf = p => Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
 const firstImageOf = s => {
-  const m = String(s ?? '').match(/<img[^>]+src=["']([^"']+)["']/i);
-  return m ? m[1] : '';
+  const str = String(s ?? '');
+  const marker = str.match(/\[\[img:([^\]\s]+)\]\]/);
+  if(marker) return marker[1];
+  const tag = str.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return tag ? tag[1] : '';
 };
 const coverUrlOf = p => p.cover?.url || p.thumbnailUrl || firstImageOf(p.content);
 const coverWithSize = (p, params) => {

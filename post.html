@@ -124,7 +124,7 @@ main{
   margin:1.5rem 0;
   font-style:italic;
 }
-.post-content img{max-width:100%;height:auto;display:block;}
+.post-content img{max-width:100%;height:auto;display:block;margin:1.6rem auto;}
 .post-content figure{margin:2rem 0;}
 .post-content figure img{margin:0;border:1px solid var(--line);}
 .post-content figcaption{
@@ -261,7 +261,13 @@ const MICROCMS_DOMAIN = 'hareruya-portfolio';
 const MICROCMS_API_KEY = 'oglpByvCLfiiCRxPnNqAEYUDMIy2MZnrgui6';
 
 const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const stripHtml = s => String(s ?? '').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
+const stripHtml = s => String(s ?? '').replace(/\[\[img:[^\]]+\]\]/g,'').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
+// note からインポートした記事は本文中の <img> がmicroCMSにより除去されているため
+// [[img:URL]] というマーカー形式で保存している。表示時に <img> タグへ復元する。
+const renderContent = html => String(html ?? '').replace(
+  /\[\[img:([^\]\s]+)\]\]/g,
+  (_, url) => `<img src="${url}" alt="" loading="lazy" referrerpolicy="no-referrer">`
+);
 
 function linkifyTextNodes(root){
   const urlRegex = /(https?:\/\/[^\s<>'"]+)/g;
@@ -348,7 +354,7 @@ async function loadPost(){
       <h1 class="post-title">${escapeHtml(p.title)}</h1>
       ${(p.cover?.url || p.thumbnailUrl) ? `<img class="post-cover" src="${p.cover?.url || p.thumbnailUrl}" alt="${escapeHtml(p.title)}">` : ''}
       ${tags.length ? `<div class="post-tags">${tags.map(t => `<span class="post-tag">#${escapeHtml(t)}</span>`).join('')}</div>` : ''}
-      <article class="post-content">${p.content || ''}</article>
+      <article class="post-content">${renderContent(p.content || '')}</article>
       <div class="post-footer">
         <a href="${backHref}">${backLabel}</a>
         <a href="index.html">Home →</a>
