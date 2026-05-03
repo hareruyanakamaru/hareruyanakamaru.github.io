@@ -450,6 +450,12 @@ footer{
 }
 .footer-social a:hover{background:rgba(244,241,232,.18);}
 .footer-social svg{width:14px;height:14px;color:var(--paper);}
+.footer-social-text{
+  font-family:'DM Mono',monospace;
+  font-size:.65rem;font-weight:500;
+  letter-spacing:.06em;
+  color:var(--paper);
+}
 
 /* ── ANIMATIONS ── */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
@@ -530,7 +536,6 @@ footer{
 <section id="service">
   <div class="sec-head">
     <h2 class="sec-title">Service</h2>
-    <span class="sec-sub">やっていること</span>
   </div>
   <div class="service-grid reveal">
     <div class="service-col">
@@ -548,7 +553,6 @@ footer{
       </div>
       <h3 class="service-title">空間デザイン</h3>
       <p class="service-desc">人の動きや関係性を丁寧に見つめ、<br>場の個性を引き出す空間をつくります。</p>
-      <a class="service-more" href="#works">詳しくみる ⟶</a>
     </div>
     <div class="service-col">
       <div class="service-icon">
@@ -564,7 +568,6 @@ footer{
       </div>
       <h3 class="service-title">イベント制作</h3>
       <p class="service-desc">企画から設計・運営まで伴走し、<br>心に残る時間と場をつくります。</p>
-      <a class="service-more" href="#works">詳しくみる ⟶</a>
     </div>
     <div class="service-col">
       <div class="service-icon">
@@ -579,7 +582,6 @@ footer{
       </div>
       <h3 class="service-title">探究学習</h3>
       <p class="service-desc">問いを起点に、学びをひらく仕掛けを<br>デザインし、伴走します。</p>
-      <a class="service-more" href="#works">詳しくみる ⟶</a>
     </div>
   </div>
 </section>
@@ -591,7 +593,6 @@ footer{
   <section id="works">
     <div class="sec-head">
       <h2 class="sec-title">Works</h2>
-      <span class="sec-sub">仕事の実績</span>
     </div>
     <div class="works-grid reveal" id="works-grid">
       <div class="work-card"><div class="work-tags">読み込み中…</div></div>
@@ -605,7 +606,6 @@ footer{
   <section id="blog">
     <div class="sec-head">
       <h2 class="sec-title">Blog</h2>
-      <span class="sec-sub">考えたこと、つくっていること</span>
     </div>
     <div class="blog-list reveal" id="blog-list">
       <div class="blog-item"><div class="blog-text"><span class="blog-d">読み込み中…</span></div></div>
@@ -621,7 +621,6 @@ footer{
 <section id="tags">
   <div class="sec-head">
     <h2 class="sec-title">Tags</h2>
-    <span class="sec-sub">タグから探す</span>
   </div>
   <div class="tags-list reveal" id="tags-list">
     <span class="tag-chip">読み込み中…</span>
@@ -654,19 +653,24 @@ footer{
   <div class="footer-bottom">
     <span class="footer-copy">© 2026 Hareruya Nakamaru / Ito Studio</span>
     <div class="footer-social">
-      <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
+      <a href="https://www.instagram.com/harerunakama033/" target="_blank" rel="noopener" aria-label="Instagram">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <rect x="2" y="2" width="20" height="20" rx="5"/>
           <circle cx="12" cy="12" r="4"/>
           <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
         </svg>
       </a>
-      <a href="mailto:hareruyanakamaru@gmail.com" aria-label="Email">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="4" width="20" height="16" rx="2"/>
-          <path d="M2 7 L12 13 L22 7"/>
+      <a href="https://www.facebook.com/profile.php?id=100004436648159" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M14 13.5h2.5l.5-3H14v-2c0-.86 0-1.5 1.5-1.5h1.5V4.14c-.32-.04-1.78-.14-3.13-.14C11.05 4 9 5.71 9 8.6V10.5H6.5v3H9V21h5z"/>
         </svg>
       </a>
+      <a href="https://twitter.com/itoawase0324" target="_blank" rel="noopener" aria-label="X (Twitter)">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a class="footer-social-text" href="https://note.com/itoawase" target="_blank" rel="noopener" aria-label="note">note</a>
     </div>
   </div>
 </footer>
