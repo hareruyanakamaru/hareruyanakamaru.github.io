@@ -59,12 +59,15 @@ nav{
   display:block;
   mix-blend-mode:darken;
 }
-.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
 .nav-links a{
-  font-size:.95rem;color:var(--ink);
-  font-weight:500;transition:color .2s;
+  font-family:'DM Mono',monospace;
+  font-size:.78rem;letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--ink);font-weight:400;
+  transition:opacity .2s;
 }
-.nav-links a:hover{color:var(--orange);}
+.nav-links a:hover{opacity:.55;}
 
 /* PAGE HEAD */
 .page-head{
