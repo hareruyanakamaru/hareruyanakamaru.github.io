@@ -205,75 +205,6 @@ nav{
 /* ── SECTIONS ── */
 section{padding:5rem 3rem;}
 
-/* ── ABOUT ── */
-.about{padding:6rem 3rem;background:var(--paper);}
-.about-inner{max-width:1100px;margin:0 auto;}
-.about-grid{
-  display:grid;
-  grid-template-columns:1fr 1.5fr;
-  gap:4rem;
-  align-items:start;
-}
-.about-photo{position:relative;}
-.about-photo-placeholder{
-  aspect-ratio:3/4;
-  background:var(--paper2);
-  border:1px dashed var(--line2);
-  display:flex;align-items:center;justify-content:center;
-  color:var(--muted);
-  font-size:.78rem;
-  font-family:'DM Mono',monospace;
-  letter-spacing:.1em;
-}
-.about-photo img{
-  width:100%;aspect-ratio:3/4;object-fit:cover;
-  display:block;
-}
-.about-text{padding-top:.4rem;}
-.about-name{
-  font-size:1.7rem;font-weight:700;
-  letter-spacing:.05em;
-  margin-bottom:.3rem;
-}
-.about-name small{
-  font-size:.65rem;
-  font-family:'DM Mono',monospace;
-  letter-spacing:.18em;
-  color:var(--muted);
-  margin-left:1rem;
-  font-weight:400;
-}
-.about-tagline{
-  font-size:.78rem;color:var(--muted);
-  font-family:'DM Mono',monospace;letter-spacing:.16em;
-  margin-bottom:2rem;
-  text-transform:uppercase;
-}
-.about-bio p{
-  font-size:.95rem;line-height:2;color:var(--ink2);
-  margin-bottom:1rem;
-}
-.about-now{
-  margin-top:2.4rem;padding-top:1.8rem;
-  border-top:1px solid var(--line2);
-}
-.about-now h4{
-  font-size:.7rem;color:var(--muted);
-  font-family:'DM Mono',monospace;letter-spacing:.2em;
-  margin-bottom:1rem;
-}
-.about-now ul{list-style:none;}
-.about-now li{
-  font-size:.92rem;color:var(--ink2);
-  padding:.45rem 0 .45rem 1.4rem;
-  position:relative;
-  line-height:1.7;
-}
-.about-now li::before{
-  content:"—";position:absolute;left:0;
-  color:var(--navy);font-weight:600;
-}
-
 /* ── CONCEPT ── */
 .concept{
   background:var(--paper2);
@@ -584,9 +515,6 @@ footer{
   .hero-slide-excerpt{max-width:60%;font-size:.78rem;}
   .hero-arrow{width:36px;height:36px;}
   section{padding:3.5rem 1.5rem;}
-  .about{padding:4rem 1.5rem;}
-  .about-grid{grid-template-columns:1fr;gap:2.5rem;}
-  .about-photo{max-width:280px;margin:0 auto;}
   .service-grid{grid-template-columns:1fr;gap:2rem;padding:2rem 0;}
   .service-col + .service-col{border-left:none;border-top:1px solid var(--line);padding-top:2rem;}
   .concept{padding:4rem 1.5rem;}
@@ -616,7 +544,7 @@ footer{
     <span class="brand-mark">絲<small>いとあわせ</small></span>
   </a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
+    <li><a href="about.html">About</a></li>
     <li><a href="#works">Works</a></li>
     <li><a href="#blog">Blog</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -632,38 +560,6 @@ footer{
   <button class="hero-arrow next" id="hero-next" aria-label="次へ">›</button>
   <div class="hero-dots" id="hero-dots"></div>
 </header>
-
-<!-- ABOUT -->
-<section id="about" class="about">
-  <div class="about-inner reveal">
-    <div class="sec-head">
-      <h2 class="sec-title">About</h2>
-    </div>
-    <div class="about-grid">
-      <div class="about-photo">
-        <div class="about-photo-placeholder">
-          PHOTO — 後で差し替え
-        </div>
-      </div>
-      <div class="about-text">
-        <h3 class="about-name">中丸晴留哉<small>NAKAMARU HARERUYA</small></h3>
-        <p class="about-tagline">空間と学びをつなぐ人</p>
-        <div class="about-bio">
-          <p>東京・江東区を拠点に、空間デザイン・イベント制作・探究学習を手がけています。</p>
-          <p>10年間、公立中学校で数学の教師として子どもたちと向き合ってきました。「学び」を変えるのは、教え方ではなく、その場に流れる空気だと気づき、独立。いまは絲（いとあわせ）スタジオを運営しながら、人と人が出会い直す時間を、丁寧にデザインしています。</p>
-        </div>
-        <div class="about-now">
-          <h4>NOW</h4>
-          <ul>
-            <li>絲スタジオ運営（空間 / イベント）</li>
-            <li>探究学習プログラムの企画・伴走</li>
-            <li>10月開催・100人規模こどもフェス準備中</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- CONCEPT -->
 <section class="concept" id="concept">
@@ -790,7 +686,7 @@ footer{
     <div class="footer-col">
       <h4>MENU</h4>
       <ul class="footer-list">
-        <li><a href="#about">About</a></li>
+        <li><a href="about.html">About</a></li>
         <li><a href="works.html">Works</a></li>
         <li><a href="blog.html">Blog</a></li>
         <li><a href="mailto:hareruyanakamaru@gmail.com">Contact</a></li>

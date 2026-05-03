@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — 中丸晴留哉</title>
+<meta name="description" content="中丸晴留哉のプロフィール。空間デザイン・イベント制作・探究学習を手がけるフリーランス。元公立中学校 数学教師。絲（いとあわせ）スタジオ運営。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#1c1a16;
+  --ink2:#3a342c;
+  --paper:#f4f1e8;
+  --paper2:#ebe7d9;
+  --paper3:#e0dbca;
+  --orange:#c8651a;
+  --muted:#7a7568;
+  --line:rgba(28,26,22,.1);
+  --line2:rgba(28,26,22,.18);
+  --navy:#1c2c50;
+  --footer-bg:#1c2c50;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Noto Serif JP',serif;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 2.5rem;
+  background:rgba(244,241,232,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:.6rem;}
+.brand-mark{
+  width:64px;height:64px;
+  background:var(--navy);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.7rem;font-weight:700;
+  flex-direction:column;line-height:1;
+}
+.brand-mark small{
+  font-size:7px;letter-spacing:.18em;
+  margin-top:4px;font-family:'DM Mono',monospace;font-weight:400;
+  opacity:.85;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{
+  font-size:.95rem;color:var(--ink);
+  font-weight:500;transition:color .2s;
+}
+.nav-links a:hover{color:var(--orange);}
+
+/* PAGE HEAD */
+.page-head{
+  padding:8rem 3rem 3rem;
+  border-bottom:1px solid var(--line);
+}
+.page-title{
+  font-size:2.6rem;font-weight:700;
+  letter-spacing:.04em;
+}
+
+/* ABOUT */
+main{padding:5rem 3rem 6rem;}
+.about-inner{max-width:1100px;margin:0 auto;}
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1.5fr;
+  gap:4.5rem;
+  align-items:start;
+}
+.about-photo{position:relative;}
+.about-photo-placeholder{
+  aspect-ratio:3/4;
+  background:var(--paper2);
+  border:1px dashed var(--line2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--muted);
+  font-size:.78rem;
+  font-family:'DM Mono',monospace;
+  letter-spacing:.1em;
+}
+.about-photo img{
+  width:100%;aspect-ratio:3/4;object-fit:cover;
+  display:block;
+}
+.about-name{
+  font-size:1.8rem;font-weight:700;
+  letter-spacing:.05em;
+  margin-bottom:.3rem;
+}
+.about-name small{
+  font-size:.65rem;
+  font-family:'DM Mono',monospace;
+  letter-spacing:.18em;
+  color:var(--muted);
+  margin-left:1rem;
+  font-weight:400;
+}
+.about-tagline{
+  font-size:.78rem;color:var(--muted);
+  font-family:'DM Mono',monospace;letter-spacing:.16em;
+  margin-bottom:2.4rem;
+}
+.about-bio p{
+  font-size:.95rem;line-height:2;color:var(--ink2);
+  margin-bottom:1.1rem;
+}
+.about-block{
+  margin-top:2.6rem;padding-top:1.8rem;
+  border-top:1px solid var(--line2);
+}
+.about-block h4{
+  font-size:.7rem;color:var(--muted);
+  font-family:'DM Mono',monospace;letter-spacing:.2em;
+  margin-bottom:1rem;
+}
+.about-block ul{list-style:none;}
+.about-block li{
+  font-size:.92rem;color:var(--ink2);
+  padding:.45rem 0 .45rem 1.4rem;
+  position:relative;
+  line-height:1.7;
+}
+.about-block li::before{
+  content:"—";position:absolute;left:0;
+  color:var(--navy);font-weight:600;
+}
+
+/* FOOTER */
+footer{
+  background:var(--footer-bg);
+  color:var(--paper);
+  padding:4rem 3rem 2rem;
+}
+.footer-grid{
+  display:grid;grid-template-columns:1.5fr 1fr 1fr;
+  gap:3rem;margin-bottom:3rem;
+}
+.footer-brand .brand-mark{
+  background:var(--paper);color:var(--navy);
+  width:72px;height:72px;
+  font-size:1.9rem;
+}
+.footer-col h4{
+  font-size:.72rem;color:var(--paper);opacity:.55;
+  font-family:'DM Mono',monospace;letter-spacing:.16em;
+  font-weight:500;margin-bottom:1.2rem;
+}
+.footer-list{list-style:none;}
+.footer-list li{margin-bottom:.7rem;}
+.footer-list a{
+  font-size:.8rem;color:var(--paper);opacity:.85;
+  font-family:'DM Mono',monospace;letter-spacing:.1em;
+  transition:opacity .2s;
+}
+.footer-list a:hover{opacity:1;}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1.5rem;border-top:1px solid rgba(244,241,232,.12);
+}
+.footer-copy{
+  font-size:.72rem;color:var(--paper);opacity:.5;
+  font-family:'DM Mono',monospace;letter-spacing:.06em;
+}
+
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .page-head{padding:6rem 1.5rem 2rem;}
+  .page-title{font-size:1.9rem;}
+  main{padding:3rem 1.5rem 4rem;}
+  .about-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .about-photo{max-width:280px;margin:0 auto;}
+  footer{padding:2.5rem 1.5rem 1.5rem;}
+  .footer-grid{grid-template-columns:1fr;gap:2rem;}
+  .footer-bottom{flex-direction:column;gap:1rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="index.html">
+    <span class="brand-mark">絲<small>いとあわせ</small></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="works.html">Works</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="page-head">
+  <h1 class="page-title">About</h1>
+</header>
+
+<main>
+  <div class="about-inner">
+    <div class="about-grid">
+      <div class="about-photo">
+        <div class="about-photo-placeholder">
+          PHOTO — 後で差し替え
+        </div>
+      </div>
+      <div class="about-text">
+        <h3 class="about-name">中丸晴留哉<small>NAKAMARU HARERUYA</small></h3>
+        <p class="about-tagline">空間と学びをつなぐ人</p>
+        <div class="about-bio">
+          <p>東京・江東区を拠点に、空間デザイン・イベント制作・探究学習を手がけています。</p>
+          <p>10年間、公立中学校で数学の教師として子どもたちと向き合ってきました。「学び」を変えるのは、教え方ではなく、その場に流れる空気だと気づき、独立。いまは絲（いとあわせ）スタジオを運営しながら、人と人が出会い直す時間を、丁寧にデザインしています。</p>
+        </div>
+
+        <div class="about-block">
+          <h4>NOW</h4>
+          <ul>
+            <li>絲スタジオ運営（空間 / イベント）</li>
+            <li>探究学習プログラムの企画・伴走</li>
+            <li>10月開催・100人規模こどもフェス準備中</li>
+          </ul>
+        </div>
+
+        <div class="about-block">
+          <h4>FIELDS</h4>
+          <ul>
+            <li>空間デザイン — 場の個性を引き出す</li>
+            <li>イベント制作 — 心に残る時間と場をつくる</li>
+            <li>探究学習 — 問いを起点に学びをひらく</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer id="contact">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="brand-mark">絲<small>いとあわせ</small></span>
+    </div>
+    <div class="footer-col">
+      <h4>MENU</h4>
+      <ul class="footer-list">
+        <li><a href="about.html">About</a></li>
+        <li><a href="works.html">Works</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="mailto:hareruyanakamaru@gmail.com">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>SNS</h4>
+      <ul class="footer-list">
+        <li><a href="https://twitter.com/itoawase0324" target="_blank" rel="noopener">TWITTER</a></li>
+        <li><a href="https://www.instagram.com/harerunakama033/" target="_blank" rel="noopener">INSTAGRAM</a></li>
+        <li><a href="https://www.facebook.com/profile.php?id=100004436648159" target="_blank" rel="noopener">FACEBOOK</a></li>
+        <li><a href="https://note.com/itoawase" target="_blank" rel="noopener">NOTE</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Hareruya Nakamaru / Ito Studio</span>
+  </div>
+</footer>
+
+</body>
+</html>
