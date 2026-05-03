@@ -42,22 +42,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/chrome.css">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --ink:#1c1a16;
-  --ink2:#3a342c;
-  --paper:#f4f1e8;
-  --paper2:#ebe7d9;
-  --paper3:#e0dbca;
-  --orange:#c8651a;
-  --green:#3d6b38;
-  --muted:#7a7568;
-  --line:rgba(28,26,22,.1);
-  --line2:rgba(28,26,22,.18);
-  --navy:#00157a;
-  --footer-bg:#00157a;
-}
 html{scroll-behavior:smooth;}
 body{
   background:var(--paper);
@@ -68,57 +55,6 @@ body{
 }
 a{color:inherit;text-decoration:none;}
 img{display:block;max-width:100%;}
-
-/* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.1rem 3rem;
-  background:var(--paper);
-  transform-origin:center center;
-  transition:padding .3s ease, background .3s ease;
-  animation:nav-emerge 1.2s cubic-bezier(.22,1,.36,1) 1.2s backwards;
-}
-.brand{
-  transition:transform .5s cubic-bezier(.65,0,.35,1), opacity .4s ease;
-}
-nav.scrolled{
-  padding:.6rem 3rem;
-  background:transparent;
-}
-nav.scrolled .brand{
-  transform:translateY(-180%);
-  opacity:0;
-  pointer-events:none;
-}
-.nav-links a{
-  text-shadow:0 0 1px rgba(244,241,232,.6);
-}
-@keyframes nav-emerge{
-  0%{opacity:0;transform:scale(.94);filter:blur(2px);}
-  60%{filter:blur(0);}
-  100%{opacity:1;transform:scale(1);filter:blur(0);}
-}
-.brand{
-  display:flex;align-items:center;gap:.6rem;
-}
-.brand-logo{
-  height:52px;width:auto;
-  display:block;
-  transition:height .3s ease;
-}
-.nav-links{
-  display:flex;gap:2rem;list-style:none;align-items:center;
-}
-.nav-links a{
-  font-family:'Noto Serif JP',serif;
-  font-size:.95rem;
-  letter-spacing:.08em;
-  color:var(--ink);
-  font-weight:500;
-  transition:opacity .2s;
-}
-.nav-links a:hover{opacity:.55;}
 
 /* ── HERO SLIDER ── */
 .hero{
@@ -543,64 +479,12 @@ section{padding:5rem 3rem;}
   letter-spacing:.06em;
 }
 
-/* ── FOOTER ── */
-footer{
-  background:var(--footer-bg);
-  color:var(--paper);
-  padding:2.2rem 3rem 1.4rem;
-}
-.footer-grid{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:3rem;
-  margin-bottom:1.4rem;
-}
-.footer-brand{display:flex;align-items:center;}
-.footer-brand .brand-logo{
-  height:64px;width:auto;
-}
-.footer-social{
-  display:flex;
-  gap:1.4rem;
-  align-items:center;
-}
-.footer-social a{
-  width:34px;height:34px;
-  display:flex;align-items:center;justify-content:center;
-  color:var(--paper);
-  opacity:.75;
-  transition:opacity .2s, transform .2s;
-}
-.footer-social a:hover{
-  opacity:1;
-  transform:translateY(-2px);
-}
-.footer-social svg{
-  width:22px;height:22px;
-  fill:currentColor;
-}
-.footer-bottom{
-  display:flex;justify-content:space-between;align-items:center;
-  padding-top:1rem;border-top:1px solid rgba(244,241,232,.12);
-}
-.footer-copy{
-  font-size:.7rem;color:var(--paper);opacity:.5;
-  font-family:'DM Mono',monospace;letter-spacing:.06em;
-}
-
 /* ── ANIMATIONS ── */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
 .reveal.visible{opacity:1;transform:none;}
 
 /* ── MOBILE ── */
 @media(max-width:900px){
-  nav{padding:.9rem 1.5rem;}
-  nav.scrolled{padding:.6rem 1.5rem;}
-  .brand-logo{height:32px;}
-  nav.scrolled .brand-logo{height:28px;}
-  .footer-brand .brand-logo{height:90px;}
-  .nav-links{display:none;}
   .hero{height:auto;min-height:520px;margin:72px 1.5rem 1.5rem;animation:none;}
   .hero-slide-bg{animation:none;}
   .hero-slide-content{
@@ -631,11 +515,6 @@ footer{
     padding:3.5rem 1.5rem;
   }
   .works-grid{grid-template-columns:1fr;gap:1.5rem;}
-  footer{padding:1.8rem 1.5rem 1.2rem;}
-  .footer-grid{flex-direction:column;gap:1.4rem;align-items:center;text-align:center;}
-  .footer-brand .brand-logo{height:54px;}
-  .footer-social{gap:1.2rem;}
-  .footer-bottom{flex-direction:column;gap:.6rem;text-align:center;}
   .contact-cta{padding:3.5rem 1.5rem;}
   .contact-cta-title{font-size:1.25rem;}
   .contact-cta-btn{padding:1rem 2rem;font-size:.78rem;}
@@ -645,17 +524,7 @@ footer{
 <body>
 
 <!-- NAV -->
-<nav>
-  <a class="brand" href="#">
-    <img class="brand-logo" src="images/logo/logo-horizontal-light.png" alt="絲 いとあわせ">
-  </a>
-  <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="works.html">Works</a></li>
-    <li><a href="blog.html">Blog</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+<div id="nav-mount"></div>
 
 <!-- HERO -->
 <header class="hero">
@@ -785,53 +654,15 @@ footer{
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-grid">
-    <div class="footer-brand">
-      <img class="brand-logo" src="images/logo/logo-horizontal-navy.png" alt="絲 いとあわせ">
-    </div>
-    <div class="footer-social">
-      <a href="https://www.facebook.com/profile.php?id=100004436648159" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg viewBox="0 0 24 24"><path d="M14 13.5h2.5l.5-3H14v-2c0-.86 0-1.5 1.5-1.5h1.5V4.14c-.32-.04-1.78-.14-3.13-.14C11.05 4 9 5.71 9 8.6V10.5H6.5v3H9V21h5z"/></svg>
-      </a>
-      <a href="https://www.instagram.com/harerunakama033/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-        </svg>
-      </a>
-      <a href="https://twitter.com/itoawase0324" target="_blank" rel="noopener" aria-label="X (Twitter)">
-        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-      <a href="https://note.com/itoawase" target="_blank" rel="noopener" aria-label="note">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"/>
-          <path d="M8 16V11C8 9 9 8 12 8C15 8 16 9 16 11V16"/>
-        </svg>
-      </a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Hareruya Nakamaru / Ito Studio</span>
-  </div>
-</footer>
+<div id="footer-mount"></div>
 
+<script src="assets/chrome.js"></script>
 <script>
 // ── scroll reveal ──
 const obs = new IntersectionObserver(es=>{
   es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
 },{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-// ── nav scroll state ──
-const navEl = document.querySelector('nav');
-const onScroll = () => {
-  if(window.scrollY > 40) navEl.classList.add('scrolled');
-  else navEl.classList.remove('scrolled');
-};
-window.addEventListener('scroll', onScroll, {passive:true});
-onScroll();
 
 // ── microCMS ──
 const MICROCMS_DOMAIN = 'hareruya-portfolio';

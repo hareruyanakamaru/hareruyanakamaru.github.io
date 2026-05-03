@@ -1,0 +1,127 @@
+/*
+ * 全ページ共通のヘッダー・フッタースタイル
+ * 編集はこのファイルだけでOK。各ページの nav/footer は chrome.js が注入する。
+ */
+
+:root{
+  --ink:#1c1a16;
+  --ink2:#3a342c;
+  --paper:#f4f1e8;
+  --paper2:#ebe7d9;
+  --paper3:#e0dbca;
+  --orange:#c8651a;
+  --green:#3d6b38;
+  --muted:#7a7568;
+  --line:rgba(28,26,22,.1);
+  --line2:rgba(28,26,22,.18);
+  --navy:#00157a;
+  --footer-bg:#00157a;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.1rem 3rem;
+  background:var(--paper);
+  transform-origin:center center;
+  transition:padding .3s ease, background .3s ease;
+  animation:nav-emerge 1.2s cubic-bezier(.22,1,.36,1) .4s backwards;
+}
+.brand{
+  display:flex;align-items:center;gap:.6rem;
+  transition:transform .5s cubic-bezier(.65,0,.35,1), opacity .4s ease;
+}
+.brand-logo{
+  height:52px;width:auto;
+  display:block;
+  transition:height .3s ease;
+}
+.nav-links{
+  display:flex;gap:2rem;list-style:none;align-items:center;
+  margin:0;padding:0;
+}
+.nav-links a{
+  font-family:'Noto Serif JP',serif;
+  font-size:.95rem;
+  letter-spacing:.08em;
+  color:var(--ink);
+  font-weight:500;
+  text-shadow:0 0 1px rgba(244,241,232,.6);
+  transition:opacity .2s;
+}
+.nav-links a:hover{opacity:.55;}
+nav.scrolled{
+  padding:.6rem 3rem;
+  background:transparent;
+}
+nav.scrolled .brand{
+  transform:translateY(-180%);
+  opacity:0;
+  pointer-events:none;
+}
+@keyframes nav-emerge{
+  0%{opacity:0;transform:scale(.94);filter:blur(2px);}
+  60%{filter:blur(0);}
+  100%{opacity:1;transform:scale(1);filter:blur(0);}
+}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--footer-bg);
+  color:var(--paper);
+  padding:2.2rem 3rem 1.4rem;
+}
+.footer-grid{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:3rem;
+  margin-bottom:1.4rem;
+}
+.footer-brand{display:flex;align-items:center;}
+.footer-brand .brand-logo{
+  height:64px;width:auto;
+}
+.footer-social{
+  display:flex;
+  gap:1.4rem;
+  align-items:center;
+}
+.footer-social a{
+  width:34px;height:34px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--paper);
+  opacity:.75;
+  transition:opacity .2s, transform .2s;
+}
+.footer-social a:hover{
+  opacity:1;
+  transform:translateY(-2px);
+}
+.footer-social svg{
+  width:22px;height:22px;
+  fill:currentColor;
+}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  padding-top:1rem;border-top:1px solid rgba(244,241,232,.12);
+}
+.footer-copy{
+  font-size:.7rem;color:var(--paper);opacity:.5;
+  font-family:'DM Mono',monospace;letter-spacing:.06em;
+}
+
+/* ── MOBILE ── */
+@media(max-width:900px){
+  nav{padding:.9rem 1.5rem;}
+  nav.scrolled{padding:.6rem 1.5rem;}
+  .brand-logo{height:32px;}
+  nav.scrolled .brand-logo{height:28px;}
+  .nav-links{display:none;}
+  footer{padding:1.8rem 1.5rem 1.2rem;}
+  .footer-grid{flex-direction:column;gap:1.4rem;align-items:center;text-align:center;}
+  .footer-brand .brand-logo{height:54px;}
+  .footer-social{gap:1.2rem;}
+  .footer-bottom{flex-direction:column;gap:.6rem;text-align:center;}
+}
