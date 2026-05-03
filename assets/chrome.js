@@ -38,8 +38,8 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
       <a href="https://note.com/itoawase" target="_blank" rel="noopener" aria-label="note">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" fill-rule="evenodd">
-          <path d="M6 2H18A4 4 0 0122 6V18A4 4 0 0118 22H6A4 4 0 012 18V6A4 4 0 016 2ZM7 7.5V17H9.4V10.5H14.6V17H17V7.5H7Z"/>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+          <path d="M5 20V8a3 3 0 013-3h8a3 3 0 013 3v12h-4V9H9v11z"/>
         </svg>
       </a>
     </div>
