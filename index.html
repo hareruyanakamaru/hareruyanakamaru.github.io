@@ -55,8 +55,8 @@
   --muted:#7a7568;
   --line:rgba(28,26,22,.1);
   --line2:rgba(28,26,22,.18);
-  --navy:#1c2c50;
-  --footer-bg:#1c2c50;
+  --navy:#0e1f8c;
+  --footer-bg:#0e1f8c;
 }
 html{scroll-behavior:smooth;}
 body{
@@ -75,7 +75,18 @@ nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:.55rem 2.5rem;
   background:var(--paper);
+  transition:padding .3s ease, background .3s ease, box-shadow .3s ease;
   animation:nav-drop 1s cubic-bezier(.65,0,.35,1) 1.4s backwards;
+}
+nav.scrolled{
+  padding:.3rem 2.5rem;
+  background:rgba(244,241,232,.88);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 2px 16px rgba(28,26,22,.06);
+}
+nav.scrolled .brand-logo{
+  height:54px;
 }
 @keyframes nav-drop{
   0%{transform:translateY(-100%);opacity:0;}
@@ -85,9 +96,10 @@ nav{
   display:flex;align-items:center;gap:.6rem;
 }
 .brand-logo{
-  height:58px;width:auto;
+  height:84px;width:auto;
   display:block;
   mix-blend-mode:darken;
+  transition:height .3s ease;
 }
 .nav-links{
   display:flex;gap:2rem;list-style:none;align-items:center;
@@ -488,8 +500,8 @@ footer{
 }
 .footer-brand{display:flex;align-items:flex-start;}
 .footer-brand .brand-logo{
-  height:70px;width:auto;
-  mix-blend-mode:lighten;
+  height:140px;width:auto;
+  mix-blend-mode:normal;
 }
 .footer-col h4{
   font-size:.72rem;color:var(--paper);opacity:.55;
@@ -497,7 +509,7 @@ footer{
   font-weight:500;margin-bottom:1.2rem;
 }
 .footer-list{list-style:none;}
-.footer-list li{margin-bottom:.7rem;}
+.footer-list li{margin-bottom:.35rem;}
 .footer-list a{
   font-size:.8rem;color:var(--paper);opacity:.85;
   font-family:'DM Mono',monospace;letter-spacing:.1em;
@@ -534,7 +546,11 @@ footer{
 
 /* ── MOBILE ── */
 @media(max-width:900px){
-  nav{padding:1rem 1.5rem;}
+  nav{padding:.5rem 1.2rem;}
+  nav.scrolled{padding:.4rem 1.2rem;}
+  .brand-logo{height:48px;}
+  nav.scrolled .brand-logo{height:42px;}
+  .footer-brand .brand-logo{height:90px;}
   .nav-links{display:none;}
   .hero{height:auto;min-height:520px;margin:72px 1.5rem 1.5rem;animation:none;}
   .hero-slide-bg{animation:none;}
@@ -579,8 +595,8 @@ footer{
   </a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
-    <li><a href="#works">Works</a></li>
-    <li><a href="#blog">Blog</a></li>
+    <li><a href="works.html">Works</a></li>
+    <li><a href="blog.html">Blog</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
@@ -665,9 +681,6 @@ footer{
       <p class="service-desc">問いを起点に、学びをひらく仕掛けを<br>デザインし、伴走します。</p>
     </div>
   </div>
-  <div class="service-foot reveal">
-    <a href="works.html">view all →</a>
-  </div>
 </section>
 
 <!-- MAIN: Works + Blog -->
@@ -682,7 +695,7 @@ footer{
       <div class="work-card"><div class="work-tags">読み込み中…</div></div>
     </div>
     <div class="works-foot">
-      <a href="works.html">すべての実績を見る ⟶</a>
+      <a href="works.html">view all →</a>
     </div>
   </section>
 
@@ -695,7 +708,7 @@ footer{
       <div class="blog-item"><div class="blog-text"><span class="blog-d">読み込み中…</span></div></div>
     </div>
     <div class="blog-foot">
-      <a href="blog.html">ブログ一覧へ ⟶</a>
+      <a href="blog.html">view all →</a>
     </div>
   </section>
 
@@ -728,26 +741,6 @@ footer{
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">© 2026 Hareruya Nakamaru / Ito Studio</span>
-    <div class="footer-social">
-      <a href="https://www.instagram.com/harerunakama033/" target="_blank" rel="noopener" aria-label="Instagram">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="2" width="20" height="20" rx="5"/>
-          <circle cx="12" cy="12" r="4"/>
-          <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"/>
-        </svg>
-      </a>
-      <a href="https://www.facebook.com/profile.php?id=100004436648159" target="_blank" rel="noopener" aria-label="Facebook">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M14 13.5h2.5l.5-3H14v-2c0-.86 0-1.5 1.5-1.5h1.5V4.14c-.32-.04-1.78-.14-3.13-.14C11.05 4 9 5.71 9 8.6V10.5H6.5v3H9V21h5z"/>
-        </svg>
-      </a>
-      <a href="https://twitter.com/itoawase0324" target="_blank" rel="noopener" aria-label="X (Twitter)">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-        </svg>
-      </a>
-      <a class="footer-social-text" href="https://note.com/itoawase" target="_blank" rel="noopener" aria-label="note">note</a>
-    </div>
   </div>
 </footer>
 
@@ -757,6 +750,15 @@ const obs = new IntersectionObserver(es=>{
   es.forEach(e=>{ if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
 },{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// ── nav scroll state ──
+const navEl = document.querySelector('nav');
+const onScroll = () => {
+  if(window.scrollY > 40) navEl.classList.add('scrolled');
+  else navEl.classList.remove('scrolled');
+};
+window.addEventListener('scroll', onScroll, {passive:true});
+onScroll();
 
 // ── microCMS ──
 const MICROCMS_DOMAIN = 'hareruya-portfolio';
@@ -846,7 +848,7 @@ function renderHero(posts){
 function renderWorks(posts){
   const grid = document.getElementById('works-grid');
   if(!grid) return;
-  const works = posts.filter(p => hasCategory(p, 'Works')).slice(0, 4);
+  const works = posts.filter(p => hasCategory(p, 'Works')).slice(0, 5);
   if(!works.length){
     grid.innerHTML = '<div class="work-card"><div class="work-tags">作品がまだありません</div></div>';
     return;
