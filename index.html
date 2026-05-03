@@ -939,8 +939,6 @@ function renderWorks(posts){
     return;
   }
   grid.innerHTML = works.map((p, i) => {
-    const d = new Date(p.publishedAt);
-    const year = d.getFullYear();
     const tags = tagsOf(p);
     const tagsLine = tags.length ? tags.join(' / ') : '';
     const isFeatured = i === 0;
@@ -952,7 +950,6 @@ function renderWorks(posts){
       <div class="work-cover">${cover}</div>
       <div class="work-title">${escapeHtml(p.title)}</div>
       ${tagsLine ? `<div class="work-tags">${escapeHtml(tagsLine)}</div>` : ''}
-      <div class="work-year">${year}</div>
     </a>`;
   }).join('');
 }
