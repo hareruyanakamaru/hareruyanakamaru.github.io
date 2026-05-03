@@ -71,10 +71,10 @@ nav{
 
 /* ── HERO SLIDER ── */
 .hero{
-  height:92vh;min-height:540px;
+  height:60vh;min-height:440px;max-height:680px;
   position:relative;
   overflow:hidden;
-  background:linear-gradient(135deg,#3a342c,#1c1a16);
+  background:#1c1a16;
 }
 .hero-slides{
   display:flex;
@@ -92,36 +92,48 @@ nav{
   width:100%;height:100%;
   object-fit:cover;
 }
-.hero-slide::after{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 50%,rgba(0,0,0,.55) 100%);
-}
 .hero-slide-content{
   position:absolute;
-  right:3rem;
-  top:7rem;bottom:4rem;
+  right:2.2rem;
+  top:2.5rem;bottom:3rem;
   z-index:2;
   display:flex;
-  align-items:flex-end;
-  gap:2rem;
+  flex-direction:row-reverse;
+  align-items:flex-start;
+  gap:1.4rem;
 }
 .hero-slide-title{
   writing-mode:vertical-rl;
-  font-size:2.4rem;font-weight:700;
-  letter-spacing:.18em;line-height:1.5;
+  font-size:2.2rem;font-weight:700;
+  letter-spacing:.22em;line-height:1.5;
   color:var(--paper);
-  text-shadow:0 2px 16px rgba(0,0,0,.7);
-  max-height:60vh;
+  text-shadow:0 2px 14px rgba(0,0,0,.55);
+  max-height:100%;
 }
 .hero-slide-excerpt{
-  font-size:.82rem;
+  writing-mode:vertical-rl;
+  font-size:.74rem;
   color:var(--paper);
-  line-height:1.95;
-  max-width:200px;
-  text-shadow:0 1px 6px rgba(0,0,0,.8);
-  padding-bottom:.8rem;
-  letter-spacing:.04em;
+  line-height:2;
+  letter-spacing:.18em;
+  max-height:100%;
+  text-shadow:0 1px 6px rgba(0,0,0,.6);
+  padding-top:.4rem;
 }
+.hero-readmore{
+  position:absolute;
+  bottom:1.5rem;left:1.6rem;
+  z-index:5;
+  color:var(--paper);
+  font-size:.72rem;
+  font-family:'DM Mono',monospace;
+  letter-spacing:.14em;
+  text-shadow:0 1px 6px rgba(0,0,0,.6);
+  padding-bottom:2px;
+  border-bottom:1px solid rgba(244,241,232,.7);
+  transition:opacity .2s;
+}
+.hero-readmore:hover{opacity:.7;}
 .hero-arrow{
   position:absolute;top:50%;
   transform:translateY(-50%);
@@ -719,14 +731,16 @@ function renderHero(posts){
     const cover = p.cover?.url
       ? `<img class="hero-slide-bg" src="${p.cover.url}?w=2000&fit=crop" alt="${escapeHtml(p.title)}">`
       : '';
-    const excerpt = stripHtml(p.content).slice(0, 80);
-    const ellipsis = stripHtml(p.content).length > 80 ? '…' : '';
+    const fullText = stripHtml(p.content);
+    const excerpt = fullText.slice(0, 70);
+    const ellipsis = fullText.length > 70 ? '…' : '';
     return `<div class="hero-slide">
       ${cover}
       <div class="hero-slide-content">
         <div class="hero-slide-title">${escapeHtml(p.title)}</div>
         <div class="hero-slide-excerpt">${escapeHtml(excerpt)}${ellipsis}</div>
       </div>
+      <a class="hero-readmore" href="post.html?id=${encodeURIComponent(p.id)}">Read more →</a>
     </div>`;
   }).join('');
   dotsEl.innerHTML = heroes.map((_,i) =>
