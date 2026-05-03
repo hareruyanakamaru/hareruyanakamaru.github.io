@@ -69,77 +69,107 @@ nav{
 }
 .nav-links a:hover{color:var(--orange);}
 
-/* ── HERO ── */
+/* ── HERO SLIDER ── */
 .hero{
-  min-height:92vh;
-  display:grid;
-  grid-template-columns:auto 1fr auto;
-  gap:3rem;
-  padding:7rem 3rem 4rem;
+  height:92vh;min-height:540px;
   position:relative;
+  overflow:hidden;
+  background:linear-gradient(135deg,#3a342c,#1c1a16);
 }
-.hero-photo{
+.hero-slides{
+  display:flex;
+  height:100%;width:100%;
+  transition:transform .7s cubic-bezier(.65,0,.35,1);
+}
+.hero-slide{
+  flex:0 0 100%;
+  height:100%;
+  position:relative;
+  overflow:hidden;
+}
+.hero-slide-bg{
   position:absolute;inset:0;
-  background:linear-gradient(135deg,#3a342c 0%,#1c1a16 60%,#0f0d0a 100%);
-  background-image:var(--hero-bg, none);
-  background-size:cover;background-position:center;
-  z-index:-1;
+  width:100%;height:100%;
+  object-fit:cover;
 }
-.hero-photo::after{
+.hero-slide::after{
   content:"";position:absolute;inset:0;
-  background:linear-gradient(90deg, rgba(244,241,232,.4) 0%, rgba(244,241,232,0) 30%, rgba(244,241,232,0) 70%, rgba(244,241,232,.5) 100%);
+  background:linear-gradient(90deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,0) 35%,rgba(0,0,0,0) 50%,rgba(0,0,0,.55) 100%);
 }
-.hero-vertical-l{
+.hero-slide-content{
+  position:absolute;
+  right:3rem;
+  top:7rem;bottom:4rem;
+  z-index:2;
+  display:flex;
+  align-items:flex-end;
+  gap:2rem;
+}
+.hero-slide-title{
   writing-mode:vertical-rl;
-  font-size:1.6rem;font-weight:500;
-  letter-spacing:.5em;line-height:2.2;
+  font-size:2.4rem;font-weight:700;
+  letter-spacing:.18em;line-height:1.5;
   color:var(--paper);
-  text-shadow:0 2px 12px rgba(0,0,0,.6);
-  align-self:center;
-  padding-top:6rem;
+  text-shadow:0 2px 16px rgba(0,0,0,.7);
+  max-height:60vh;
 }
-.hero-spacer{flex:1;}
-.hero-right{
-  align-self:flex-end;
-  text-align:right;
-  background:rgba(244,241,232,.78);
-  backdrop-filter:blur(8px);
-  padding:2rem 2rem 1.8rem;
-  border-left:2px solid var(--ink);
-  max-width:320px;
-}
-.hero-name{
-  writing-mode:vertical-rl;
-  font-size:3.1rem;font-weight:700;
-  line-height:1.1;letter-spacing:.05em;
-  color:var(--ink);
-  margin:0 auto 1.2rem;
-  height:7em;
-}
-.hero-name ruby rt{
-  font-size:.22em;letter-spacing:.15em;
-  color:var(--muted);
-  font-weight:400;
-}
-.hero-tagline{
-  font-size:.95rem;
-  color:var(--ink);
-  margin-bottom:.8rem;
-  font-weight:500;
-}
-.hero-meta{
-  font-size:.78rem;
-  color:var(--ink2);
-  line-height:1.9;
-  font-family:'DM Mono',monospace;
-  font-style:normal;
+.hero-slide-excerpt{
+  font-size:.82rem;
+  color:var(--paper);
+  line-height:1.95;
+  max-width:200px;
+  text-shadow:0 1px 6px rgba(0,0,0,.8);
+  padding-bottom:.8rem;
   letter-spacing:.04em;
 }
-.hero-meta-jp{
-  font-size:.85rem;
-  font-family:'Noto Serif JP',serif;
-  letter-spacing:.04em;
-  margin-top:.4rem;
+.hero-arrow{
+  position:absolute;top:50%;
+  transform:translateY(-50%);
+  width:42px;height:42px;
+  background:rgba(244,241,232,.12);
+  border:1px solid rgba(244,241,232,.45);
+  color:var(--paper);
+  font-size:1.4rem;line-height:1;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  z-index:10;
+  transition:background .2s;
+}
+.hero-arrow.prev{left:1.5rem;}
+.hero-arrow.next{right:1.5rem;}
+.hero-arrow:hover{background:rgba(244,241,232,.28);}
+.hero-dots{
+  position:absolute;
+  bottom:1.6rem;left:50%;transform:translateX(-50%);
+  display:flex;gap:.5rem;
+  z-index:10;
+}
+.hero-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(244,241,232,.45);
+  border:none;cursor:pointer;
+  transition:background .25s,width .25s;
+  padding:0;
+}
+.hero-dot.active{
+  background:var(--paper);
+  width:24px;border-radius:4px;
+}
+.hero-empty{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  color:var(--paper);
+  text-align:center;
+  gap:.8rem;
+  padding:2rem;
+}
+.hero-empty .hero-empty-name{
+  font-size:2.4rem;font-weight:700;letter-spacing:.1em;
+}
+.hero-empty .hero-empty-sub{
+  font-size:.85rem;opacity:.7;
+  font-family:'DM Mono',monospace;letter-spacing:.1em;
 }
 
 /* ── SECTIONS ── */
@@ -198,13 +228,6 @@ section{padding:5rem 3rem;}
 .sec-head{
   display:flex;align-items:baseline;gap:1rem;
   margin-bottom:2.5rem;
-}
-.sec-num{
-  font-size:.78rem;color:var(--orange);
-  font-family:'DM Mono',monospace;
-  letter-spacing:.12em;
-  font-weight:500;
-  padding-top:.4rem;
 }
 .sec-title{
   font-size:1.9rem;font-weight:700;letter-spacing:.04em;
@@ -436,29 +459,16 @@ footer{
 @media(max-width:900px){
   nav{padding:1rem 1.5rem;}
   .nav-links{display:none;}
-  .hero{
-    grid-template-columns:1fr;
-    padding:6rem 1.5rem 3rem;
-    min-height:auto;
+  .hero{height:auto;min-height:560px;}
+  .hero-slide-content{
+    right:1.5rem;top:5rem;bottom:4rem;
+    flex-direction:column-reverse;
+    align-items:flex-end;
+    gap:1.2rem;
   }
-  .hero-vertical-l{
-    writing-mode:horizontal-tb;
-    font-size:1.1rem;letter-spacing:.3em;
-    text-align:center;
-    padding-top:0;margin-bottom:1.5rem;
-  }
-  .hero-right{
-    max-width:none;
-    align-self:center;
-    text-align:center;
-    border-left:none;border-top:2px solid var(--ink);
-    padding:1.5rem 1.2rem;
-  }
-  .hero-name{
-    writing-mode:horizontal-tb;
-    font-size:2rem;height:auto;
-    margin-bottom:.8rem;
-  }
+  .hero-slide-title{font-size:1.7rem;}
+  .hero-slide-excerpt{max-width:60%;font-size:.78rem;}
+  .hero-arrow{width:36px;height:36px;}
   section{padding:3.5rem 1.5rem;}
   .service-grid{grid-template-columns:1fr;gap:2rem;padding:2rem 0;}
   .service-col + .service-col{border-left:none;border-top:1px solid var(--line);padding-top:2rem;}
@@ -490,17 +500,12 @@ footer{
 
 <!-- HERO -->
 <header class="hero">
-  <div class="hero-photo"></div>
-  <div class="hero-vertical-l">空間と学びを、静かにつなぐ。</div>
-  <div class="hero-spacer"></div>
-  <div class="hero-right">
-    <div class="hero-name">
-      <ruby>中丸<rt>なかまる</rt></ruby><ruby>晴留哉<rt>はれるや</rt></ruby>
-    </div>
-    <div class="hero-tagline">空間と学びをつなぐ人</div>
-    <div class="hero-meta">東京都江東区</div>
-    <div class="hero-meta-jp">空間デザイン・イベント制作<br>探究学習・絲スタジオ運営</div>
+  <div class="hero-slides" id="hero-slides">
+    <!-- slides rendered by JS -->
   </div>
+  <button class="hero-arrow prev" id="hero-prev" aria-label="前へ">‹</button>
+  <button class="hero-arrow next" id="hero-next" aria-label="次へ">›</button>
+  <div class="hero-dots" id="hero-dots"></div>
 </header>
 
 <!-- CONCEPT -->
@@ -585,7 +590,6 @@ footer{
   <!-- WORKS -->
   <section id="works">
     <div class="sec-head">
-      <span class="sec-num">01</span>
       <h2 class="sec-title">Works</h2>
       <span class="sec-sub">仕事の実績</span>
     </div>
@@ -600,7 +604,6 @@ footer{
   <!-- BLOG -->
   <section id="blog">
     <div class="sec-head">
-      <span class="sec-num">02</span>
       <h2 class="sec-title">Blog</h2>
       <span class="sec-sub">考えたこと、つくっていること</span>
     </div>
@@ -682,6 +685,7 @@ const MICROCMS_API_KEY = 'oglpByvCLfiiCRxPnNqAEYUDMIy2MZnrgui6';
 const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const categoryOf = p => Array.isArray(p.category) ? p.category[0] : p.category;
 const tagsOf = p => Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
+const stripHtml = s => String(s ?? '').replace(/<[^>]+>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
 
 async function fetchAllPosts(){
   const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=100&orders=-publishedAt`;
@@ -689,6 +693,62 @@ async function fetchAllPosts(){
   if(!res.ok) throw new Error('API error: ' + res.status);
   const data = await res.json();
   return data.contents || [];
+}
+
+function renderHero(posts){
+  const slides = document.getElementById('hero-slides');
+  const dotsEl = document.getElementById('hero-dots');
+  const prevBtn = document.getElementById('hero-prev');
+  const nextBtn = document.getElementById('hero-next');
+  if(!slides) return;
+  const heroes = posts.filter(p => categoryOf(p) === 'Hero').slice(0, 3);
+  if(!heroes.length){
+    slides.innerHTML = `<div class="hero-slide"><div class="hero-empty">
+      <div class="hero-empty-name">中丸晴留哉</div>
+      <div class="hero-empty-sub">microCMS で category=Hero の記事を追加してください</div>
+    </div></div>`;
+    if(prevBtn) prevBtn.style.display='none';
+    if(nextBtn) nextBtn.style.display='none';
+    return;
+  }
+  slides.innerHTML = heroes.map(p => {
+    const cover = p.cover?.url
+      ? `<img class="hero-slide-bg" src="${p.cover.url}?w=2000&fit=crop" alt="${escapeHtml(p.title)}">`
+      : '';
+    const excerpt = stripHtml(p.content).slice(0, 80);
+    const ellipsis = stripHtml(p.content).length > 80 ? '…' : '';
+    return `<div class="hero-slide">
+      ${cover}
+      <div class="hero-slide-content">
+        <div class="hero-slide-title">${escapeHtml(p.title)}</div>
+        <div class="hero-slide-excerpt">${escapeHtml(excerpt)}${ellipsis}</div>
+      </div>
+    </div>`;
+  }).join('');
+  dotsEl.innerHTML = heroes.map((_,i) =>
+    `<button class="hero-dot${i===0?' active':''}" data-idx="${i}" aria-label="slide ${i+1}"></button>`
+  ).join('');
+  if(heroes.length === 1){
+    prevBtn.style.display='none';
+    nextBtn.style.display='none';
+    dotsEl.style.display='none';
+    return;
+  }
+  let idx = 0, timer;
+  const go = i => {
+    idx = (i + heroes.length) % heroes.length;
+    slides.style.transform = `translateX(-${idx*100}%)`;
+    dotsEl.querySelectorAll('.hero-dot').forEach((d,j) => d.classList.toggle('active', j===idx));
+    restart();
+  };
+  const restart = () => { clearInterval(timer); timer = setInterval(()=>go(idx+1), 5000); };
+  prevBtn.onclick = () => go(idx-1);
+  nextBtn.onclick = () => go(idx+1);
+  dotsEl.addEventListener('click', e => {
+    const b = e.target.closest('.hero-dot');
+    if(b) go(+b.dataset.idx);
+  });
+  restart();
 }
 
 function renderWorks(posts){
@@ -757,11 +817,13 @@ function renderTags(posts){
 (async () => {
   try{
     const posts = await fetchAllPosts();
+    renderHero(posts);
     renderWorks(posts);
     renderBlog(posts);
     renderTags(posts);
   }catch(e){
     console.error(e);
+    renderHero([]);
     document.getElementById('works-grid').innerHTML = '<div class="work-card"><div class="work-tags">読み込みに失敗しました</div></div>';
     document.getElementById('blog-list').innerHTML = '<div class="blog-item"><div class="blog-text"><span class="blog-d">読み込みに失敗しました</span></div></div>';
   }
