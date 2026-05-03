@@ -55,8 +55,8 @@
   --muted:#7a7568;
   --line:rgba(28,26,22,.1);
   --line2:rgba(28,26,22,.18);
-  --navy:#0e1f8c;
-  --footer-bg:#0e1f8c;
+  --navy:#00157a;
+  --footer-bg:#00157a;
 }
 html{scroll-behavior:smooth;}
 body{
@@ -75,22 +75,19 @@ nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:.55rem 2.5rem;
   background:var(--paper);
-  overflow:hidden;
   transition:padding .3s ease, background .3s ease;
   animation:nav-drop 1s cubic-bezier(.65,0,.35,1) 1.4s backwards;
 }
 .brand{
-  position:relative;
-  top:0;
-  transition:top .5s cubic-bezier(.65,0,.35,1);
+  transition:transform .5s cubic-bezier(.65,0,.35,1), opacity .4s ease;
 }
 nav.scrolled{
   padding:.3rem 2.5rem;
   background:transparent;
-  overflow:visible;
 }
 nav.scrolled .brand{
-  top:-200px;
+  transform:translateY(-180%);
+  opacity:0;
   pointer-events:none;
 }
 .nav-links a{
@@ -106,7 +103,6 @@ nav.scrolled .brand{
 .brand-logo{
   height:84px;width:auto;
   display:block;
-  mix-blend-mode:multiply;
   transition:height .3s ease;
 }
 .nav-links{
@@ -566,7 +562,6 @@ footer{
 .footer-brand{display:flex;align-items:flex-start;}
 .footer-brand .brand-logo{
   height:140px;width:auto;
-  mix-blend-mode:lighten;
 }
 .footer-col h4{
   font-size:.72rem;color:var(--paper);opacity:.55;
@@ -665,7 +660,7 @@ footer{
 <!-- NAV -->
 <nav>
   <a class="brand" href="#">
-    <img class="brand-logo" src="images/logo/logo-horizontal-light.jpg" alt="絲 いとあわせ">
+    <img class="brand-logo" src="images/logo/logo-horizontal-light.png" alt="絲 いとあわせ">
   </a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
@@ -806,7 +801,7 @@ footer{
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
-      <img class="brand-logo" src="images/logo/logo-horizontal-navy.jpg" alt="絲 いとあわせ">
+      <img class="brand-logo" src="images/logo/logo-horizontal-navy.png" alt="絲 いとあわせ">
     </div>
     <div class="footer-cols">
       <div class="footer-col">
