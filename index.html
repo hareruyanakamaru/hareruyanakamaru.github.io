@@ -103,29 +103,35 @@ nav{
 }
 .hero-slide-content{
   position:absolute;
-  right:2.2rem;
-  top:2.5rem;bottom:3rem;
+  right:2rem;
+  top:2rem;bottom:3rem;
   z-index:2;
   display:flex;
   flex-direction:row-reverse;
   align-items:flex-start;
-  gap:1.4rem;
+  gap:1.2rem;
+  max-height:calc(100% - 5rem);
 }
 .hero-slide-title{
   writing-mode:vertical-rl;
-  font-size:2.4rem;font-weight:700;
-  letter-spacing:.22em;line-height:1.5;
+  font-size:clamp(1.6rem, 3.4vh, 2.2rem);
+  font-weight:700;
+  letter-spacing:.18em;line-height:1.5;
   color:var(--paper);
   text-shadow:0 2px 4px rgba(0,0,0,.85), 0 0 14px rgba(0,0,0,.55);
+  white-space:nowrap;
   max-height:100%;
+  overflow:hidden;
 }
 .hero-slide-excerpt{
   writing-mode:vertical-rl;
-  font-size:.78rem;
+  font-size:.74rem;
   color:var(--paper);
-  line-height:2;
-  letter-spacing:.18em;
+  line-height:1.95;
+  letter-spacing:.14em;
   max-height:100%;
+  white-space:nowrap;
+  overflow:hidden;
   text-shadow:0 1px 3px rgba(0,0,0,.95), 0 0 10px rgba(0,0,0,.7);
   padding-top:.4rem;
 }
@@ -753,18 +759,20 @@ function renderHero(posts){
     if(nextBtn) nextBtn.style.display='none';
     return;
   }
+  const TITLE_MAX = 14;
+  const EXCERPT_MAX = 45;
   slides.innerHTML = heroes.map(p => {
     const cover = p.cover?.url
       ? `<img class="hero-slide-bg" src="${p.cover.url}?w=2000&fit=crop" alt="${escapeHtml(p.title)}">`
       : '';
+    const titleStr = p.title.length > TITLE_MAX ? p.title.slice(0, TITLE_MAX) + '…' : p.title;
     const fullText = stripHtml(p.content);
-    const excerpt = fullText.slice(0, 70);
-    const ellipsis = fullText.length > 70 ? '…' : '';
+    const excerpt = fullText.slice(0, EXCERPT_MAX) + (fullText.length > EXCERPT_MAX ? '…' : '');
     return `<div class="hero-slide">
       ${cover}
       <div class="hero-slide-content">
-        <div class="hero-slide-title">${escapeHtml(p.title)}</div>
-        <div class="hero-slide-excerpt">${escapeHtml(excerpt)}${ellipsis}</div>
+        <div class="hero-slide-title">${escapeHtml(titleStr)}</div>
+        <div class="hero-slide-excerpt">${escapeHtml(excerpt)}</div>
       </div>
       <a class="hero-readmore" href="post.html?id=${encodeURIComponent(p.id)}">Read more →</a>
     </div>`;
