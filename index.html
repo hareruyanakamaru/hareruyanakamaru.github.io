@@ -79,15 +79,15 @@ nav{
   animation:nav-drop 1s cubic-bezier(.65,0,.35,1) 1.4s backwards;
 }
 .brand{
-  transition:opacity .45s ease, transform .45s ease;
+  transition:transform .5s cubic-bezier(.65,0,.35,1);
+  will-change:transform;
 }
 nav.scrolled{
   padding:.3rem 2.5rem;
   background:transparent;
 }
 nav.scrolled .brand{
-  opacity:0;
-  transform:translateY(-110%);
+  transform:translateY(-180%);
   pointer-events:none;
 }
 .nav-links a{
