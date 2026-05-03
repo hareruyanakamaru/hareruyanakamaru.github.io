@@ -75,19 +75,22 @@ nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:.55rem 2.5rem;
   background:var(--paper);
+  overflow:hidden;
   transition:padding .3s ease, background .3s ease;
   animation:nav-drop 1s cubic-bezier(.65,0,.35,1) 1.4s backwards;
 }
 .brand{
-  transition:transform .5s cubic-bezier(.65,0,.35,1);
-  will-change:transform;
+  position:relative;
+  top:0;
+  transition:top .5s cubic-bezier(.65,0,.35,1);
 }
 nav.scrolled{
   padding:.3rem 2.5rem;
   background:transparent;
+  overflow:visible;
 }
 nav.scrolled .brand{
-  transform:translateY(-180%);
+  top:-200px;
   pointer-events:none;
 }
 .nav-links a{
