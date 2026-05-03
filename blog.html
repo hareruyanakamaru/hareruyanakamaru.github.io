@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — 中丸晴留哉</title>
+<meta name="description" content="中丸晴留哉のブログ。考えたこと、つくっていること。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --ink:#1c1a16;
+  --ink2:#3a342c;
+  --paper:#f4f1e8;
+  --paper2:#ebe7d9;
+  --paper3:#e0dbca;
+  --orange:#c8651a;
+  --green:#3d6b38;
+  --muted:#7a7568;
+  --line:rgba(28,26,22,.1);
+  --line2:rgba(28,26,22,.18);
+  --footer-bg:#1f1c17;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Noto Serif JP',serif;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.2rem 2.5rem;
+  background:rgba(244,241,232,.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:.6rem;}
+.brand-mark{
+  width:54px;height:54px;
+  background:var(--ink);color:var(--paper);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;font-weight:700;
+  flex-direction:column;line-height:1;
+}
+.brand-mark small{
+  font-size:7px;letter-spacing:.1em;
+  margin-top:3px;font-family:'DM Mono',monospace;font-weight:400;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{
+  font-size:.95rem;color:var(--ink);
+  font-weight:500;transition:color .2s;
+}
+.nav-links a:hover{color:var(--orange);}
+
+.page-head{
+  padding:8rem 3rem 3rem;
+  border-bottom:1px solid var(--line);
+}
+.page-title{
+  font-size:2.6rem;font-weight:700;
+  letter-spacing:.04em;margin-bottom:.5rem;
+}
+.page-sub{
+  font-family:'DM Mono',monospace;
+  font-size:.85rem;color:var(--orange);
+  letter-spacing:.08em;
+}
+
+/* BLOG LIST */
+main{padding:2rem 3rem 6rem;max-width:920px;margin:0 auto;}
+.blog-list{display:flex;flex-direction:column;}
+.blog-item{
+  display:grid;grid-template-columns:140px 1fr;gap:2rem;
+  align-items:flex-start;
+  padding:2rem 0;
+  border-bottom:1px solid var(--line);
+  transition:padding-left .2s;
+}
+.blog-item:first-child{border-top:1px solid var(--line);}
+.blog-item:hover{padding-left:.4rem;}
+.blog-item:hover .blog-title{color:var(--orange);}
+.blog-thumb{
+  width:140px;height:105px;
+  background:var(--paper2);overflow:hidden;
+}
+.blog-thumb img{width:100%;height:100%;object-fit:cover;}
+.blog-text{display:flex;flex-direction:column;gap:.4rem;}
+.blog-meta{
+  display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;
+  font-size:.78rem;color:var(--muted);
+  font-family:'DM Mono',monospace;letter-spacing:.06em;
+}
+.blog-cat{
+  background:var(--paper2);padding:3px 8px;
+  font-size:.7rem;
+}
+.blog-title{
+  font-size:1.1rem;font-weight:600;
+  line-height:1.5;transition:color .2s;
+}
+.blog-tags{
+  font-size:.75rem;color:var(--muted);
+  font-family:'DM Mono',monospace;letter-spacing:.04em;
+  margin-top:.3rem;
+}
+.loading,.empty{
+  text-align:center;color:var(--muted);
+  padding:4rem 0;font-family:'DM Mono',monospace;font-size:12px;
+}
+
+footer{
+  background:var(--footer-bg);
+  color:var(--paper);
+  padding:3rem 3rem 2rem;
+  display:flex;justify-content:space-between;align-items:center;
+}
+.footer-copy{
+  font-size:.72rem;color:var(--paper);opacity:.5;
+  font-family:'DM Mono',monospace;letter-spacing:.06em;
+}
+.footer-back{
+  font-size:.82rem;color:var(--paper);opacity:.7;
+  font-family:'DM Mono',monospace;letter-spacing:.08em;
+  transition:opacity .2s;
+}
+.footer-back:hover{opacity:1;color:var(--orange);}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .page-head{padding:6rem 1.5rem 2rem;}
+  .page-title{font-size:1.8rem;}
+  main{padding:2rem 1.5rem 4rem;}
+  .blog-item{grid-template-columns:90px 1fr;gap:1rem;padding:1.2rem 0;}
+  .blog-thumb{width:90px;height:68px;}
+  .blog-title{font-size:.95rem;}
+  footer{padding:2rem 1.5rem;flex-direction:column;gap:1rem;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="index.html">
+    <span class="brand-mark">絲<small>絲スタジオ</small></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#service">About</a></li>
+    <li><a href="works.html">Works</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="page-head">
+  <h1 class="page-title">Blog</h1>
+  <span class="page-sub">考えたこと、つくっていること</span>
+</header>
+
+<main>
+  <div class="blog-list" id="blog-list">
+    <div class="loading">読み込み中…</div>
+  </div>
+</main>
+
+<footer>
+  <span class="footer-copy">© 2026 Hareruya Nakamaru / Ito Studio</span>
+  <a class="footer-back" href="index.html">⟵ ホームに戻る</a>
+</footer>
+
+<script>
+const MICROCMS_DOMAIN = 'hareruya-portfolio';
+const MICROCMS_API_KEY = 'oglpByvCLfiiCRxPnNqAEYUDMIy2MZnrgui6';
+
+const escapeHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const categoryOf = p => Array.isArray(p.category) ? p.category[0] : p.category;
+const tagsOf = p => Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
+
+async function loadBlogs(){
+  const list = document.getElementById('blog-list');
+  try{
+    const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=100&orders=-publishedAt`;
+    const res = await fetch(url, { headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY }});
+    if(!res.ok) throw new Error('API error');
+    const data = await res.json();
+    const blogs = (data.contents || []).filter(p => categoryOf(p) === 'Blog');
+    if(!blogs.length){
+      list.innerHTML = '<div class="empty">記事がまだありません</div>';
+      return;
+    }
+    list.innerHTML = blogs.map(p => {
+      const d = new Date(p.publishedAt);
+      const ymd = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+      const tags = tagsOf(p);
+      const tagsLine = tags.length ? tags.map(t => `#${t}`).join(' ') : '';
+      const thumb = p.cover?.url
+        ? `<img src="${p.cover.url}?w=400&h=300&fit=crop" alt="">`
+        : '';
+      return `<a class="blog-item" href="post.html?id=${encodeURIComponent(p.id)}">
+        <div class="blog-thumb">${thumb}</div>
+        <div class="blog-text">
+          <div class="blog-meta">
+            <span>${escapeHtml(ymd)}</span>
+            <span class="blog-cat">Blog</span>
+          </div>
+          <span class="blog-title">${escapeHtml(p.title)}</span>
+          ${tagsLine ? `<div class="blog-tags">${escapeHtml(tagsLine)}</div>` : ''}
+        </div>
+      </a>`;
+    }).join('');
+  }catch(e){
+    console.error(e);
+    list.innerHTML = '<div class="empty">読み込みに失敗しました</div>';
+  }
+}
+loadBlogs();
+</script>
+</body>
+</html>
