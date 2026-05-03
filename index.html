@@ -75,6 +75,11 @@ nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:.55rem 2.5rem;
   background:var(--paper);
+  animation:nav-drop 1s cubic-bezier(.65,0,.35,1) 1.4s backwards;
+}
+@keyframes nav-drop{
+  0%{transform:translateY(-100%);opacity:0;}
+  100%{transform:translateY(0);opacity:1;}
 }
 .brand{
   display:flex;align-items:center;gap:.6rem;
