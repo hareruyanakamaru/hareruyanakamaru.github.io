@@ -51,17 +51,10 @@ nav{
   border-bottom:1px solid var(--line);
 }
 .brand{display:flex;align-items:center;gap:.6rem;}
-.brand-mark{
-  width:64px;height:64px;
-  background:var(--navy);color:var(--paper);
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.7rem;font-weight:700;
-  flex-direction:column;line-height:1;
-}
-.brand-mark small{
-  font-size:7px;letter-spacing:.18em;
-  margin-top:4px;font-family:'DM Mono',monospace;font-weight:400;
-  opacity:.85;
+.brand-logo{
+  width:68px;height:68px;
+  display:block;
+  object-fit:cover;
 }
 .nav-links{display:flex;gap:2.5rem;list-style:none;}
 .nav-links a{
@@ -178,10 +171,8 @@ footer{
   display:grid;grid-template-columns:1.5fr 1fr 1fr;
   gap:3rem;margin-bottom:3rem;
 }
-.footer-brand .brand-mark{
-  background:var(--paper);color:var(--navy);
-  width:72px;height:72px;
-  font-size:1.9rem;
+.footer-brand .brand-logo{
+  width:84px;height:84px;
 }
 .footer-col h4{
   font-size:.72rem;color:var(--paper);opacity:.55;
@@ -220,7 +211,7 @@ footer{
 
 <nav>
   <a class="brand" href="index.html">
-    <span class="brand-mark">絲<small>いとあわせ</small></span>
+    <img class="brand-logo" src="images/logo/logo-square-navy.jpg" alt="絲 いとあわせ">
   </a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
@@ -237,7 +228,7 @@ footer{
 <footer id="contact">
   <div class="footer-grid">
     <div class="footer-brand">
-      <span class="brand-mark">絲<small>いとあわせ</small></span>
+      <img class="brand-logo" src="images/logo/logo-square-light.jpg" alt="絲 いとあわせ">
     </div>
     <div class="footer-col">
       <h4>MENU</h4>
