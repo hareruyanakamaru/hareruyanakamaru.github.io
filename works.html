@@ -243,8 +243,6 @@ async function loadWorks(){
       return;
     }
     grid.innerHTML = works.map(p => {
-      const d = new Date(p.publishedAt);
-      const year = d.getFullYear();
       const tags = tagsOf(p);
       const tagsLine = tags.length ? tags.join(' / ') : '';
       const cover = p.cover?.url
@@ -254,7 +252,6 @@ async function loadWorks(){
         <div class="work-cover">${cover}</div>
         <div class="work-title">${escapeHtml(p.title)}</div>
         ${tagsLine ? `<div class="work-tags">${escapeHtml(tagsLine)}</div>` : ''}
-        <div class="work-year">${year}</div>
       </a>`;
     }).join('');
   }catch(e){
