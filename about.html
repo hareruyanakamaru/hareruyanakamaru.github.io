@@ -107,10 +107,11 @@ main{padding:5rem 3rem 6rem;}
   margin-top:2.6rem;padding-top:1.8rem;
   border-top:1px solid var(--line2);
 }
-.about-block h4{
+.about-block h3{
   font-size:.7rem;color:var(--muted);
   font-family:'DM Mono',monospace;letter-spacing:.2em;
   margin-bottom:1rem;
+  font-weight:500;
 }
 .about-block ul{list-style:none;}
 .about-block li{
@@ -142,13 +143,13 @@ main{padding:5rem 3rem 6rem;}
 <main>
   <div class="about-inner">
     <div class="about-grid">
-      <div class="about-photo">
+      <div class="about-photo" id="about-photo">
         <div class="about-photo-placeholder">
-          PHOTO — 後で差し替え
+          読み込み中…
         </div>
       </div>
       <div class="about-text">
-        <h3 class="about-name">中丸晴留哉<small>NAKAMARU HARERUYA</small></h3>
+        <h2 class="about-name">中丸晴留哉<small>NAKAMARU HARERUYA</small></h2>
         <p class="about-tagline">空間と学びをつなぐ人</p>
         <div class="about-bio">
           <p>東京・江東区を拠点に、空間デザイン・イベント制作・探究学習を手がけています。</p>
@@ -156,7 +157,7 @@ main{padding:5rem 3rem 6rem;}
         </div>
 
         <div class="about-block">
-          <h4>NOW</h4>
+          <h3>NOW</h3>
           <ul>
             <li>絲スタジオ運営（空間 / イベント）</li>
             <li>探究学習プログラムの企画・伴走</li>
@@ -165,7 +166,7 @@ main{padding:5rem 3rem 6rem;}
         </div>
 
         <div class="about-block">
-          <h4>FIELDS</h4>
+          <h3>FIELDS</h3>
           <ul>
             <li>空間デザイン — 場の個性を引き出す</li>
             <li>イベント制作 — 心に残る時間と場をつくる</li>
@@ -180,5 +181,28 @@ main{padding:5rem 3rem 6rem;}
 <div id="footer-mount"></div>
 
 <script src="assets/chrome.js"></script>
+<script src="assets/utils.js"></script>
+<script>
+// 記事「なかまるはれるや」のカバー画像をプロフィール写真に使う
+(async () => {
+  const photoEl = document.getElementById('about-photo');
+  if(!photoEl) return;
+  try{
+    const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=100&fields=id,title,cover,thumbnailUrl,content`;
+    const res = await fetch(url, { headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY }});
+    if(!res.ok) throw new Error('API error');
+    const data = await res.json();
+    const post = (data.contents || []).find(p => (p.title || '').includes('なかまるはれるや'));
+    if(!post){ photoEl.innerHTML = ''; return; }
+    const cover = coverUrlOf(post);
+    if(!cover){ photoEl.innerHTML = ''; return; }
+    const src = post.cover?.url ? `${cover}?w=800&fit=crop` : cover;
+    photoEl.innerHTML = `<img src="${src}" alt="中丸晴留哉">`;
+  }catch(e){
+    console.error(e);
+    photoEl.innerHTML = '';
+  }
+})();
+</script>
 </body>
 </html>

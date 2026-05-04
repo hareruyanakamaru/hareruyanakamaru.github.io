@@ -18,6 +18,8 @@
 - 共通CSS（リセット・page-head・reveal）をchrome.cssに集約
 - 共通JS（escapeHtml/hasCategory/coverWithSize等）をassets/utils.jsに切り出し
 - ブレイクポイントを全ページ768pxに統一
+- aboutのプロフィール写真を記事「なかまるはれるや」のカバー画像から動的取得
+- 見出し階層を整理（about/works/blog/indexのカード見出しをh3、年見出しをh2に）
 
 ### 🔧 作業中・やりかけ
 - （なし）

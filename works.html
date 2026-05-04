@@ -102,6 +102,7 @@ main{padding:1.5rem 3rem 6rem;max-width:1200px;margin:0 auto;}
   font-size:1.05rem;font-weight:600;
   margin:1rem 0 .4rem;
   line-height:1.5;transition:color .2s;
+  letter-spacing:.02em;
 }
 .work-tags{
   font-size:.78rem;color:var(--muted);
@@ -175,7 +176,7 @@ async function loadWorks(){
         : '';
       return `<a class="work-card" data-tags="${escapeHtml(tags.join('|'))}" href="post.html?id=${encodeURIComponent(p.id)}">
         <div class="work-cover">${cover}</div>
-        <div class="work-title">${escapeHtml(p.title)}</div>
+        <h3 class="work-title">${escapeHtml(p.title)}</h3>
         ${tagsLine ? `<div class="work-tags">${escapeHtml(tagsLine)}</div>` : ''}
       </a>`;
     }).join('');

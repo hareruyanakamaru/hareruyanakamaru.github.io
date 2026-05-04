@@ -254,7 +254,7 @@ function renderItem(p){
         <span>${escapeHtml(ymd)}</span>
         ${tagsLine ? `<span class="blog-tags">${escapeHtml(tagsLine)}</span>` : ''}
       </div>
-      <span class="blog-title">${escapeHtml(p.title)}</span>
+      <h3 class="blog-title">${escapeHtml(p.title)}</h3>
     </div>
   </a>`;
 }
@@ -333,7 +333,7 @@ async function loadBlogs(){
       const items = byYear[y].map(renderItem).join('');
       return `<section class="year-section" id="year-${y}">
         <div class="year-heading">
-          <span class="year-heading-num">${y}</span>
+          <h2 class="year-heading-num">${y}</h2>
           <span class="year-heading-count">${byYear[y].length} posts</span>
         </div>
         <div class="blog-list">${items}</div>

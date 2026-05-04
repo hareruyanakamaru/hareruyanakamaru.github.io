@@ -771,7 +771,7 @@ function renderWorks(posts){
       : '';
     return `<a class="work-card${isFeatured ? ' featured' : ''}" href="post.html?id=${encodeURIComponent(p.id)}">
       <div class="work-cover">${cover}</div>
-      <div class="work-title">${escapeHtml(p.title)}</div>
+      <h3 class="work-title">${escapeHtml(p.title)}</h3>
       ${tagsLine ? `<div class="work-tags">${escapeHtml(tagsLine)}</div>` : ''}
     </a>`;
   }).join('');
@@ -794,7 +794,7 @@ function renderBlog(posts){
       <div class="blog-thumb">${thumb}</div>
       <div class="blog-text">
         <span class="blog-d">${escapeHtml(ymd)}</span>
-        <span class="blog-title">${escapeHtml(p.title)}</span>
+        <h3 class="blog-title">${escapeHtml(p.title)}</h3>
       </div>
     </a>`;
   }).join('');
