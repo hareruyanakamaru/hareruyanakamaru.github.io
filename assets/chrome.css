@@ -18,6 +18,37 @@
   --footer-bg:#00157a;
 }
 
+/* ── GLOBAL RESETS / DEFAULTS ── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Noto Serif JP',serif;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+
+/* ── PAGE HEAD（about / works / blog 共通） ── */
+.page-head{
+  padding:8rem 3rem 3rem max(3rem, calc(50% - 460px - 6rem));
+  border-bottom:1px solid var(--line);
+}
+.page-title{
+  font-size:2.6rem;font-weight:700;
+  letter-spacing:.04em;
+}
+@media(max-width:768px){
+  .page-head{padding:6rem 1.5rem 2rem;}
+  .page-title{font-size:1.9rem;}
+}
+
+/* ── REVEAL ANIMATION ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
 /* ── NAV ── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
@@ -125,7 +156,7 @@ footer{
 }
 
 /* ── MOBILE ── */
-@media(max-width:900px){
+@media(max-width:768px){
   nav{padding:.9rem 1.5rem;}
   nav.scrolled{padding:.6rem 1.5rem;}
   .brand-logo{height:32px;}
