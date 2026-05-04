@@ -68,70 +68,86 @@ img{display:block;max-width:100%;}
 
 main{padding:1rem 3rem 6rem;max-width:920px;margin:0 auto;position:relative;}
 
-/* スクロール連動の年月インジケーター（左サイド） */
-.scroll-month{
+/* 年ナビゲーション（縦・左サイド・スクロール連動） */
+.year-nav{
   position:fixed;
   left:3rem;top:50%;
   transform:translateY(-50%);
-  font-family:'DM Mono',monospace;
-  color:var(--ink2);
+  display:flex;flex-direction:column;
+  align-items:center;
+  gap:.7rem;
   z-index:30;
-  pointer-events:none;
-  opacity:0;
-  transition:opacity .4s ease;
-  text-align:center;
+  font-family:'DM Mono',monospace;
+  pointer-events:auto;
 }
-.scroll-month.visible{opacity:1;}
-.scroll-month .sm-year{
-  font-size:2.6rem;font-weight:700;
-  letter-spacing:.04em;
-  line-height:1;
-  margin-bottom:.4rem;
-  color:var(--ink);
-}
-.scroll-month .sm-month{
-  font-size:1rem;
-  letter-spacing:.2em;
+.year-nav a{
+  font-size:.95rem;
   color:var(--muted);
+  opacity:.45;
+  letter-spacing:.04em;
+  cursor:pointer;
+  transition:opacity .35s ease, font-size .4s cubic-bezier(.22,1,.36,1), color .35s ease, margin .4s ease;
+  text-align:center;
+  line-height:1;
+  padding:.1rem 0;
 }
-.scroll-month .sm-line{
-  width:1px;height:32px;
+.year-nav a:hover{opacity:.85;}
+.year-nav a.active{
+  font-size:2.6rem;
+  font-weight:700;
+  color:var(--ink);
+  opacity:1;
+  margin:.6rem 0;
+  letter-spacing:.04em;
+}
+.year-nav .yn-month,
+.year-nav .yn-line{display:none;}
+.year-nav a.active .yn-month{
+  display:block;
+  font-size:.95rem;
+  font-weight:400;
+  color:var(--muted);
+  letter-spacing:.2em;
+  margin-top:.5rem;
+}
+.year-nav a.active .yn-line{
+  display:block;
+  width:1px;height:30px;
   background:var(--ink2);
-  margin:.6rem auto 0;
+  margin:.5rem auto 0;
   opacity:.4;
 }
 @media(max-width:1200px){
-  .scroll-month{display:none;}
-}
-
-/* 年ナビゲーション */
-.year-nav{
-  position:sticky;top:80px;z-index:50;
-  background:var(--paper);
-  display:flex;gap:.5rem;
-  padding:1rem 0 .8rem;
-  margin-bottom:1.5rem;
-  border-bottom:1px solid var(--line);
-  flex-wrap:wrap;
-}
-.year-nav a{
-  font-family:'DM Mono',monospace;
-  font-size:.85rem;
-  letter-spacing:.05em;
-  padding:.4rem .9rem;
-  border:1px solid var(--line2);
-  border-radius:999px;
-  color:var(--ink2);
-  transition:all .2s;
-}
-.year-nav a:hover{
-  border-color:var(--navy);
-  color:var(--navy);
-}
-.year-nav a.active{
-  background:var(--navy);
-  color:var(--paper);
-  border-color:var(--navy);
+  .year-nav{
+    position:sticky;top:80px;
+    transform:none;
+    left:auto;
+    flex-direction:row;
+    flex-wrap:wrap;
+    gap:.5rem;
+    padding:1rem 0 .8rem;
+    background:var(--paper);
+    margin-bottom:1.5rem;
+    border-bottom:1px solid var(--line);
+  }
+  .year-nav a{
+    font-size:.85rem;
+    padding:.4rem .9rem;
+    border:1px solid var(--line2);
+    border-radius:999px;
+    opacity:1;
+    color:var(--ink2);
+  }
+  .year-nav a.active{
+    background:var(--navy);
+    color:var(--paper);
+    border-color:var(--navy);
+    font-size:.85rem;
+    font-weight:400;
+    margin:0;
+  }
+  .year-nav a.active .yn-month,
+  .year-nav a.active .yn-line{display:none;}
 }
 
 .year-section{margin-bottom:3.5rem;scroll-margin-top:140px;}
@@ -211,12 +227,6 @@ main{padding:1rem 3rem 6rem;max-width:920px;margin:0 auto;position:relative;}
   <h1 class="page-title">Blog</h1>
 </header>
 
-<div class="scroll-month" id="scroll-month">
-  <div class="sm-year"></div>
-  <div class="sm-month"></div>
-  <div class="sm-line"></div>
-</div>
-
 <main>
   <nav class="year-nav" id="year-nav"></nav>
   <div id="blog-sections">
@@ -289,39 +299,40 @@ function renderItem(p){
 }
 
 function setupScrollMonth(){
-  const indicator = document.getElementById('scroll-month');
-  const yearEl = indicator.querySelector('.sm-year');
-  const monthEl = indicator.querySelector('.sm-month');
+  const yearNav = document.getElementById('year-nav');
   const items = [...document.querySelectorAll('.blog-item')];
+  const yearLinks = [...yearNav.querySelectorAll('a')];
   if(!items.length) return;
 
   let currentY = '', currentM = '';
   const update = () => {
-    // ビューポート上部に最も近いblog-itemを探す
-    const offsetTop = 200; // ヘッダー分の余白
+    const offsetTop = window.innerHeight * 0.4; // 画面の40%付近を「現在地」とする
     let nearest = null;
     let nearestDist = Infinity;
     for(const item of items){
       const rect = item.getBoundingClientRect();
-      if(rect.bottom < offsetTop) continue;  // 画面上に出てしまった分は対象外
+      if(rect.bottom < 0) continue;
       const dist = Math.abs(rect.top - offsetTop);
       if(dist < nearestDist){
         nearestDist = dist;
         nearest = item;
       }
     }
-    if(!nearest){
-      indicator.classList.remove('visible');
-      return;
-    }
+    if(!nearest) return;
     const y = nearest.dataset.year;
     const m = nearest.dataset.month;
-    if(y !== currentY || m !== currentM){
-      currentY = y; currentM = m;
-      yearEl.textContent = y;
-      monthEl.textContent = m;
-    }
-    indicator.classList.add('visible');
+    if(y === currentY && m === currentM) return;
+    currentY = y; currentM = m;
+
+    // active 年の更新
+    yearLinks.forEach(a => {
+      const isActive = a.dataset.year === y;
+      a.classList.toggle('active', isActive);
+      if(isActive){
+        const monthEl = a.querySelector('.yn-month');
+        if(monthEl) monthEl.textContent = m;
+      }
+    });
   };
 
   let ticking = false;
@@ -351,9 +362,9 @@ async function loadBlogs(){
     }
     const years = Object.keys(byYear).map(Number).sort((a,b) => b - a);
 
-    // 年ナビ生成
+    // 年ナビ生成（各年に月・線のスロット付き）
     yearNav.innerHTML = years.map(y =>
-      `<a href="#year-${y}" data-year="${y}">${y}</a>`
+      `<a href="#year-${y}" data-year="${y}">${y}<span class="yn-month"></span><span class="yn-line"></span></a>`
     ).join('');
 
     // 各年セクション生成
@@ -377,22 +388,7 @@ async function loadBlogs(){
       });
     });
 
-    // スクロール位置で active 年をハイライト
-    const links = [...yearNav.querySelectorAll('a')];
-    const sectionEls = years.map(y => document.getElementById(`year-${y}`));
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if(e.isIntersecting){
-          const id = e.target.id;
-          links.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${id}`));
-        }
-      });
-    }, {rootMargin: '-40% 0px -55% 0px'});
-    sectionEls.forEach(el => el && obs.observe(el));
-    // 初期は最新年をactive
-    links[0]?.classList.add('active');
-
-    // スクロール連動の年月インジケーター起動
+    // スクロール連動で active 年と現在月を更新
     setupScrollMonth();
   }catch(e){
     console.error(e);
