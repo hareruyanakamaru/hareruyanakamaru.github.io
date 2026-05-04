@@ -24,9 +24,8 @@ nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:1.1rem 3rem;
   background:var(--paper);
-  transform-origin:center center;
   transition:padding .3s ease, background .3s ease;
-  animation:nav-emerge 1.2s cubic-bezier(.22,1,.36,1) .4s backwards;
+  animation:nav-emerge .6s ease-out both;
 }
 .brand{
   display:flex;align-items:center;gap:.6rem;
@@ -61,19 +60,23 @@ body.home nav.scrolled .brand{
   opacity:0;
   pointer-events:none;
 }
-/* それ以外のページ（about/works/blog/post/contact）ではロゴ残す */
+/* それ以外のページ（about/works/blog/post/contact）ではロゴを残す */
 body:not(.home) nav.scrolled{
   background:rgba(244,241,232,.92);
   backdrop-filter:blur(10px);
   -webkit-backdrop-filter:blur(10px);
 }
+body:not(.home) nav.scrolled .brand{
+  transform:none;
+  opacity:1;
+  pointer-events:auto;
+}
 body:not(.home) nav.scrolled .brand-logo{
   height:42px;
 }
 @keyframes nav-emerge{
-  0%{opacity:0;transform:scale(.94);filter:blur(2px);}
-  60%{filter:blur(0);}
-  100%{opacity:1;transform:scale(1);filter:blur(0);}
+  from{opacity:0;transform:translateY(-6px);}
+  to{opacity:1;transform:translateY(0);}
 }
 
 /* ── FOOTER ── */
