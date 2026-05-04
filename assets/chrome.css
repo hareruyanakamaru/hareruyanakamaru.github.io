@@ -125,7 +125,7 @@ footer{
 }
 .footer-brand{display:flex;align-items:center;}
 .footer-brand .brand-logo{
-  height:64px;width:auto;
+  height:96px;width:auto;
 }
 .footer-social{
   display:flex;
@@ -164,7 +164,7 @@ footer{
   .nav-links{display:none;}
   footer{padding:1.8rem 1.5rem 1.2rem;}
   .footer-grid{flex-direction:column;gap:1.4rem;align-items:center;text-align:center;}
-  .footer-brand .brand-logo{height:54px;}
+  .footer-brand .brand-logo{height:80px;}
   .footer-social{gap:1.2rem;}
   .footer-bottom{flex-direction:column;gap:.6rem;text-align:center;}
 }

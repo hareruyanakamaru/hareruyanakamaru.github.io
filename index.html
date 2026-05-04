@@ -270,7 +270,10 @@ section{padding:5rem 3rem;}
 }
 .sec-title{
   font-size:1.9rem;font-weight:700;letter-spacing:.04em;
+  transition:color .2s;
 }
+.sec-head a{transition:color .2s;}
+.sec-head a:hover .sec-title{color:var(--orange);}
 .sec-sub{
   font-size:.85rem;color:var(--orange);
   font-family:'DM Mono',monospace;
@@ -437,6 +440,7 @@ section{padding:5rem 3rem;}
   background:var(--paper2);
   padding:5rem 3rem;
   text-align:center;
+  scroll-margin-top:80px;
 }
 .contact-cta-inner{
   max-width:680px;margin:0 auto;
@@ -629,7 +633,7 @@ section{padding:5rem 3rem;}
   <!-- WORKS -->
   <section id="works">
     <div class="sec-head">
-      <h2 class="sec-title">Works</h2>
+      <a href="works.html"><h2 class="sec-title">Works</h2></a>
     </div>
     <div class="works-grid reveal" id="works-grid">
       <div class="work-card"><div class="work-tags">読み込み中…</div></div>
@@ -642,7 +646,7 @@ section{padding:5rem 3rem;}
   <!-- BLOG -->
   <section id="blog">
     <div class="sec-head">
-      <h2 class="sec-title">Blog</h2>
+      <a href="blog.html"><h2 class="sec-title">Blog</h2></a>
     </div>
     <div class="blog-list reveal" id="blog-list">
       <div class="blog-item"><div class="blog-text"><span class="blog-d">読み込み中…</span></div></div>
@@ -811,6 +815,11 @@ function renderBlog(posts){
     renderHero([]);
     document.getElementById('works-grid').innerHTML = '<div class="work-card"><div class="work-tags">読み込みに失敗しました</div></div>';
     document.getElementById('blog-list').innerHTML = '<div class="blog-item"><div class="blog-text"><span class="blog-d">読み込みに失敗しました</span></div></div>';
+  }
+  // 他ページから #contact 等のハッシュ付きで来たとき、コンテンツ描画後の高さで再スクロール
+  if(location.hash){
+    const el = document.querySelector(location.hash);
+    if(el) setTimeout(() => el.scrollIntoView({behavior:'auto', block:'start'}), 80);
   }
 })();
 </script>
