@@ -71,7 +71,9 @@ main{padding:1rem 3rem 6rem;max-width:920px;margin:0 auto;position:relative;}
 /* 年ナビゲーション（縦・左サイド・スクロール連動） */
 .year-nav{
   position:fixed;
-  left:3rem;right:auto;top:38.2%;
+  left:max(3rem, calc(50% - 460px - 6rem));
+  right:auto;
+  top:50%;
   transform:translateY(-50%);
   display:flex;flex-direction:column;
   align-items:center;
