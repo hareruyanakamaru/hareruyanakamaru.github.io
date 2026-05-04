@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>microCMS 画像プレビュー ブックマークレット</title>
+<style>
+  body{font-family:system-ui,sans-serif;max-width:800px;margin:2rem auto;padding:1rem;line-height:1.6;color:#222;}
+  h1{font-size:1.4rem;}
+  h2{font-size:1.1rem;margin-top:2rem;border-bottom:1px solid #ccc;padding-bottom:.3rem;}
+  code{background:#f4f4f4;padding:2px 6px;border-radius:3px;font-size:.9em;}
+  .install{
+    display:inline-block;
+    padding:1rem 1.5rem;
+    background:#0e1f8c;color:#fff;
+    border-radius:6px;text-decoration:none;
+    font-weight:bold;
+    margin:1rem 0;
+    cursor:grab;
+  }
+  .install:active{cursor:grabbing;}
+  ol li{margin-bottom:.5rem;}
+  .step{background:#f9f6ee;padding:1rem 1.5rem;border-left:4px solid #c8651a;margin:1rem 0;}
+</style>
+</head>
+<body>
+<h1>📷 microCMS 画像プレビュー</h1>
+
+<p>
+microCMS 管理画面の本文に書かれた <code>[[img:URL]]</code> マーカーから、
+全画像を右サイドにサムネ表示するブックマークレットです。
+</p>
+
+<h2>設置方法（5秒）</h2>
+
+<div class="step">
+<ol>
+  <li>ブラウザのブックマークバーを表示（Mac: <code>⌘+Shift+B</code>）</li>
+  <li>下のボタンを<strong>ブックマークバーへドラッグ＆ドロップ</strong></li>
+</ol>
+</div>
+
+<a class="install" href="javascript:(function(){var ed=document.querySelector('.ProseMirror,[contenteditable=%22true%22]');if(!ed){alert('microCMS編集画面で実行してください');return;}var t=ed.innerText;var ms=[].concat.apply([],[...t.matchAll(/\[\[img:([^\]\s]+)\]\]/g)]);var s=document.getElementById('mcms-img-pv');if(s)s.remove();s=document.createElement('div');s.id='mcms-img-pv';s.style.cssText='position:fixed;right:0;top:60px;width:340px;max-height:calc(100vh - 80px);overflow-y:auto;background:%23fff;border:2px solid %230e1f8c;border-radius:8px;padding:12px;z-index:999999;box-shadow:-2px 2px 12px rgba(0,0,0,.15);font-family:system-ui;';var h=document.createElement('div');h.innerHTML='<div style=%22display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;%22><strong>📷 画像プレビュー ('+ms.length+')</strong><span style=%22cursor:pointer;font-size:18px;%22 onclick=%22this.parentNode.parentNode.parentNode.remove()%22>✕</span></div>';s.appendChild(h);ms.forEach(function(m,i){var d=document.createElement('div');d.style.cssText='border-bottom:1px solid %23eee;padding:6px 0;';d.innerHTML='<div style=%22font-size:11px;color:%23666;margin-bottom:4px;%22>'+(i+1)+'枚目: '+m[1].split('/').slice(-2).join('/')+'</div><img src=%22'+m[1]+'%22 style=%22max-width:100%25;display:block;border-radius:4px;%22 loading=%22lazy%22>';s.appendChild(d);});document.body.appendChild(s);})();">📷 画像プレビュー</a>
+
+<h2>使い方</h2>
+<ol>
+  <li>microCMS で記事の編集画面を開く</li>
+  <li>ブックマークバーの「📷 画像プレビュー」をクリック</li>
+  <li>右側に画像一覧サイドパネルが出現！</li>
+  <li>本文を編集してマーカー位置を移動 → microCMSで「変更を保存」</li>
+  <li>もう一度ブックマークレットをクリックすれば最新の状態で再表示</li>
+</ol>
+
+<h2>機能</h2>
+<ul>
+  <li>本文に書かれた <code>[[img:URL]]</code> マーカーをすべて検出</li>
+  <li>右サイドに番号付きでサムネ表示（順番＝本文中の登場順）</li>
+  <li>右上の ✕ ボタンで閉じれる</li>
+  <li>microCMSの動作には一切影響しません（読み取り専用）</li>
+</ul>
+
+<h2>うまく動かないとき</h2>
+<ul>
+  <li>microCMSの編集画面を開いた状態で実行してください</li>
+  <li>本文の編集エリアにフォーカスを当ててからクリックすると確実</li>
+  <li>マーカー <code>[[img:URL]]</code> が本文に含まれていない記事では何も表示されません</li>
+</ul>
+
+<hr style="margin:3rem 0;">
+<p style="color:#888;font-size:.85rem;">— 中丸晴留哉 ポートフォリオ運用ツール</p>
+</body>
+</html>

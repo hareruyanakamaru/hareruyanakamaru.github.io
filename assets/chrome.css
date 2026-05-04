@@ -55,10 +55,20 @@ nav.scrolled{
   padding:.6rem 3rem;
   background:transparent;
 }
-nav.scrolled .brand{
+/* ホームページのみロゴをスクロール時に上にフェードアウトさせる */
+body.home nav.scrolled .brand{
   transform:translateY(-180%);
   opacity:0;
   pointer-events:none;
+}
+/* それ以外のページ（about/works/blog/post/contact）ではロゴ残す */
+body:not(.home) nav.scrolled{
+  background:rgba(244,241,232,.92);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+body:not(.home) nav.scrolled .brand-logo{
+  height:42px;
 }
 @keyframes nav-emerge{
   0%{opacity:0;transform:scale(.94);filter:blur(2px);}
