@@ -65,12 +65,45 @@ img{display:block;max-width:100%;}
   letter-spacing:.04em;
 }
 
-main{padding:3.5rem 3rem 6rem;}
+main{padding:1.5rem 3rem 6rem;max-width:1200px;margin:0 auto;}
+
+/* タグフィルター */
+.tag-filter{
+  position:sticky;top:80px;z-index:50;
+  background:var(--paper);
+  display:flex;gap:.5rem;
+  padding:1rem 0 1rem;
+  margin-bottom:2rem;
+  border-bottom:1px solid var(--line);
+  flex-wrap:wrap;
+}
+.tag-filter button{
+  font-family:'DM Mono',monospace;
+  font-size:.85rem;
+  letter-spacing:.05em;
+  padding:.4rem .9rem;
+  border:1px solid var(--line2);
+  border-radius:999px;
+  color:var(--ink2);
+  background:transparent;
+  cursor:pointer;
+  transition:all .2s;
+}
+.tag-filter button:hover{
+  border-color:var(--navy);
+  color:var(--navy);
+}
+.tag-filter button.active{
+  background:var(--navy);
+  color:var(--paper);
+  border-color:var(--navy);
+}
+
 .works-grid{
   display:grid;grid-template-columns:repeat(3,1fr);
   gap:3rem 2rem;
-  max-width:1200px;margin:0 auto;
 }
+.work-card.hidden{display:none;}
 .work-card{
   display:block;
   transition:transform .25s;
@@ -122,6 +155,7 @@ main{padding:3.5rem 3rem 6rem;}
 </header>
 
 <main>
+  <div class="tag-filter" id="tag-filter"></div>
   <div class="works-grid" id="works-grid">
     <div class="loading">読み込み中…</div>
   </div>
@@ -145,6 +179,7 @@ const tagsOf = p => Array.isArray(p.tags) ? p.tags : (p.tags ? [p.tags] : []);
 
 async function loadWorks(){
   const grid = document.getElementById('works-grid');
+  const filter = document.getElementById('tag-filter');
   try{
     const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=100&orders=-publishedAt`;
     const res = await fetch(url, { headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY }});
@@ -155,18 +190,42 @@ async function loadWorks(){
       grid.innerHTML = '<div class="empty">作品がまだありません</div>';
       return;
     }
+
+    // 全タグ収集
+    const tagCounts = {};
+    works.forEach(p => tagsOf(p).forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
+    const allTags = Object.entries(tagCounts).sort((a,b) => b[1] - a[1]);
+
+    // タグフィルターボタン生成
+    filter.innerHTML = `<button data-tag="" class="active">All (${works.length})</button>` +
+      allTags.map(([t, n]) => `<button data-tag="${escapeHtml(t)}">${escapeHtml(t)} (${n})</button>`).join('');
+
+    // カード描画
     grid.innerHTML = works.map(p => {
       const tags = tagsOf(p);
       const tagsLine = tags.length ? tags.join(' / ') : '';
       const cover = p.cover?.url
         ? `<img src="${p.cover.url}?w=800&fit=crop" alt="${escapeHtml(p.title)}">`
         : '';
-      return `<a class="work-card" href="post.html?id=${encodeURIComponent(p.id)}">
+      return `<a class="work-card" data-tags="${escapeHtml(tags.join('|'))}" href="post.html?id=${encodeURIComponent(p.id)}">
         <div class="work-cover">${cover}</div>
         <div class="work-title">${escapeHtml(p.title)}</div>
         ${tagsLine ? `<div class="work-tags">${escapeHtml(tagsLine)}</div>` : ''}
       </a>`;
     }).join('');
+
+    // タグフィルター動作
+    filter.addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if(!btn) return;
+      const tag = btn.dataset.tag;
+      filter.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn));
+      grid.querySelectorAll('.work-card').forEach(card => {
+        const cardTags = (card.dataset.tags || '').split('|').filter(Boolean);
+        const visible = !tag || cardTags.includes(tag);
+        card.classList.toggle('hidden', !visible);
+      });
+    });
   }catch(e){
     console.error(e);
     grid.innerHTML = '<div class="empty">読み込みに失敗しました</div>';
