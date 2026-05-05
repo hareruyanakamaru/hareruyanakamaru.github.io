@@ -188,11 +188,12 @@ main{padding:5rem 3rem 6rem;}
   const photoEl = document.getElementById('about-photo');
   if(!photoEl) return;
   try{
-    const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=100&fields=id,title,cover,thumbnailUrl,content`;
+    const filter = encodeURIComponent('title[contains]なかまるはれるや');
+    const url = `https://${MICROCMS_DOMAIN}.microcms.io/api/v1/posts?limit=1&filters=${filter}&fields=id,title,cover,thumbnailUrl,content`;
     const res = await fetch(url, { headers: { 'X-MICROCMS-API-KEY': MICROCMS_API_KEY }});
     if(!res.ok) throw new Error('API error');
     const data = await res.json();
-    const post = (data.contents || []).find(p => (p.title || '').includes('なかまるはれるや'));
+    const post = (data.contents || [])[0];
     if(!post){ photoEl.innerHTML = ''; return; }
     const cover = coverUrlOf(post);
     if(!cover){ photoEl.innerHTML = ''; return; }
