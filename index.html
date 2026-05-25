@@ -255,7 +255,7 @@ section{padding:5rem 3rem;}
 }
 .concept-a p{
   font-size:1rem;
-  line-height:2.1;
+  line-height:1.95;
   color:var(--ink2);
 }
 .concept-sign{
@@ -363,9 +363,10 @@ section{padding:5rem 3rem;}
 }
 .work-card:hover .work-cover img{transform:scale(1.04);}
 .work-title{
-  font-size:1rem;font-weight:600;
-  margin:.9rem 0 .4rem;
+  font-size:1.05rem;font-weight:600;
+  margin:1rem 0 .4rem;
   line-height:1.5;
+  letter-spacing:.02em;
   transition:color .2s;
 }
 .work-tags{
@@ -443,7 +444,7 @@ section{padding:5rem 3rem;}
   scroll-margin-top:80px;
 }
 .contact-cta-inner{
-  max-width:680px;margin:0 auto;
+  max-width:880px;margin:0 auto;
 }
 .contact-cta-label{
   font-size:.78rem;color:var(--orange);
@@ -461,6 +462,33 @@ section{padding:5rem 3rem;}
   font-size:.95rem;line-height:1.95;
   color:var(--ink2);
   margin-bottom:2.4rem;
+}
+.contact-topics{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+  margin:0 auto 2.6rem;
+  text-align:left;
+}
+.contact-topic{
+  padding:1.3rem 1.2rem;
+  background:var(--paper);
+  border:1px solid var(--line);
+  transition:border-color .2s;
+}
+.contact-topic:hover{border-color:var(--orange);}
+.contact-topic h3{
+  font-size:.92rem;
+  font-weight:700;
+  letter-spacing:.04em;
+  margin-bottom:.5rem;
+}
+.contact-topic p{
+  font-size:.75rem;
+  color:var(--muted);
+  line-height:1.85;
+  font-family:'DM Mono',monospace;
+  letter-spacing:.02em;
 }
 .contact-cta-btn{
   display:inline-block;
@@ -484,6 +512,25 @@ section{padding:5rem 3rem;}
   color:var(--muted);
   font-family:'DM Mono',monospace;
   letter-spacing:.06em;
+}
+.contact-sns{
+  margin-top:1.8rem;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:1rem;
+  font-family:'DM Mono',monospace;
+  font-size:.78rem;
+  letter-spacing:.1em;
+}
+.contact-sns a{
+  color:var(--muted);
+  transition:color .2s;
+}
+.contact-sns a:hover{color:var(--orange);}
+.contact-sns .sep{
+  color:var(--line2);
+  user-select:none;
 }
 
 /* ── MOBILE ── */
@@ -537,6 +584,9 @@ section{padding:5rem 3rem;}
   .contact-cta{padding:3.5rem 1.5rem;}
   .contact-cta-title{font-size:1.25rem;}
   .contact-cta-btn{padding:1rem 2rem;font-size:.78rem;}
+  .contact-topics{grid-template-columns:1fr;gap:.6rem;}
+  .contact-topic{padding:1rem 1.1rem;}
+  .contact-sns{flex-wrap:wrap;gap:.7rem;}
 }
 </style>
 </head>
@@ -664,11 +714,35 @@ section{padding:5rem 3rem;}
     <div class="contact-cta-label">— Contact —</div>
     <h2 class="contact-cta-title">お仕事のご相談・<br>お問い合わせはこちら</h2>
     <p class="contact-cta-desc">
-      空間デザイン・イベント企画運営・探究学習のご相談、<br>
-      ちいさなご質問でも、お気軽にご連絡ください。
+      空間・イベント・学びにまつわるご相談、<br>
+      まだ漠然とした構想段階でも、お気軽にお声がけください。
     </p>
+
+    <div class="contact-topics">
+      <div class="contact-topic">
+        <h3>空間デザイン</h3>
+        <p>店舗 / オフィス / イベント空間 / 場の在り方の設計</p>
+      </div>
+      <div class="contact-topic">
+        <h3>イベント制作</h3>
+        <p>企画 / 運営 / オリジナル企画 / 教育系プログラム</p>
+      </div>
+      <div class="contact-topic">
+        <h3>探究学習</h3>
+        <p>授業設計 / 教員研修 / 子ども向けプログラム</p>
+      </div>
+    </div>
+
     <a class="contact-cta-btn" href="mailto:hareruyanakamaru@gmail.com?subject=お問い合わせ">Send Email →</a>
     <span class="contact-cta-mail">hareruyanakamaru@gmail.com</span>
+
+    <div class="contact-sns">
+      <a href="https://www.instagram.com/hareruya_itoawase/" target="_blank" rel="noopener">Instagram</a>
+      <span class="sep">/</span>
+      <a href="https://twitter.com/itoawase0324" target="_blank" rel="noopener">X</a>
+      <span class="sep">/</span>
+      <a href="https://note.com/itoawase" target="_blank" rel="noopener">note</a>
+    </div>
   </div>
 </section>
 
