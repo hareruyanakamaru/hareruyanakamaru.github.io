@@ -29,6 +29,7 @@
 - HOMEコンタクトセクション作り込み：相談例3カード（空間/イベント/探究）+ SNSリンク（Insta/X/note）
 - フォント微調整：work-title統一（index/works）・concept本文行間1.95に
 - .gitignore追加（.DS_Store除外）
+- SSG導入（scripts/build.mjs + GitHub Actions で1日1回自動ビルド）。JSなしでもAI/クローラー/SEOに全コンテンツが見える状態に。費用ゼロ。
 
 ### 🔧 作業中・やりかけ
 - （なし）
